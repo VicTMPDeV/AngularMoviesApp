@@ -1,1 +1,82 @@
-/* You can add global styles to this file, and also import other style files */
+@import './theme.scss';
+
+@media (max-width: 480px) {
+  mat-sidenav {
+      width: 80vw;
+  }
+}
+
+@media (min-width: 480px) {
+  mat-sidenav {
+      width: 250px;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.logo-image {
+  width: 200px;
+}
+
+.menu-divider {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  height: 200px;
+  justify-content: center;
+  align-items: flex-end;
+  align-content: stretch;
+}
+
+.switch-theme {
+  flex: 0 0 content;
+  justify-content: center;
+  align-self: flex-end;
+}
+
+.dark-theme .mat-drawer {
+  background-color: #2F343B;
+  color: white;
+}
+
+.mat-list-base {
+  padding-top: 0px;
+}
+
+.content {
+  margin: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.mat-raised-button, .mat-stroked-button, .mat-flat-button {
+  padding: 0 1.15em;
+  margin: 0 .65em;
+  min-width: 3em;
+  line-height: 39px
+}
+
+.mat-standard-chip {
+  padding: .5em .85em;
+  min-height: 2.5em;
+}
+
+.material-icons {
+  font-size: 24px;
+  font-family: 'Material Icons', 'Material Icons';  
+  .mat-badge-content {
+    font-family: 'Roboto';
+  }
+}
