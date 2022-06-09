@@ -3,19 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path:'movies/list', 
-    loadChildren: () => import('./pages/movies/list-movies/list-movies.module')
-                          .then( m => m.ListMoviesModule)
+    path:'home', 
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomeModule)
   },
   {
-    path:'actors/list', 
-    loadChildren: () => import('./pages/actors/list-actors/list-actors.module')
-                          .then( m => m.ListActorsModule)
+    path:'auth', 
+    redirectTo:'home'
   },
   {
-    path:'studios/list', 
-    loadChildren: () => import('./pages/studios/list-studios/list-studios.module')
-                          .then( m => m.ListStudiosModule)
+    path:'', 
+    pathMatch:'full',
+    redirectTo:'home'
   }
 ];
 
