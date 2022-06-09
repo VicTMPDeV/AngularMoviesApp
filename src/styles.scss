@@ -17,29 +17,52 @@ body {
   height: 100%;
 }
 
-.logo-image {
-  width: 200px;
-}
-
-.menu-divider {
+mat-divider.menu-divider {
   margin-left: 1em;
   margin-right: 1em;
 }
 
-.flex-container {
+mat-icon.mat-list-icon {
+  margin-right: 15px;
+}
+
+mat-nav-list.mat-nav-list.mat-list-base.ng-tns-c75-0 {
+  padding-top: 0px;
+}
+
+
+.flex-sidenav-container {
   display: flex;
-  flex-direction: row;
-  height: 200px;
+  flex-direction: column;
+  height: calc(100vh - 300px);
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   align-content: stretch;
 }
 
-.switch-theme {
-  flex: 0 0 content;
+.flex-sidenav-logo {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   justify-content: center;
-  align-self: flex-end;
+  align-items: center;
+  align-content: stretch;
 }
+
+.flex-switch {
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+}
+
+.logo {
+  width: 200px;
+}
+
+
 
 .dark-theme .mat-drawer {
   background-color: #2F343B;
@@ -74,7 +97,7 @@ body {
 }
 
 .material-icons {
-  font-size: 24px;
+  font-size: 25px;
   font-family: 'Material Icons', 'Material Icons';  
   .mat-badge-content {
     font-family: 'Roboto';
