@@ -15,6 +15,8 @@ export class HomeComponent implements AfterViewInit {
 
   isDarkTheme: boolean = false;
 
+  isMobile: boolean = false;
+
   logoImage: string = '../../../assets/images/logoVictorFilled.png';
 
   constructor(private observerBP: BreakpointObserver){}
@@ -25,9 +27,11 @@ export class HomeComponent implements AfterViewInit {
         if (resp.matches){
           this.sideNav.mode = 'over';
           this.sideNav.close();
+          this.isMobile = true;
         }else{
           this.sideNav.mode = 'side';
           this.sideNav.open();
+          this.isMobile = false;
         }
       });
   }
@@ -43,6 +47,12 @@ export class HomeComponent implements AfterViewInit {
       : this.logoImage = '../../../assets/images/logoVictorFilled.png';
     })();
 
+  }
+
+  toggleSideNav(): void {
+    if(this.isMobile){
+      this.sideNav.toggle();
+    }
   }
 
   iconChange(): string{
