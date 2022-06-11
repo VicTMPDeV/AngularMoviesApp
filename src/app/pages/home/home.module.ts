@@ -1,19 +1,8 @@
 //@angular Modules
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-//@angular Material Modules
-import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { CommonModule } from '@angular/common';
 //Featured Components
-import { HomeComponent } from './home-component.component';
-//Featured Modules
-import { HomeModuleRoutingModule } from './home-module-routing.module';
-
+import { HomeComponent } from './home.component';
 
 
 @NgModule({
@@ -21,15 +10,7 @@ import { HomeModuleRoutingModule } from './home-module-routing.module';
     HomeComponent
   ],
   imports: [
-    HomeModuleRoutingModule,
-    CommonModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatIconModule,
-    MatListModule,
-    MatSidenavModule,
-    MatSlideToggleModule,
-    MatToolbarModule
+    CommonModule
   ]
 })
 export class HomeModule { }

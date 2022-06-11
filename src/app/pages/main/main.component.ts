@@ -4,11 +4,11 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
-  selector: 'app-home-component',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.scss']
 })
-export class HomeComponent implements AfterViewInit {
+export class MainComponent implements AfterViewInit {
 
   @ViewChild(MatSidenav)
   sideNav!: MatSidenav;
@@ -58,4 +58,5 @@ export class HomeComponent implements AfterViewInit {
   iconChange(): string{
     return (this.isDarkTheme) ? 'bedtime' : 'light_mode';
   }
+
 }
