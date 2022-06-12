@@ -42,7 +42,7 @@ export class MainComponent {
     this.router.events
       .pipe(
         untilDestroyed(this),
-        filter((e) => e instanceof NavigationEnd)
+        filter((event) => event instanceof NavigationEnd)
       )
       .subscribe(() => {
         if (this.sideNav.mode === 'over') {
