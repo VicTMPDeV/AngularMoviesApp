@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MenuService } from '../../../services/menu.service';
 
 @Component({
   selector: 'app-detail-movie',
@@ -7,18 +8,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class DetailMovieComponent implements OnInit, OnDestroy {
 
-  isActive: boolean = false;
-
-  constructor() { }
+  constructor(private menuService: MenuService) { }
 
   ngOnInit(): void {
-    this.isActive = true;
-    console.log(this.isActive);
+    this.menuService.setSidenavVisibility(false);
   }
 
   ngOnDestroy(): void {
-    this.isActive = false;
-    console.log(this.isActive);
+    this.menuService.setSidenavVisibility(true);
   }
 
 }

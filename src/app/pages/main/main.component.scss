@@ -1,107 +1,107 @@
 @media (max-width: 480px) {
-    mat-sidenav {
-      width: 80vw;
-    }
+  mat-sidenav {
+    width: 80vw;
   }
-  
-  @media (min-width: 480px) {
-    mat-sidenav {
-      width: 250px;
-    }
+}
+
+@media (min-width: 480px) {
+  mat-sidenav {
+    width: 250px;
   }
-  
-  html,
-  body {
-    height: 100%;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+mat-divider.menu-divider {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+mat-icon.mat-list-icon {
+  margin-right: 15px;
+}
+
+// mat-nav-list.mat-nav-list.mat-list-base.ng-tns-c75-0 {
+//   padding-top: 0px;
+// }
+
+.logo {
+  width: 200px;
+}
+
+.flex-sidenav-container {
+  display: flex;
+  flex-direction: column;
+  // height: calc(100vh - 300px);
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+}
+
+.flex-sidenav-logo {
+  display: flex;
+  flex-direction: column;
+  // height: 100%;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+}
+
+.flex-switch {
+  display: flex;
+  flex-direction: row;
+  // height: 50px;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+}
+
+
+
+
+
+.dark-theme .mat-drawer {
+  background-color: #2F343B;
+  color: white;
+}
+
+.mat-list-base {
+  padding-top: 0px;
+}
+
+.content {
+  margin: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.mat-raised-button,
+.mat-stroked-button,
+.mat-flat-button {
+  padding: 0 1.15em;
+  margin: 0 .65em;
+  min-width: 3em;
+  line-height: 39px
+}
+
+.mat-standard-chip {
+  padding: .5em .85em;
+  min-height: 2.5em;
+}
+
+.material-icons {
+  font-size: 25px;
+  font-family: 'Material Icons', 'Material Icons';
+
+  .mat-badge-content {
+    font-family: 'Roboto';
   }
-  
-  mat-divider.menu-divider {
-    margin-left: 1em;
-    margin-right: 1em;
-  }
-  
-  mat-icon.mat-list-icon {
-    margin-right: 15px;
-  }
-  
-  // mat-nav-list.mat-nav-list.mat-list-base.ng-tns-c75-0 {
-  //   padding-top: 0px;
-  // }
-  
-  .logo {
-    width: 200px;
-  }
-  
-  .flex-sidenav-container {
-    display: flex;
-    flex-direction: column;
-    // height: calc(100vh - 300px);
-    justify-content: center;
-    align-items: center;
-    align-content: stretch;
-  }
-  
-  .flex-sidenav-logo {
-    display: flex;
-    flex-direction: column;
-    // height: 100%;
-    justify-content: center;
-    align-items: center;
-    align-content: stretch;
-  }
-  
-  .flex-switch {
-    display: flex;
-    flex-direction: row;
-    // height: 50px;
-    justify-content: center;
-    align-items: center;
-    align-content: stretch;
-  }
-  
-  
-  
-  
-  
-  .dark-theme .mat-drawer {
-    background-color: #2F343B;
-    color: white;
-  }
-  
-  .mat-list-base {
-    padding-top: 0px;
-  }
-  
-  .content {
-    margin: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .spacer {
-    flex: 1 1 auto;
-  }
-  
-  .mat-raised-button,
-  .mat-stroked-button,
-  .mat-flat-button {
-    padding: 0 1.15em;
-    margin: 0 .65em;
-    min-width: 3em;
-    line-height: 39px
-  }
-  
-  .mat-standard-chip {
-    padding: .5em .85em;
-    min-height: 2.5em;
-  }
-  
-  .material-icons {
-    font-size: 25px;
-    font-family: 'Material Icons', 'Material Icons';
-  
-    .mat-badge-content {
-      font-family: 'Roboto';
-    }
-  }
+}

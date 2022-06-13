@@ -1,11 +1,12 @@
 <div [ngClass]="(isDarkTheme) ? 'dark-theme' : 'light-theme'">
     <mat-sidenav-container fullscreen>
         <!-- SIDENAV START -->
-        <mat-sidenav #sidenav>
+        <mat-sidenav #sidenav
+                     >
             <mat-toolbar color="primary">
                 <span>Menú</span>
                 <span class="spacer"></span>
-                <button mat-icon-button (click)="this.sideNav.toggle()">
+                <button mat-icon-button (click)="sideNavigator.toggle()">
                     <mat-icon>close</mat-icon>
                 </button>
             </mat-toolbar>
@@ -48,14 +49,22 @@
                 </div>
             </mat-nav-list>
         </mat-sidenav>
+
+        
         <!-- SIDENAV END -->
         <!-- MAIN CONTENT START -->
         <mat-sidenav-content>
             <!-- TOOLBAR -->
             <mat-toolbar color="primary">
-                <button mat-icon-button (click)="this.sideNav.toggle()" *ngIf="!sidenav.opened">
+                <button mat-icon-button 
+                        *ngIf="sideNavVisibility else noMenuVisible"
+                        (click)="this.sideNavigator.toggle()" 
+                        >
                     <mat-icon>menu</mat-icon>
                 </button>
+                <ng-template #noMenuVisible>
+                    <mat-icon (click)="location.back(); this.sideNavigator.toggle()">arrow_back</mat-icon>
+                </ng-template>
                 <span class="spacer"></span>
             </mat-toolbar>
             <!-- ROUTER COMPONENTS LAZY LOADED -->

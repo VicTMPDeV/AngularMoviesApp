@@ -5,6 +5,9 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { delay, filter } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { MenuService } from '../../services/menu.service';
+import { Observable } from 'rxjs';
+import { Location } from '@angular/common';
 
 @UntilDestroy()
 @Component({
@@ -14,14 +17,24 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 })
 export class MainComponent {
 
-  @ViewChild(MatSidenav)
-  sideNav!: MatSidenav;
+  @ViewChild(MatSidenav, {static:true})
+  sideNavigator!: MatSidenav;
 
+  sideNavVisibility: boolean = true;
   isDarkTheme: boolean = false;
   isMobile: boolean = false;
   logoImage: string = '../../../assets/images/logoVictorFilled.png';
 
-  constructor(private observerBP: BreakpointObserver, private router: Router) { }
+  constructor(private observerBP: BreakpointObserver, 
+              private router: Router,
+              private menuService: MenuService,
+              public location: Location ) { }
+
+  ngOnInit(): void {
+    this.menuService.getSidenavVisibility()
+        .subscribe(visibility => this.sideNavVisibility = visibility);
+  }
+
 
   ngAfterViewInit() {
     this.observerBP
@@ -29,12 +42,12 @@ export class MainComponent {
       .pipe(delay(1), untilDestroyed(this))
       .subscribe((resp) => {
         if (resp.matches) {
-          this.sideNav.mode = 'over';
-          this.sideNav.close();
+          this.sideNavigator.mode = 'over';
+          this.sideNavigator.close();
           this.isMobile = true;
         } else {
-          this.sideNav.mode = 'side';
-          this.sideNav.open();
+          this.sideNavigator.mode = 'side';
+          this.sideNavigator.open();
           this.isMobile = false;
         }
       });
@@ -45,8 +58,8 @@ export class MainComponent {
         filter((event) => event instanceof NavigationEnd)
       )
       .subscribe(() => {
-        if (this.sideNav.mode === 'over') {
-          this.sideNav.close();
+        if (this.sideNavigator.mode === 'over') {
+          this.sideNavigator.close();
         }
       });
   }
@@ -62,7 +75,7 @@ export class MainComponent {
 
   toggleSideNav(): void {
     if (this.isMobile) {
-      this.sideNav.toggle();
+      this.sideNavigator.toggle();
     }
   }
 
