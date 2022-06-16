@@ -1,8 +1,8 @@
 <div [ngClass]="(isDarkTheme) ? 'dark-theme' : 'light-theme'">
     <mat-sidenav-container fullscreen>
-        <!-- SIDENAV START -->
-        <mat-sidenav #sidenav
-                     >
+
+        <mat-sidenav #sidenav>
+
             <mat-toolbar color="primary">
                 <span>Menú</span>
                 <span class="spacer"></span>
@@ -10,6 +10,7 @@
                     <mat-icon>close</mat-icon>
                 </button>
             </mat-toolbar>
+
             <mat-nav-list>
                 <a mat-list-item routerLink="/" (click)="toggleSideNav()">
                     <span>Inicio</span>
@@ -33,12 +34,10 @@
                 <mat-divider class="menu-divider"></mat-divider>
                 <div mat-list-item class="flex-sidenav-container">
                     <div class="flex-sidenav-logo">
-                        <!-- AUTHOR IMAGE -->
                         <a href="https://github.com/VicTMPDeV/AngularMoviesApp" target="_blank">
                             <img class="logo" [src]="logoImage" />
                         </a>
                     </div>
-                    <!-- LIGHT - DARK SWITCH -->
                     <div class="flex-switch">
                         <mat-slide-toggle mat-icon-button (click)="toggleTheme()">
                         </mat-slide-toggle>
@@ -50,28 +49,27 @@
             </mat-nav-list>
         </mat-sidenav>
 
-        
-        <!-- SIDENAV END -->
-        <!-- MAIN CONTENT START -->
         <mat-sidenav-content>
-            <!-- TOOLBAR -->
+
             <mat-toolbar color="primary">
                 <button mat-icon-button 
-                        *ngIf="sideNavVisibility else noMenuVisible"
-                        (click)="this.sideNavigator.toggle()" 
-                        >
+                        *ngIf="sideNavVisibility; else noMenuVisible"
+                        (click)="this.sideNavigator.toggle()">
                     <mat-icon>menu</mat-icon>
                 </button>
                 <ng-template #noMenuVisible>
-                    <mat-icon (click)="location.back(); this.sideNavigator.toggle()">arrow_back</mat-icon>
+                    <mat-icon (click)="location.back(); this.sideNavigator.toggle()">
+                        arrow_back
+                    </mat-icon>
                 </ng-template>
                 <span class="spacer"></span>
             </mat-toolbar>
-            <!-- ROUTER COMPONENTS LAZY LOADED -->
+
             <div class="content">
                 <router-outlet></router-outlet>
             </div>
+
         </mat-sidenav-content>
-        <!-- MAIN CONTENT END -->
+
     </mat-sidenav-container>
 </div>
