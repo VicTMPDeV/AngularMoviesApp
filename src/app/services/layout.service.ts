@@ -6,14 +6,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class LayoutService {
 
-  private sideNavState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true); //Estado inicial true -> se muestra
+  private sideNavAvailability$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true); //Estado inicial true -> se muestra
 
   getSidenavState(): Observable<boolean> {
-    return this.sideNavState$.asObservable();
+    return this.sideNavAvailability$.asObservable();
   };
 
   setSidenavState(visible: boolean): void {
-    this.sideNavState$.next(visible);
+    this.sideNavAvailability$.next(visible);
   }
 
 }

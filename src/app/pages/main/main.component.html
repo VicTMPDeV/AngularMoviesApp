@@ -54,12 +54,12 @@
         <mat-sidenav-content>
 
             <mat-toolbar color="primary">
-                <button mat-icon-button *ngIf="sideNavVisible; else hideSideNav" (click)="sideNav.toggle()">
-                    <mat-icon *ngIf="!sideNav.opened">menu</mat-icon>
+                <button mat-icon-button *ngIf="sideNavAvailable; else noSideNav" (click)="sideNav.toggle()">
+                    <mat-icon>menu</mat-icon>
                 </button>
-                <ng-template #hideSideNav>
+                <ng-template #noSideNav>
                     <button mat-icon-button (click)="goBack()">
-                        <mat-icon *ngIf="!sideNav.opened">arrow_back</mat-icon>
+                        <mat-icon>arrow_back</mat-icon>
                     </button>
                 </ng-template>
                 <span class="spacer"></span>

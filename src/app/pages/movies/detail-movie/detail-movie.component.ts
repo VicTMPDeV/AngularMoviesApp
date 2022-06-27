@@ -8,14 +8,14 @@ import { LayoutService } from '../../../services/layout.service';
 })
 export class DetailMovieComponent implements OnInit, OnDestroy {
 
-  constructor(private menuService: LayoutService) { }
+  constructor(private layoutService: LayoutService) { }
 
   ngOnInit(): void {
-    this.menuService.setSidenavState(false);
+    this.layoutService.setSidenavState(false);
   }
 
   ngOnDestroy(): void {
-    this.menuService.setSidenavState(true);
+    this.layoutService.setSidenavState(true);
   }
 
 }

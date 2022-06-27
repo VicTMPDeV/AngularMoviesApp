@@ -1,9 +1,9 @@
 //@angular Components
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Location } from '@angular/common';
-import { NavigationEnd, Router } from '@angular/router';
-import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { Location } from '@angular/common';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
+import { NavigationEnd, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { delay, filter } from 'rxjs/operators';
 //Featured Service
@@ -21,7 +21,7 @@ export class MainComponent implements OnInit {
   ('sideNav', {static:true}) //Para poder disponer de el en el hook onInit
 
   public sideNav!: MatSidenav;
-  public sideNavVisible: boolean = true;
+  public sideNavAvailable: boolean = false;
   public isDarkTheme: boolean = false;
   public isMobile: boolean = false;
   public logoImage: string = '../../../assets/images/logoVictorFilled.png';
@@ -33,7 +33,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.layoutService.getSidenavState()
-        .subscribe(visibility => this.sideNavVisible = visibility);
+        .subscribe(available => this.sideNavAvailable = available);
   }
 
   ngAfterViewInit() {
@@ -67,6 +67,7 @@ export class MainComponent implements OnInit {
   public goBack(){
     this.location.back();
     this.sideNav.toggle();
+    // console.log(this.layoutService);
   }
 
   public sideNavMobileBehavior(): void {
