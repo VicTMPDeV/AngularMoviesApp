@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MenuService } from '../../../services/menu.service';
+import { LayoutService } from '../../../services/layout.service';
 
 @Component({
   selector: 'app-detail-movie',
@@ -8,14 +8,14 @@ import { MenuService } from '../../../services/menu.service';
 })
 export class DetailMovieComponent implements OnInit, OnDestroy {
 
-  constructor(private menuService: MenuService) { }
+  constructor(private menuService: LayoutService) { }
 
   ngOnInit(): void {
-    this.menuService.setSidenavVisibility(false);
+    this.menuService.setSidenavState(false);
   }
 
   ngOnDestroy(): void {
-    this.menuService.setSidenavVisibility(true);
+    this.menuService.setSidenavState(true);
   }
 
 }
