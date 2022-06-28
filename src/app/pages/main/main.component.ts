@@ -8,6 +8,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { delay, filter } from 'rxjs/operators';
 //Featured Service
 import { LayoutService } from '../../services/layout.service';
+import { Observable, of } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -26,11 +27,9 @@ export class MainComponent implements OnInit {
 
   constructor(private layoutService: LayoutService,
               public location: Location,
-              private observerBP: BreakpointObserver, 
-              private router: Router) { }
+              private observerBP: BreakpointObserver) { }
 
   ngOnInit(): void {
-    console.log(this.sideNav);
     this.layoutService.getObservableSidenavState()
                       .subscribe(available => this.sideNavAvailable = available);
   }
@@ -51,34 +50,28 @@ export class MainComponent implements OnInit {
         }
       });
 
-    this.router.events
-      .pipe(
-        untilDestroyed(this),
-        filter((event) => event instanceof NavigationEnd)
-      )
-      .subscribe(() => {
-        if (this.sideNav.mode === 'over') {
-          this.sideNav.close();
-        }
-      });
+    // this.router.events
+    //   .pipe(
+    //     untilDestroyed(this),
+    //     filter((event) => event instanceof NavigationEnd)
+    //   )
+    //   .subscribe(() => {
+    //     if (this.sideNav.mode === 'over') {
+    //       this.sideNav.close();
+    //     }
+    //   });
   }
 
   public goBack(): void{
     this.location.back();
     this.sideNav.open();
-    console.log(this.layoutService);
   }
 
-  public sideNavMobileBehavior(): void {
-    if (this.isMobile) {
-      this.sideNav.toggle();
-    }
-  }
-
-  // LIGHT / DARK Theme 
-  public changeIconTheme(): string {
-    return (this.isDarkTheme) ? 'bedtime' : 'light_mode';
-  }
+  // public sideNavMobileBehavior(): void {
+  //   if (this.isMobile) {
+  //     this.sideNav.toggle();
+  //   }
+  // }
 
   public toggleTheme(): void {
     this.isDarkTheme = !this.isDarkTheme;

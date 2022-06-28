@@ -16,10 +16,4 @@ export class ListMoviesComponent implements OnInit {
     this.layoutService.setSidenavState(true);
   }
 
-  public hideSideNav():void {
-    this.layoutService.setSidenavState(false);
-    console.log('SIDE NAV STATUS: ', this.layoutService);
-  }
-
-
 }
