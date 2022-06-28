@@ -1,4 +1,4 @@
-import { Component, OnInit, SkipSelf, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { LayoutService } from '../../../services/layout.service';
 
 @Component({
@@ -10,9 +10,16 @@ import { LayoutService } from '../../../services/layout.service';
 })
 export class ListMoviesComponent implements OnInit {
 
-  constructor(private menuService: LayoutService) { }
+  constructor(private layoutService: LayoutService) { }
 
   ngOnInit(): void {
+    this.layoutService.setSidenavState(true);
   }
+
+  public hideSideNav():void {
+    this.layoutService.setSidenavState(false);
+    console.log('SIDE NAV STATUS: ', this.layoutService);
+  }
+
 
 }

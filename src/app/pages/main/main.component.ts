@@ -17,23 +17,22 @@ import { LayoutService } from '../../services/layout.service';
 })
 export class MainComponent implements OnInit {
 
-  @ViewChild
-  ('sideNav', {static:true}) //Para poder disponer de el en el hook onInit
-
-  public sideNav!: MatSidenav;
+  @ViewChild('sideNav', {static:true}) //Para poder disponer de el en el hook onInit
+  public sideNav!: MatSidenav; //Creare un Observable entorno a esta variable para comunicar entre componentes
   public sideNavAvailable: boolean = false;
   public isDarkTheme: boolean = false;
   public isMobile: boolean = false;
   public logoImage: string = '../../../assets/images/logoVictorFilled.png';
 
-  constructor(private observerBP: BreakpointObserver, 
-              private router: Router,
-              private layoutService: LayoutService,
-              public location: Location) { }
+  constructor(private layoutService: LayoutService,
+              public location: Location,
+              private observerBP: BreakpointObserver, 
+              private router: Router) { }
 
   ngOnInit(): void {
-    this.layoutService.getSidenavState()
-        .subscribe(available => this.sideNavAvailable = available);
+    console.log(this.sideNav);
+    this.layoutService.getObservableSidenavState()
+                      .subscribe(available => this.sideNavAvailable = available);
   }
 
   ngAfterViewInit() {
@@ -64,10 +63,10 @@ export class MainComponent implements OnInit {
       });
   }
 
-  public goBack(){
+  public goBack(): void{
     this.location.back();
-    this.sideNav.toggle();
-    // console.log(this.layoutService);
+    this.sideNav.open();
+    console.log(this.layoutService);
   }
 
   public sideNavMobileBehavior(): void {
