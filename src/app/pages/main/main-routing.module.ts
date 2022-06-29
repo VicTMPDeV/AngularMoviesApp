@@ -7,8 +7,7 @@ import { MainComponent } from './main.component';
 
 const routes: Routes = [
   {
-    path:'',
-    component: MainComponent,
+    path:'', component: MainComponent,
     children:[
       {
         path:'', 
@@ -16,15 +15,20 @@ const routes: Routes = [
       },
       {
         path:'movies', 
-        loadChildren: () => import('../movies/movies.module').then( m => m.MoviesModule)
+        loadChildren: () => import('../movies/list-movies/list-movies.module').then( m => m.ListMoviesModule)
       },
       {
         path:'actors', 
-        loadChildren: () => import('../actors/actors.module').then( m => m.ActorsModule)
+        loadChildren: () => import('../actors/list-actors/list-actors.module').then( m => m.ListActorsModule)
       },
       {
         path:'studios', 
-        loadChildren: () => import('../studios/studios.module').then( m => m.StudiosModule)
+        loadChildren: () => import('../studios/list-studios/list-studios.module').then( m => m.ListStudiosModule)
+      },
+      {
+        path: '**',
+        redirectTo: '',
+        pathMatch: 'full'
       }
     ]
   }
