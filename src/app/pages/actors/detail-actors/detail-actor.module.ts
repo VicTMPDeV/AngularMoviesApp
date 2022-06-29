@@ -2,7 +2,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 //Featured Modules
-import { DetailActorRoutingModule } from './detail-actor-routing.module';
 import { DetailActorComponent } from './detail-actor.component';
 
 
@@ -11,8 +10,7 @@ import { DetailActorComponent } from './detail-actor.component';
     DetailActorComponent
   ],
   imports: [
-    CommonModule,
-    DetailActorRoutingModule
+    CommonModule
   ]
 })
 export class DetailActorModule { }
