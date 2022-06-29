@@ -4,7 +4,6 @@ import { ListActorsRoutingModule } from './list-actors-routing.module';
 import { ListActorsComponent } from './list-actors.component';
 
 
-
 @NgModule({
   declarations: [
     ListActorsComponent
