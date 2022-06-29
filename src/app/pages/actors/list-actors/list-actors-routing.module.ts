@@ -4,7 +4,13 @@ import { ListActorsComponent } from './list-actors.component';
 
 const routes: Routes = [
   {
-    path: '', component: ListActorsComponent
+    path: '', component: ListActorsComponent,
+    children:[
+      {
+        path:':id',
+        loadChildren: () => import('../detail-actors/detail-actor.module').then( m => m.DetailActorModule)
+      }
+    ]
   }
 ];
 

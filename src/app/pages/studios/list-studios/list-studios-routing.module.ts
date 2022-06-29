@@ -4,7 +4,13 @@ import { ListStudiosComponent } from './list-studios.component';
 
 const routes: Routes = [
   {
-    path: '', component: ListStudiosComponent
+    path: '', component: ListStudiosComponent,
+    children:[
+      {
+        path:':id',
+        loadChildren: () => import('../detail-studio/detail-studio.module').then( m => m.DetailStudioModule)
+      }
+    ]
   }
 ];
 

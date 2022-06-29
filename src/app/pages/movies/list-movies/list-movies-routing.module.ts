@@ -4,7 +4,13 @@ import { ListMoviesComponent } from './list-movies.component';
 
 const routes: Routes = [
   {
-    path: '', component: ListMoviesComponent
+    path: '', component: ListMoviesComponent,
+    children:[
+      {
+        path:':id',
+        loadChildren: () => import('../detail-movie/detail-movie.module').then( m => m.DetailMovieModule)
+      }
+    ]
   }
 ];
 
