@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 //Featured Modules
 import { DetailStudioComponent } from './detail-studio.component';
-import { DetailStudioRoutingModule } from './detail-studio-routing.module';
 
 
 @NgModule({
@@ -11,8 +10,7 @@ import { DetailStudioRoutingModule } from './detail-studio-routing.module';
     DetailStudioComponent
   ],
   imports: [
-    CommonModule,
-    DetailStudioRoutingModule
+    CommonModule
   ]
 })
 export class DetailStudioModule { }
