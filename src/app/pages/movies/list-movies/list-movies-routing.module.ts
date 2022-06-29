@@ -15,7 +15,12 @@ const routes: Routes = [
   // },
   // {
   //   path: 'edit/:id', component: AddMovieComponent
-  // }
+  // },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

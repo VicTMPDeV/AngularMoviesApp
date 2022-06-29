@@ -24,6 +24,11 @@ const routes: Routes = [
       {
         path:'studios', 
         loadChildren: () => import('../studios/list-studios/list-studios.module').then( m => m.ListStudiosModule)
+      },
+      {
+        path: '**',
+        redirectTo: '',
+        pathMatch: 'full'
       }
     ]
   }
