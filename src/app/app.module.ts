@@ -7,14 +7,17 @@ import { AppRoutingModule } from './app-routing.module';
 //Featured Components
 import { AppComponent } from './app.component';
 
+import { HttpClientModule } from "@angular/common/http";
+
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports:[
-    BrowserModule,
     BrowserAnimationsModule,
+    BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],
