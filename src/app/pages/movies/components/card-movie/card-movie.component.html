@@ -1,5 +1,13 @@
 <mat-card>
+    <!-- <mat-card-actions [routerLink]="['/heroes',heroData.id]"></mat-card-actions> -->
     <mat-card-header>
-        
+        <mat-card-title>{{movie.title}}</mat-card-title>
     </mat-card-header>
+
+    <img mat-card-image [src]="movie | imageMoviePipe">
+
+    <mat-card-content *ngFor="let actor of movie.actors">
+        <span><strong>{{actor}}</strong></span>
+    </mat-card-content>
+
 </mat-card>
