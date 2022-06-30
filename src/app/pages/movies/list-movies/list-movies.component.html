@@ -1,5 +1,6 @@
-<p>list-movies works!</p>
+<!-- <p>list-movies works!</p>
 <a mat-list-item routerLink=":id">
     <span>Detalle Película</span>
     <mat-icon mat-list-icon>home</mat-icon>
-</a>
+</a> -->
+<mat-card *ngFor="let movie of moviesList">{{ movie | json }}</mat-card>

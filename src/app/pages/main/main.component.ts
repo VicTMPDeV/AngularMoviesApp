@@ -7,7 +7,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { delay, filter } from 'rxjs/operators';
 //Featured Service
-import { LayoutService } from '../../services/layout.service';
+import { MainService } from './services/main.service';
 import { Observable, of } from 'rxjs';
 
 @UntilDestroy()
@@ -25,13 +25,12 @@ export class MainComponent implements OnInit {
   public isMobile: boolean = false;
   public logoImage: string = '../../../assets/images/logoVictorFilled.png';
 
-  constructor(private layoutService: LayoutService,
+  constructor(private mainService: MainService,
               public location: Location,
               private observerBP: BreakpointObserver) { }
 
   ngOnInit(): void {
-    this.layoutService.getObservableSidenavState()
-                      .subscribe(available => this.sideNavAvailable = available);
+
   }
 
   ngAfterViewInit() {
@@ -49,17 +48,6 @@ export class MainComponent implements OnInit {
           this.isMobile = false;
         }
       });
-
-    // this.router.events
-    //   .pipe(
-    //     untilDestroyed(this),
-    //     filter((event) => event instanceof NavigationEnd)
-    //   )
-    //   .subscribe(() => {
-    //     if (this.sideNav.mode === 'over') {
-    //       this.sideNav.close();
-    //     }
-    //   });
   }
 
   public goBack(): void{
