@@ -1,6 +1,11 @@
-<!-- <p>list-movies works!</p>
-<a mat-list-item routerLink=":id">
-    <span>Detalle Película</span>
-    <mat-icon mat-list-icon>home</mat-icon>
-</a> -->
-<mat-card *ngFor="let movie of moviesList">{{ movie | json }}</mat-card>
+<div fxLayoutAlign="center" 
+     fxLayoutGap="20px"
+     fxLayout="row wrap" 
+     fxLayout.xs="column">
+
+    <div *ngFor="let movie of moviesList" fxFlex="20" fxFlex.lg="30" fxFlex.sm="30">
+        <!-- <pre>{{movie | json}}</pre> -->
+        <app-card-movie [movieData]="movie" [routerLink]="['/movies',movie.id]"></app-card-movie>
+
+    </div>
+</div>
