@@ -25,7 +25,8 @@ export class MainComponent implements OnInit {
   public isMobile: boolean = false;
   public logoImage: string = '../../../assets/images/logoVictorFilled.png';
 
-  constructor(private mainService: MainService,
+  constructor(private router: Router,
+              private mainService: MainService,
               public location: Location,
               private observerBP: BreakpointObserver) { }
 

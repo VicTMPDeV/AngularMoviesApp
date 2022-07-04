@@ -1,4 +1,6 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -6,14 +8,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class MainService {
 
-  // private sideNavAvailability$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  private toolbarText$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  // getObservableSidenavState(): Observable<boolean> {
-  //   return this.sideNavAvailability$.asObservable();
-  // };
+  getToolbarText(): Observable<string> {
+    return this.toolbarText$.asObservable();
+  };
 
-  // setSidenavState(visible: boolean): void {
-  //   this.sideNavAvailability$.next(visible);
-  // }
+  setToolbarText(value: string): void {
+    this.toolbarText$.next(value);
+  }
 
 }
