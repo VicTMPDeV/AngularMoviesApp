@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 //Featured Components
 import { AppComponent } from './app.component';
-
 import { HttpClientModule } from "@angular/common/http";
 
 

@@ -1,0 +1,18 @@
+<mat-card>
+
+    <mat-card-header>
+        <mat-card-title>{{movie.title}}</mat-card-title>
+    </mat-card-header>
+
+    <img mat-card-image [src]="movie | imageMoviePipe">
+
+    <mat-card-content>
+        <ul class="mat-card__tags">
+            <li class="mat-card__tags-item" 
+                *ngFor="let genre of movie.genre">
+                <strong>#{{genre}}</strong>
+            </li>
+        </ul>
+    </mat-card-content>
+
+</mat-card>
