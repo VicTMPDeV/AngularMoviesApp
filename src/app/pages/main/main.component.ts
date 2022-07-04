@@ -1,14 +1,13 @@
 //@angular Components
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Location } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivationEnd, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { delay, filter } from 'rxjs/operators';
+import { delay, filter, map } from 'rxjs/operators';
 //Featured Service
 import { MainService } from './services/main.service';
-import { Observable, of } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -16,11 +15,11 @@ import { Observable, of } from 'rxjs';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
 
   @ViewChild('sideNav', {static:true}) //Para poder disponer de el en el hook onInit
-  public sideNav!: MatSidenav; //Creare un Observable entorno a esta variable para comunicar entre componentes
-  public sideNavAvailable: boolean = false;
+  public sideNav!: MatSidenav; 
+  public currentPage: string = '';
   public isDarkTheme: boolean = false;
   public isMobile: boolean = false;
   public logoImage: string = '../../../assets/images/logoVictorFilled.png';
@@ -28,11 +27,11 @@ export class MainComponent implements OnInit {
   constructor(private router: Router,
               private mainService: MainService,
               public location: Location,
-              private observerBP: BreakpointObserver) { }
-
-  ngOnInit(): void {
-
-  }
+              private observerBP: BreakpointObserver) { 
+              
+                this.getCurrentPageSlug(); 
+              
+              }
 
   ngAfterViewInit() {
     this.observerBP
@@ -51,16 +50,37 @@ export class MainComponent implements OnInit {
       });
   }
 
+  private getCurrentPageSlug(){
+    this.router.events
+    .pipe(
+      filter((event: any) => event instanceof ActivationEnd && event.snapshot.firstChild === null),
+      map((event: ActivationEnd) => event.snapshot.data),
+    )
+    .subscribe(({currentPage}) => { //uso desestructuración del argumento para evitar un error de ts
+      this.currentPage = currentPage;
+    });
+  }
+
+  public showBackIcon(): boolean {
+    if(this.currentPage === 'detailMovie' || this.currentPage === 'addMovie' || this.currentPage === 'editMovie'){
+      this.sideNav.close();
+      return true;
+    }else{
+      this.sideNav.open();
+      return false;
+    }
+  }
+
   public goBack(): void{
     this.location.back();
     this.sideNav.open();
   }
 
-  // public sideNavMobileBehavior(): void {
-  //   if (this.isMobile) {
-  //     this.sideNav.toggle();
-  //   }
-  // }
+  public sideNavMobileBehavior(): void {
+    if (this.isMobile) {
+      this.sideNav.toggle();
+    }
+  }
 
   public toggleTheme(): void {
     this.isDarkTheme = !this.isDarkTheme;

@@ -12,22 +12,22 @@
             </mat-toolbar>
 
             <mat-nav-list>
-                <a mat-list-item routerLink="/" (click)="sideNav.toggle()">
+                <a mat-list-item routerLink="/" (click)="sideNavMobileBehavior()">
                     <span>Inicio</span>
                     <mat-icon mat-list-icon>home</mat-icon>
                 </a>
                 <mat-divider class="menu-divider"></mat-divider>
-                <a mat-list-item routerLink="movies" (click)="sideNav.toggle()">
+                <a mat-list-item routerLink="movies" (click)="sideNavMobileBehavior()">
                     <span>Películas</span>
                     <mat-icon mat-list-icon>theaters</mat-icon>
                 </a>
                 <mat-divider class="menu-divider"></mat-divider>
-                <a mat-list-item routerLink="actors" (click)="sideNav.toggle()">
+                <a mat-list-item routerLink="actors" (click)="sideNavMobileBehavior()">
                     <span>Actores</span>
                     <mat-icon mat-list-icon>star_rate</mat-icon>
                 </a>
                 <mat-divider class="menu-divider"></mat-divider>
-                <a mat-list-item routerLink="studios" (click)="sideNav.toggle()">
+                <a mat-list-item routerLink="studios" (click)="sideNavMobileBehavior()">
                     <span>Estudios</span>
                     <mat-icon mat-list-icon>movie</mat-icon>
                 </a>
@@ -54,14 +54,19 @@
         <mat-sidenav-content>
 
             <mat-toolbar color="primary">
-                <button mat-icon-button *ngIf="!sideNav.opened" (click)="sideNav.toggle()">
+
+                <button mat-icon-button 
+                        *ngIf="!sideNav.opened && !showBackIcon()" 
+                        (click)="sideNav.toggle()">
                     <mat-icon>menu</mat-icon>
                 </button>
-                <ng-template #noSideNav>
-                    <button mat-icon-button (click)="goBack()">
-                        <mat-icon>arrow_back</mat-icon>
-                    </button>
-                </ng-template>
+
+                <button mat-icon-button 
+                        *ngIf="showBackIcon()"
+                        (click)="goBack()">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
                 <span class="spacer"></span>
             </mat-toolbar>
 
