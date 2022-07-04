@@ -9,7 +9,9 @@
     <mat-card-content>
         <ul class="mat-card__tags">
             <li class="mat-card__tags-item" 
-                *ngFor="let genre of movie.genre">#{{genre}}</li>
+                *ngFor="let genre of movie.genre">
+                <strong>#{{genre}}</strong>
+            </li>
         </ul>
     </mat-card-content>
 
