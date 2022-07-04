@@ -6,16 +6,16 @@ import { AddMovieComponent } from '../add-movie/add-movie.component';
 
 const routes: Routes = [
   {
-    path: '', component: ListMoviesComponent, data: { currentPage: 'movies' }
+    path: '', component: ListMoviesComponent
   },
   {
-    path: 'add', component: AddMovieComponent, data: { currentPage: 'addMovie' }
+    path: 'add', component: AddMovieComponent
   },
   {
-    path: 'edit/:id', component: AddMovieComponent, data: { currentPage: 'editMovie' }
+    path: 'edit/:id', component: AddMovieComponent
   },
   {
-    path: ':id', component: DetailMovieComponent, data: { currentPage: 'detailMovie' }
+    path: ':id', component: DetailMovieComponent
   },
   {
     path: '**',

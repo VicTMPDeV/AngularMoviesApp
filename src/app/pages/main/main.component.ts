@@ -54,21 +54,22 @@ export class MainComponent {
     this.router.events
     .pipe(
       filter((event: any) => event instanceof ActivationEnd && event.snapshot.firstChild === null),
-      map((event: ActivationEnd) => event.snapshot.data),
+      map((event: ActivationEnd) => event.snapshot.routeConfig),
     )
-    .subscribe(({currentPage}) => { //uso desestructuración del argumento para evitar un error de ts
-      this.currentPage = currentPage;
+    .subscribe((data) => {
+      this.currentPage = data!.path || '';
     });
   }
 
   public showBackIcon(): boolean {
-    if(this.currentPage === 'detailMovie' || this.currentPage === 'addMovie' || this.currentPage === 'editMovie'){
-      this.sideNav.close();
-      return true;
-    }else{
-      this.sideNav.open();
-      return false;
+    let show: boolean = false;
+    if (this.currentPage !== '') {
+      show = true;
+      this.sideNav.close(); //añado un efecto colateral al mostrar el icono
+    } else {
+      show = false;
     }
+    return show;
   }
 
   public goBack(): void{
@@ -76,7 +77,7 @@ export class MainComponent {
     this.sideNav.open();
   }
 
-  public sideNavMobileBehavior(): void {
+  public mobileBehavior(): void {
     if (this.isMobile) {
       this.sideNav.toggle();
     }
