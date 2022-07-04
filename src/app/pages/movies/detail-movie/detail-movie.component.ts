@@ -1,20 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MainService } from '../../main/services/main.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-detail-movie',
   templateUrl: './detail-movie.component.html',
   styleUrls: ['./detail-movie.component.scss']
 })
-export class DetailMovieComponent implements OnInit, OnDestroy {
+export class DetailMovieComponent implements OnInit {
 
-  constructor(private mainService: MainService) { }
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
 
-  }
-
-  ngOnDestroy(): void {
+    this.activatedRoute.params
+      .subscribe( ({id}) => console.log(id));
 
   }
 

@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListMoviesComponent } from './list-movies.component';
-import { DetailMovieComponent } from '../detail-movie/detail-movie.component';
-import { AddMovieComponent } from '../add-movie/add-movie.component';
 
 const routes: Routes = [
   {
     path: '', component: ListMoviesComponent
   },
   {
-    path: 'add', component: AddMovieComponent
+    path: ':id', 
+    loadChildren: () => import('../detail-movie/detail-movie.module').then( m => m.DetailMovieModule)
   },
   {
-    path: 'edit/:id', component: AddMovieComponent
+    path: 'add',
+    loadChildren: () => import('../add-movie/add-movie.module').then(m => m.AddMovieModule)
   },
   {
-    path: ':id', component: DetailMovieComponent
+    path: 'edit/:id',
+    loadChildren: () => import('../add-movie/add-movie.module').then(m => m.AddMovieModule)
   },
   {
     path: '**',

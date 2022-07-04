@@ -1,8 +1,10 @@
 //@angular Modules
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-//Featured Modules
+import { NgModule } from '@angular/core';
+//Featured Components
 import { DetailMovieComponent } from './detail-movie.component';
+
+import { DetailMovieRoutingModule } from './detail-movie-routing.module';
 
 
 @NgModule({
@@ -10,7 +12,8 @@ import { DetailMovieComponent } from './detail-movie.component';
     DetailMovieComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    DetailMovieRoutingModule
   ]
 })
 export class DetailMovieModule { }

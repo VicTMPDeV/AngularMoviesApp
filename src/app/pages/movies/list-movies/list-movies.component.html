@@ -4,8 +4,6 @@
      fxLayout.xs="column">
 
     <div *ngFor="let movie of moviesList" fxFlex="20" fxFlex.lg="30" fxFlex.sm="30">
-        <!-- <pre>{{movie | json}}</pre> -->
         <app-card-movie [movieData]="movie" [routerLink]="['/movies',movie.id]"></app-card-movie>
-
     </div>
 </div>

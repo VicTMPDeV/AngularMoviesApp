@@ -33,6 +33,18 @@ export class MainComponent {
               
               }
 
+  private getCurrentPageSlug() {
+    this.router.events
+      .pipe(
+        filter((event: any) => event instanceof ActivationEnd && event.snapshot.firstChild === null),
+        map((event: ActivationEnd) => event.snapshot.routeConfig),
+      )
+      .subscribe((data) => {
+        this.currentPage = data!.path || '';
+      });
+  }
+
+
   ngAfterViewInit() {
     this.observerBP
       .observe(['(max-width: 480px)'])
@@ -50,16 +62,6 @@ export class MainComponent {
       });
   }
 
-  private getCurrentPageSlug(){
-    this.router.events
-    .pipe(
-      filter((event: any) => event instanceof ActivationEnd && event.snapshot.firstChild === null),
-      map((event: ActivationEnd) => event.snapshot.routeConfig),
-    )
-    .subscribe((data) => {
-      this.currentPage = data!.path || '';
-    });
-  }
 
   public showBackIcon(): boolean {
     let show: boolean = false;
@@ -72,10 +74,12 @@ export class MainComponent {
     return show;
   }
 
+
   public goBack(): void{
     this.location.back();
     this.sideNav.open();
   }
+
 
   public mobileBehavior(): void {
     if (this.isMobile) {
@@ -83,6 +87,7 @@ export class MainComponent {
     }
   }
 
+  
   public toggleTheme(): void {
     this.isDarkTheme = !this.isDarkTheme;
     (() => {
