@@ -6,14 +6,9 @@ import { Movie } from '../../models/movie.interface';
   templateUrl: './card-movie.component.html',
   styleUrls: ['./card-movie.component.scss']
 })
-export class CardMovieComponent implements OnInit {
+export class CardMovieComponent {
 
   @Input('movieData')
   movie!: Movie;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

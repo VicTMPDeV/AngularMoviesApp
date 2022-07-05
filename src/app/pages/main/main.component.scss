@@ -111,3 +111,9 @@ mat-icon.mat-list-icon {
     font-family: 'Roboto';
   }
 }
+
+.main-toolbar {
+  position: sticky;
+  top: 0; 
+  z-index: 1;
+}
