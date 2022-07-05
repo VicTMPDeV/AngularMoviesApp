@@ -16,4 +16,11 @@ export class MoviesService {
   public getMovies(): Observable<Movie[]>{
     return this.http.get<Movie[]>(`${this._baseUrl}/movies`);
   }
+
+  public getMovie(): Observable<Movie>{
+    return this.http.get<Movie>(`${this._baseUrl}/movies/:id`);
+  }
+
+
+
 }

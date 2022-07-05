@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MainService } from '../../main/services/main.service';
 import { Movie } from '../models/movie.interface';
 import { MoviesService } from '../services/movies.service';
 
@@ -15,13 +14,13 @@ export class ListMoviesComponent implements OnInit {
 
   public moviesList: Movie[] = [];
   
-  constructor(private mainService: MainService,
-    private moviesService: MoviesService) { }
+  constructor(private moviesService: MoviesService) { }
 
   ngOnInit(): void {
 
     this.moviesService.getMovies()
       .subscribe( moviesServiceResponse => this.moviesList = moviesServiceResponse);
+      
   }
 
 }
