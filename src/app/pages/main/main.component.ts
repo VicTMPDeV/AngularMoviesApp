@@ -91,7 +91,7 @@ export class MainComponent {
 
 
   ngOnDestroy(): void {
-    this.routerSubscription.unsubscribe();
+    this.routerSubscription?.unsubscribe();
   }
 
 
