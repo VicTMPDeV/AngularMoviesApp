@@ -1,9 +1,9 @@
 <div *ngIf="movie; else noResponseYet">
     <!-- TODO layout-->
-    <button mat-fab color="primary" routerLink="add" class="edit-button">
+    <button mat-fab color="primary" routerLink="edit/:id" class="edit-button">
         <mat-icon>edit</mat-icon>
     </button>
-    <button mat-fab color="warn" routerLink="add" class="delete-button">
+    <button mat-fab color="warn" class="delete-button">
         <mat-icon>delete</mat-icon>
     </button>
 </div>

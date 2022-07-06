@@ -12,7 +12,7 @@ export class MainService {
 
   getToolbarText(): Observable<string> {
     return this.toolbarText$.asObservable();
-  };
+  }
 
   setToolbarText(value: string): void {
     this.toolbarText$.next(value);

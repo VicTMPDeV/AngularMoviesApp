@@ -1,13 +1,15 @@
 //@angular Components
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Location } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnDestroy, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { ActivationEnd, Router } from '@angular/router';
+import { Router, ActivationEnd, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { delay, filter, map } from 'rxjs/operators';
+import { delay, filter, map, mapTo } from 'rxjs/operators';
+import { of, Subscription } from 'rxjs';
 //Featured Service
-import { MainService } from './services/main.service';
+
+const sideNavUrlAvailable: string[] = ['/','/movies','/actors','/studios']; 
 
 @UntilDestroy()
 @Component({
@@ -17,31 +19,39 @@ import { MainService } from './services/main.service';
 })
 export class MainComponent {
 
+
   @ViewChild('sideNav', {static:true}) //Para poder disponer de el en el hook onInit
   public sideNav!: MatSidenav; 
-  public currentPage: string = '';
-  public isDarkTheme: boolean = false;
-  public isMobile: boolean = false;
+  public routerSubscription!: Subscription;
+  public currentUrl!: string;
+  public isSideNavAvailable!: boolean;
+  public isDarkTheme!: boolean;
+  public isMobile!: boolean;
   public logoImage: string = '../../../assets/images/logoVictorFilled.png';
 
-  constructor(private router: Router,
-              private mainService: MainService,
-              public location: Location,
-              private observerBP: BreakpointObserver) { 
-              
-                this.getCurrentPageSlug(); 
-              
-              }
 
-  private getCurrentPageSlug() {
-    this.router.events
+  constructor(private router: Router,
+              public location: Location,
+              private observerBP: BreakpointObserver) {}
+
+
+  ngOnInit(): void {
+    this.routerSubscription = this.router.events
       .pipe(
-        filter((event: any) => event instanceof ActivationEnd && event.snapshot.firstChild === null),
-        map((event: ActivationEnd) => event.snapshot.routeConfig),
+        filter((event: any) => event instanceof NavigationEnd),
+        map((event: NavigationEnd) => event.url),
       )
-      .subscribe((data) => {
-        this.currentPage = data!.path || '';
+      .subscribe((next) => {
+        console.log(next); // para observar el numero de emisiones
+        this.currentUrl = next;
+        if (sideNavUrlAvailable.includes(next)) {
+          this.isSideNavAvailable = true;
+        } else {
+          this.sideNav.close(); //añado un efecto colateral al mostrar el icono
+          this.isSideNavAvailable = false;
+        }
       });
+
   }
 
 
@@ -63,24 +73,6 @@ export class MainComponent {
   }
 
 
-  public showBackIcon(): boolean {
-    let show: boolean = false;
-    if (this.currentPage !== '') {
-      show = true;
-      this.sideNav.close(); //añado un efecto colateral al mostrar el icono
-    } else {
-      show = false;
-    }
-    return show;
-  }
-
-
-  public goBack(): void{
-    this.location.back();
-    this.sideNav.open();
-  }
-
-
   public mobileBehavior(): void {
     if (this.isMobile) {
       this.sideNav.toggle();
@@ -96,5 +88,11 @@ export class MainComponent {
         : this.logoImage = '../../../assets/images/logoVictorFilled.png';
     })();
   }
+
+
+  ngOnDestroy(): void {
+    this.routerSubscription.unsubscribe();
+  }
+
 
 }
