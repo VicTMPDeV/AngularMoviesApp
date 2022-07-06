@@ -1,5 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs';
+import { Movie } from '../models/movie.interface';
+import { MoviesService } from '../services/movies.service';
 
 @Component({
   selector: 'app-detail-movie',
@@ -8,12 +11,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailMovieComponent implements OnInit {
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  public movie!: Movie;
+
+  constructor(private activatedRoute: ActivatedRoute,
+              private moviesService: MoviesService) { }
 
   ngOnInit(): void {
 
     this.activatedRoute.params
-      .subscribe( ({id}) => console.log(id));
+      .pipe(
+        switchMap( ({id}) => this.moviesService.getMovieById(id) )
+      )
+      .subscribe( movieResp => this.movie = movieResp );
 
   }
 

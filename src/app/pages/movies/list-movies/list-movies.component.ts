@@ -19,8 +19,8 @@ export class ListMoviesComponent implements OnInit {
   ngOnInit(): void {
 
     this.moviesService.getMovies()
-      .subscribe( moviesServiceResponse => this.moviesList = moviesServiceResponse);
-      
+      .subscribe( moviesResp => this.moviesList = moviesResp);
+
   }
 
 }

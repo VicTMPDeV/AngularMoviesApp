@@ -1,9 +1,12 @@
-<div fxLayoutAlign="center" 
-     fxLayoutGap="20px"
-     fxLayout="row wrap" 
-     fxLayout.xs="column">
-     <mat-spinner color="accent"></mat-spinner>
-    <!-- <div *ngFor="let movie of moviesList" fxFlex="20" fxFlex.lg="30" fxFlex.sm="30">
-        <app-card-movie [movieData]="movie" [routerLink]="['/movies',movie.id]"></app-card-movie>
-    </div> -->
+<div *ngIf="movie; else noResponseYet">
+    <!-- TODO layout-->
+    <button mat-fab color="primary" routerLink="add" class="edit-button">
+        <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-fab color="warn" routerLink="add" class="delete-button">
+        <mat-icon>delete</mat-icon>
+    </button>
 </div>
+<ng-template #noResponseYet>
+    <mat-spinner color="accent"></mat-spinner>
+</ng-template>
