@@ -2,15 +2,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 //Featured Modules
-import { DetailStudioComponent } from './detail-studio.component';
+import { DetailCompanyComponent } from './detail-company.component';
 
 
 @NgModule({
   declarations: [
-    DetailStudioComponent
+    DetailCompanyComponent
   ],
   imports: [
     CommonModule
   ]
 })
-export class DetailStudioModule { }
+export class DetailCompanyModule { }
