@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Movie } from '../models/movie.interface';
+import { MovieDto } from '../models/dto/movieDto.interface';
 import { MoviesService } from '../services/movies.service';
 
 
@@ -12,7 +12,7 @@ import { MoviesService } from '../services/movies.service';
 })
 export class ListMoviesComponent implements OnInit {
 
-  public moviesList: Movie[] = [];
+  public moviesList: MovieDto[] = [];
   
   constructor(private moviesService: MoviesService) { }
 

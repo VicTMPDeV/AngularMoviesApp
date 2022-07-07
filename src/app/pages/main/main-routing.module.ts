@@ -22,8 +22,8 @@ const routes: Routes = [
         loadChildren: () => import('../actors/list-actors/list-actors.module').then( m => m.ListActorsModule)
       },
       {
-        path:'studios', 
-        loadChildren: () => import('../studios/list-studios/list-studios.module').then( m => m.ListStudiosModule)
+        path:'companies', 
+        loadChildren: () => import('../companies/list-companies/list-companies.module').then( m => m.ListCompaniesModule)
       },
       {
         path: '**',

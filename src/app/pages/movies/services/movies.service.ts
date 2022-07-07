@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.pre';
-import { Movie } from '../models/movie.interface';
+import { MovieDto } from '../models/dto/movieDto.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +13,12 @@ export class MoviesService {
 
   constructor( private http: HttpClient ) { }
 
-  public getMovies(): Observable<Movie[]>{
-    return this.http.get<Movie[]>(`${this._baseUrl}/movies`);
+  public getMovies(): Observable<MovieDto[]>{
+    return this.http.get<MovieDto[]>(`${this._baseUrl}/movies`);
   }
 
-  public getMovieById( id: string ): Observable<Movie>{
-    return this.http.get<Movie>(`${this._baseUrl}/movies/${id}`);
+  public getMovieById( id: number ): Observable<MovieDto>{
+    return this.http.get<MovieDto>(`${this._baseUrl}/movies/${id}`);
   }
-
-
 
 }

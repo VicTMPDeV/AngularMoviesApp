@@ -1,3 +1,6 @@
+import { ActorDto } from "../../actors/models/dto/actorDto.interface";
+import { CompanyDto } from "../../companies/models/dto/companyDto.interface";
+
 export interface Movie {
     id?:        number; //Opcional porque al crear la película no se que id le tocaría (depende del backend, no de mi).
     title:      string;
@@ -6,7 +9,8 @@ export interface Movie {
     year:       number;
     duration:   number;
     imdbRating: number;
-    actors:     number[];
+    actors:     ActorDto[];
+    companies:  CompanyDto;
 }
 
 export enum Genre {

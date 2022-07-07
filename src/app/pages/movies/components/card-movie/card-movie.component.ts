@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Movie } from '../../models/movie.interface';
+import { MovieDto } from '../../models/dto/movieDto.interface';
 
 @Component({
   selector: 'app-card-movie',
@@ -9,6 +9,6 @@ import { Movie } from '../../models/movie.interface';
 export class CardMovieComponent {
 
   @Input('movieData')
-  movie!: Movie;
+  movie!: MovieDto;
 
 }

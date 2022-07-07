@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
-import { Movie } from '../models/movie.interface';
+import { ActorsService } from '../../actors/actors.service';
+import { MovieDto } from '../models/dto/movieDto.interface';
 import { MoviesService } from '../services/movies.service';
 
 @Component({
@@ -11,10 +12,11 @@ import { MoviesService } from '../services/movies.service';
 })
 export class DetailMovieComponent implements OnInit {
 
-  public movie!: Movie;
+  public movie!: MovieDto;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private moviesService: MoviesService) { }
+              private moviesService: MoviesService,
+              private actorsService: ActorsService) { }
 
   ngOnInit(): void {
 
@@ -22,7 +24,7 @@ export class DetailMovieComponent implements OnInit {
       .pipe(
         switchMap( ({id}) => this.moviesService.getMovieById(id) )
       )
-      .subscribe( movieResp => this.movie = movieResp );
+      .subscribe( (movieResp: MovieDto) => this.movie = movieResp );
 
   }
 

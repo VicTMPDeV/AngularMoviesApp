@@ -24,7 +24,7 @@ export class MainComponent {
   public sideNav!: MatSidenav; 
   public routerSubscription!: Subscription;
   public currentUrl!: string;
-  public isSideNavAvailable!: boolean;
+  public isSideNavAvailable: boolean = true;
   public isDarkTheme!: boolean;
   public isMobile!: boolean;
   public logoImage: string = '../../../assets/images/logoVictorFilled.png';
