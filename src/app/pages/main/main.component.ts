@@ -3,7 +3,6 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild, DoCheck } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { NavigationEnd, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Subscription } from 'rxjs';
 import { delay, filter, map } from 'rxjs/operators';
@@ -18,7 +17,6 @@ import { MainService } from './services/main.service';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent {
-
 
   @ViewChild('sideNav', {static:true}) //Para poder disponer de el en el hook onInit
   public sideNav!: MatSidenav; 
@@ -60,10 +58,9 @@ export class MainComponent {
     });
   }
 
-
   
   ngAfterViewInit() {
-    this.observerBP
+    this._observerBP
       .observe(['(max-width: 480px)'])
       .pipe(delay(1), untilDestroyed(this))
       .subscribe( breakpoint => {
@@ -80,9 +77,8 @@ export class MainComponent {
   }
 
 
-
   public goBack(): void {
-    this.location.back();
+    this._location.back();
     this.sideNav.close();
   }
 
@@ -103,10 +99,8 @@ export class MainComponent {
     })();
   }
 
-
   // ngOnDestroy(): void {
   //   this.routerSubscription?.unsubscribe();
   // }
-
 
 }
