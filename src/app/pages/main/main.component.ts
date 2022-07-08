@@ -1,14 +1,15 @@
 //@angular Components
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Location } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnDestroy, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router, ActivationEnd, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { delay, filter } from 'rxjs/operators';
+import { delay, filter, map, mapTo } from 'rxjs/operators';
+import { of, Subscription } from 'rxjs';
 //Featured Service
-import { LayoutService } from '../../services/layout.service';
-import { Observable, of } from 'rxjs';
+
+const sideNavUrlAvailable: string[] = ['/','/movies','/actors','/studios']; 
 
 @UntilDestroy()
 @Component({
@@ -16,23 +17,43 @@ import { Observable, of } from 'rxjs';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
+
 
   @ViewChild('sideNav', {static:true}) //Para poder disponer de el en el hook onInit
-  public sideNav!: MatSidenav; //Creare un Observable entorno a esta variable para comunicar entre componentes
-  public sideNavAvailable: boolean = false;
-  public isDarkTheme: boolean = false;
-  public isMobile: boolean = false;
+  public sideNav!: MatSidenav; 
+  public routerSubscription!: Subscription;
+  public currentUrl!: string;
+  public isSideNavAvailable: boolean = true;
+  public isDarkTheme!: boolean;
+  public isMobile!: boolean;
   public logoImage: string = '../../../assets/images/logoVictorFilled.png';
 
-  constructor(private layoutService: LayoutService,
+
+  constructor(private router: Router,
               public location: Location,
-              private observerBP: BreakpointObserver) { }
+              private observerBP: BreakpointObserver) {}
+
 
   ngOnInit(): void {
-    this.layoutService.getObservableSidenavState()
-                      .subscribe(available => this.sideNavAvailable = available);
+    this.routerSubscription = this.router.events
+      .pipe(
+        filter((event: any) => event instanceof NavigationEnd),
+        map((event: NavigationEnd) => event.url),
+      )
+      .subscribe((next) => {
+        console.log(next); // para observar el numero de emisiones
+        this.currentUrl = next;
+        if (sideNavUrlAvailable.includes(next)) {
+          this.isSideNavAvailable = true;
+        } else {
+          this.sideNav.close(); //añado un efecto colateral al mostrar el icono
+          this.isSideNavAvailable = false;
+        }
+      });
+
   }
+
 
   ngAfterViewInit() {
     this.observerBP
@@ -49,30 +70,16 @@ export class MainComponent implements OnInit {
           this.isMobile = false;
         }
       });
-
-    // this.router.events
-    //   .pipe(
-    //     untilDestroyed(this),
-    //     filter((event) => event instanceof NavigationEnd)
-    //   )
-    //   .subscribe(() => {
-    //     if (this.sideNav.mode === 'over') {
-    //       this.sideNav.close();
-    //     }
-    //   });
   }
 
-  public goBack(): void{
-    this.location.back();
-    this.sideNav.open();
+
+  public mobileBehavior(): void {
+    if (this.isMobile) {
+      this.sideNav.toggle();
+    }
   }
 
-  // public sideNavMobileBehavior(): void {
-  //   if (this.isMobile) {
-  //     this.sideNav.toggle();
-  //   }
-  // }
-
+  
   public toggleTheme(): void {
     this.isDarkTheme = !this.isDarkTheme;
     (() => {
@@ -81,5 +88,11 @@ export class MainComponent implements OnInit {
         : this.logoImage = '../../../assets/images/logoVictorFilled.png';
     })();
   }
+
+
+  ngOnDestroy(): void {
+    this.routerSubscription?.unsubscribe();
+  }
+
 
 }

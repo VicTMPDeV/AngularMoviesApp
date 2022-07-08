@@ -232,9 +232,9 @@ $darktheme: (
 // CSS Classes
 // ----------------------------------------------------
 .light-theme {
-    @include mat.all-component-themes($lightTheme);
-  }
-  
+  @include mat.all-component-themes($lightTheme);
+}
+
 .dark-theme {
-@include mat.all-component-themes($darktheme);
+  @include mat.all-component-themes($darktheme);
 }

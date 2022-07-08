@@ -5,7 +5,25 @@ import { ListMoviesComponent } from './list-movies.component';
 const routes: Routes = [
   {
     path: '', component: ListMoviesComponent
-  }
+  },
+  {
+    path: 'add',  
+    loadChildren: () => import('../add-movie/add-movie.module').then(m => m.AddMovieModule)
+  },
+  {
+    path: 'edit/:id',  
+    loadChildren: () => import('../add-movie/add-movie.module').then(m => m.AddMovieModule)
+  },
+  {
+    path: ':id',  
+    loadChildren: () => import('../detail-movie/detail-movie.module').then( m => m.DetailMovieModule)
+  },
+  // TODO -> Tiene sentido? cualquier cosa que reciba la puede tomar como un id
+  // {
+  //   path: '**',
+  //   redirectTo: '',
+  //   pathMatch: 'full'
+  // }
 ];
 
 @NgModule({

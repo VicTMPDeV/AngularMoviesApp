@@ -5,9 +5,12 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 //Featured Modules
 import { ListMoviesRoutingModule } from './list-movies-routing.module';
 import { ListMoviesComponent } from './list-movies.component';
+import { CardMovieModule } from '../components/card-movie/card-movie.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -17,9 +20,12 @@ import { ListMoviesComponent } from './list-movies.component';
   imports: [
     CommonModule,
     ListMoviesRoutingModule,
+    CardMovieModule,
+    FlexLayoutModule,
     MatButtonModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatProgressSpinnerModule
   ]
 })
 export class ListMoviesModule { }
