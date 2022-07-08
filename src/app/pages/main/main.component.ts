@@ -20,31 +20,19 @@ export class MainComponent {
 
   @ViewChild('sideNav', {static:true}) //Para poder disponer de el en el hook onInit
   public sideNav!: MatSidenav; 
-  public routerSubscription!: Subscription;
-  public currentUrl!: string;
-  public isSideNavAvailable: boolean = JSON.parse(localStorage.getItem('sideNavAvailable')!);
+  public sideNavAbailability: boolean = this.sideNavAvailability();
   public isDarkTheme!: boolean;
   public isMobile!: boolean;
   public logoImage: string = '../../../assets/images/logoVictorFilled.png';
 
 
-  constructor(private mainServ: MainService,
-              private location: Location,
-              private observerBP: BreakpointObserver) {}
-
-
-
- ngDoCheck(): void {
-  //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
-  //Add 'implements DoCheck' to the class.
-  console.log(this.mainServ.getRouter.url);
-  console.log(this.mainServ.hideSideNav());
- }
-
+  constructor(private _mainService: MainService,
+              private _location: Location,
+              private _observerBP: BreakpointObserver) {}
 
 
   ngAfterViewInit() {
-    this.observerBP
+    this._observerBP
       .observe(['(max-width: 480px)'])
       .pipe(delay(1), untilDestroyed(this))
       .subscribe( breakpoint => {
@@ -60,10 +48,12 @@ export class MainComponent {
       });
   }
 
-
+  public sideNavAvailability(): boolean {
+    return (this._mainService.sideNavAvailableForCurrentRoute()) ? true : false;
+  }
 
   public goBack(): void {
-    this.location.back();
+    this._location.back();
     this.sideNav.close();
   }
 

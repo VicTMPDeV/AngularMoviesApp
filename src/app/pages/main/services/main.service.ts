@@ -7,16 +7,16 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class MainService {
 
-  private readonly sideNavUrlAvailable: string[] = ['/','/movies','/actors','/studios']; 
+  private readonly sideNavUrlAvailable: string[] = ['/','/movies','/actors','/companies']; 
   private toolbarText$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor(private router: Router){}
 
-  public get getRouter(){
+  public get getRouter(): Router{
     return this.router;
   }
 
-  public hideSideNav(){
+  public sideNavAvailableForCurrentRoute(): boolean{
     return this.sideNavUrlAvailable.includes(this.router.url);
   }
 
