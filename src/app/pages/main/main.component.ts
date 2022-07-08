@@ -1,15 +1,15 @@
 //@angular Components
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Location } from '@angular/common';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, DoCheck } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NavigationEnd, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Subscription } from 'rxjs';
 import { delay, filter, map } from 'rxjs/operators';
+import { MainService } from './services/main.service';
 //Featured Service
 
-const sideNavUrlAvailable: string[] = ['/','/movies','/actors','/studios']; 
 
 @UntilDestroy()
 @Component({
@@ -17,11 +17,12 @@ const sideNavUrlAvailable: string[] = ['/','/movies','/actors','/studios'];
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit, OnDestroy {
+export class MainComponent {
 
 
   @ViewChild('sideNav', {static:true}) //Para poder disponer de el en el hook onInit
   public sideNav!: MatSidenav; 
+  private readonly sideNavUrlAvailable: string[] = ['/','/movies','/actors','/companies']; 
   public routerSubscription!: Subscription;
   public currentUrl!: string;
   public isSideNavAvailable: boolean = JSON.parse(localStorage.getItem('sideNavAvailable')!);
@@ -31,11 +32,12 @@ export class MainComponent implements OnInit, OnDestroy {
 
 
   constructor(private router: Router,
-              public location: Location,
+              private location: Location,
               private observerBP: BreakpointObserver) {}
 
 
   ngOnInit(): void {
+
     this.routerSubscription = this.getSidenavAvailability();
   }
 
@@ -48,7 +50,7 @@ export class MainComponent implements OnInit, OnDestroy {
     .subscribe((next) => {
       console.log('NEXT: ', next); // para observar el numero de emisiones
       this.currentUrl = next;
-      if (sideNavUrlAvailable.includes(next)) {
+      if (this.sideNavUrlAvailable.includes(next)) {
         this.isSideNavAvailable = true;
       } else {
         this.sideNav.close(); //añado un efecto colateral al mostrar el icono
@@ -59,6 +61,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
 
+  
   ngAfterViewInit() {
     this.observerBP
       .observe(['(max-width: 480px)'])
@@ -76,10 +79,13 @@ export class MainComponent implements OnInit, OnDestroy {
       });
   }
 
+
+
   public goBack(): void {
     this.location.back();
     this.sideNav.close();
   }
+
 
   public mobileBehavior(): void {
     if (this.isMobile) {
@@ -98,9 +104,9 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
 
-  ngOnDestroy(): void {
-    this.routerSubscription?.unsubscribe();
-  }
+  // ngOnDestroy(): void {
+  //   this.routerSubscription?.unsubscribe();
+  // }
 
 
 }

@@ -5,7 +5,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MainService {
-
   private toolbarText$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   getToolbarText(): Observable<string> {
