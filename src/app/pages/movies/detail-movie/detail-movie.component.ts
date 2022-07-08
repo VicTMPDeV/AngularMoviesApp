@@ -85,8 +85,8 @@ export class DetailMovieComponent implements OnInit {
     // movie.companies = CompanyDto;
 
     movieDto.genre.forEach(value => {
-      console.log('GENRES STRING: ', value);
-      // movie.genres.push()
+      // console.log('GENRES STRING: ', value);
+      movie.genres.push()
     });
     return movie;
   }

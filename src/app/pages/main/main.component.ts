@@ -24,7 +24,8 @@ export class MainComponent implements OnInit, OnDestroy {
   public sideNav!: MatSidenav; 
   public routerSubscription!: Subscription;
   public currentUrl!: string;
-  public isSideNavAvailable: boolean = JSON.parse(localStorage.getItem('sideNavAvailable')!); 
+  public isSideNavAvailable: boolean = JSON.parse(localStorage.getItem('sideNavAvailable')!);
+  public isSideNavOpened: boolean = JSON.parse(localStorage.getItem('sideNavOpened')!);
   public isDarkTheme!: boolean;
   public isMobile!: boolean;
   public logoImage: string = '../../../assets/images/logoVictorFilled.png';
@@ -37,6 +38,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.routerSubscription = this.getSidenavAvailability();
+    this.sideNav.close();
   }
 
   public getSidenavAvailability(): Subscription{
@@ -46,18 +48,20 @@ export class MainComponent implements OnInit, OnDestroy {
       map((event: NavigationEnd) => event.url),
     )
     .subscribe((next) => {
-      console.log(next); // para observar el numero de emisiones
+      console.log('NEXT: ', next); // para observar el numero de emisiones
       this.currentUrl = next;
       if (sideNavUrlAvailable.includes(next)) {
         this.isSideNavAvailable = true;
+        this.isSideNavOpened = true;
         console.log(this.isSideNavAvailable);
-        localStorage.setItem('sideNavAvailable', JSON.stringify(this.isSideNavAvailable));
       } else {
         this.sideNav.close(); //añado un efecto colateral al mostrar el icono
         this.isSideNavAvailable = false;
+        this.isSideNavOpened = false;
         console.log(this.isSideNavAvailable);
-        localStorage.setItem('sideNavAvailable', JSON.stringify(this.isSideNavAvailable));
       }
+      localStorage.setItem('sideNavAvailable', JSON.stringify(this.isSideNavAvailable));
+      localStorage.setItem('sideNavOpened', JSON.stringify(this.sideNav.opened));
     });
   }
 
