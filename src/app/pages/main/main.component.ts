@@ -1,12 +1,12 @@
 //@angular Components
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Location } from '@angular/common';
-import { Component, OnDestroy, OnInit, ViewChild, DoCheck } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { NavigationEnd, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Subscription } from 'rxjs';
 import { delay, filter, map } from 'rxjs/operators';
-import { MainService } from './services/main.service';
 //Featured Service
 
 
@@ -20,8 +20,8 @@ export class MainComponent {
 
   @ViewChild('sideNav', {static:true}) //Para poder disponer de el en el hook onInit
   public sideNav!: MatSidenav; 
-  private readonly sideNavUrlAvailable: string[] = ['/','/movies','/actors','/companies']; 
-  public routerSubscription!: Subscription;
+  private readonly urlSideNavAvailable: string[] = ['/','/movies','/actors','/companies']; 
+  public routerSubscription: Subscription = this.getSidenavAvailability();
   public currentUrl!: string;
   public isSideNavAvailable: boolean = JSON.parse(localStorage.getItem('sideNavAvailable')!);
   public isDarkTheme!: boolean;
@@ -29,18 +29,14 @@ export class MainComponent {
   public logoImage: string = '../../../assets/images/logoVictorFilled.png';
 
 
-  constructor(private router: Router,
-              private location: Location,
-              private observerBP: BreakpointObserver) {}
+  constructor(private _router: Router,
+              private _location: Location,
+              private _observerBP: BreakpointObserver) {}
 
 
-  ngOnInit(): void {
-
-    this.routerSubscription = this.getSidenavAvailability();
-  }
 
   public getSidenavAvailability(): Subscription{
-    return this.router.events
+    return this._router.events
     .pipe(
       filter((event: any) => event instanceof NavigationEnd),
       map((event: NavigationEnd) => event.url),
@@ -48,11 +44,12 @@ export class MainComponent {
     .subscribe((next) => {
       console.log('NEXT: ', next); // para observar el numero de emisiones
       this.currentUrl = next;
-      if (this.sideNavUrlAvailable.includes(next)) {
+      if (this.urlSideNavAvailable.includes(next)) {
         this.isSideNavAvailable = true;
       } else {
-        this.sideNav.close(); //añado un efecto colateral al mostrar el icono
+        console.log('entro aqui');
         this.isSideNavAvailable = false;
+        this.sideNav.close(); //añado un efecto colateral al mostrar el icono
       }
       localStorage.setItem('sideNavAvailable', JSON.stringify(this.isSideNavAvailable));
     });
@@ -99,8 +96,8 @@ export class MainComponent {
     })();
   }
 
-  // ngOnDestroy(): void {
-  //   this.routerSubscription?.unsubscribe();
-  // }
+  ngOnDestroy(): void {
+    this.routerSubscription?.unsubscribe();
+  }
 
 }

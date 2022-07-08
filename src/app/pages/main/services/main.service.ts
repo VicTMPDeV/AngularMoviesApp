@@ -9,15 +9,7 @@ export class MainService {
 
   private toolbarText$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  constructor(private router: Router){}
-
-  public get getRouter(): Router{
-    return this.router;
-  }
-
-  public sideNavAvailableForCurrentRoute(): boolean{
-    return this.sideNavUrlAvailable.includes(this.router.url);
-  }
+  constructor(){}
 
   getToolbarText(): Observable<string> {
     return this.toolbarText$.asObservable();
