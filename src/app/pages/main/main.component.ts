@@ -1,15 +1,14 @@
 //@angular Components
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Location } from '@angular/common';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { NavigationEnd, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Subscription } from 'rxjs';
-import { delay, filter, map } from 'rxjs/operators';
+import { delay } from 'rxjs/operators';
+import { MainService } from './services/main.service';
 //Featured Service
 
-const sideNavUrlAvailable: string[] = ['/','/movies','/actors','/studios']; 
 
 @UntilDestroy()
 @Component({
@@ -17,8 +16,7 @@ const sideNavUrlAvailable: string[] = ['/','/movies','/actors','/studios'];
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit, OnDestroy {
-
+export class MainComponent {
 
   @ViewChild('sideNav', {static:true}) //Para poder disponer de el en el hook onInit
   public sideNav!: MatSidenav; 
@@ -30,33 +28,19 @@ export class MainComponent implements OnInit, OnDestroy {
   public logoImage: string = '../../../assets/images/logoVictorFilled.png';
 
 
-  constructor(private router: Router,
-              public location: Location,
+  constructor(private mainServ: MainService,
+              private location: Location,
               private observerBP: BreakpointObserver) {}
 
 
-  ngOnInit(): void {
-    this.routerSubscription = this.getSidenavAvailability();
-  }
 
-  public getSidenavAvailability(): Subscription{
-    return this.router.events
-    .pipe(
-      filter((event: any) => event instanceof NavigationEnd),
-      map((event: NavigationEnd) => event.url),
-    )
-    .subscribe((next) => {
-      console.log('NEXT: ', next); // para observar el numero de emisiones
-      this.currentUrl = next;
-      if (sideNavUrlAvailable.includes(next)) {
-        this.isSideNavAvailable = true;
-      } else {
-        this.sideNav.close(); //añado un efecto colateral al mostrar el icono
-        this.isSideNavAvailable = false;
-      }
-      localStorage.setItem('sideNavAvailable', JSON.stringify(this.isSideNavAvailable));
-    });
-  }
+ ngDoCheck(): void {
+  //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
+  //Add 'implements DoCheck' to the class.
+  console.log(this.mainServ.getRouter.url);
+  console.log(this.mainServ.hideSideNav());
+ }
+
 
 
   ngAfterViewInit() {
@@ -76,10 +60,13 @@ export class MainComponent implements OnInit, OnDestroy {
       });
   }
 
+
+
   public goBack(): void {
     this.location.back();
     this.sideNav.close();
   }
+
 
   public mobileBehavior(): void {
     if (this.isMobile) {
@@ -96,11 +83,5 @@ export class MainComponent implements OnInit, OnDestroy {
         : this.logoImage = '../../../assets/images/logoVictorFilled.png';
     })();
   }
-
-
-  ngOnDestroy(): void {
-    this.routerSubscription?.unsubscribe();
-  }
-
 
 }
