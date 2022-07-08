@@ -5,7 +5,7 @@ import { ActorDto } from '../../actors/models/dto/actorDto.interface';
 import { ActorsService } from '../../actors/services/actors.service';
 import { CompanyDto } from '../../companies/models/dto/companyDto.interface';
 import { MovieDto } from '../models/dto/movieDto.interface';
-import { Movie } from '../models/movie.interface';
+import { Genre, Movie } from '../models/movie.interface';
 import { MoviesService } from '../services/movies.service';
 
 @Component({
@@ -85,8 +85,7 @@ export class DetailMovieComponent implements OnInit {
     // movie.companies = CompanyDto;
 
     movieDto.genre.forEach(value => {
-      // console.log('GENRES STRING: ', value);
-      movie.genres.push()
+      movie.genres.push( (<any>Genre)[value]);
     });
     return movie;
   }
