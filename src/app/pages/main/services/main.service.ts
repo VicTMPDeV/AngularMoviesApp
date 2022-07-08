@@ -7,7 +7,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class MainService {
 
-  private readonly sideNavUrlAvailable: string[] = ['/','/movies','/actors','/companies']; 
   private toolbarText$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor(private router: Router){}
