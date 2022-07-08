@@ -5,12 +5,12 @@ export interface Movie {
     id?:        number; //Opcional porque al crear la película no se que id le tocaría (depende del backend, no de mi).
     title:      string;
     poster?:    string;
-    genre:      Genre[];
+    genres:     Genre[];
     year:       number;
     duration:   number;
     imdbRating: number;
     actors:     ActorDto[];
-    companies:  CompanyDto;
+    companies?:  CompanyDto;
 }
 
 export enum Genre {
