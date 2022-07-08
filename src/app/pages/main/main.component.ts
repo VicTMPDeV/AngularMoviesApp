@@ -25,7 +25,6 @@ export class MainComponent implements OnInit, OnDestroy {
   public routerSubscription!: Subscription;
   public currentUrl!: string;
   public isSideNavAvailable: boolean = JSON.parse(localStorage.getItem('sideNavAvailable')!);
-  public isSideNavOpened: boolean = JSON.parse(localStorage.getItem('sideNavOpened')!);
   public isDarkTheme!: boolean;
   public isMobile!: boolean;
   public logoImage: string = '../../../assets/images/logoVictorFilled.png';
@@ -38,7 +37,6 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.routerSubscription = this.getSidenavAvailability();
-    this.sideNav.close();
   }
 
   public getSidenavAvailability(): Subscription{
@@ -52,16 +50,11 @@ export class MainComponent implements OnInit, OnDestroy {
       this.currentUrl = next;
       if (sideNavUrlAvailable.includes(next)) {
         this.isSideNavAvailable = true;
-        this.isSideNavOpened = true;
-        console.log(this.isSideNavAvailable);
       } else {
         this.sideNav.close(); //añado un efecto colateral al mostrar el icono
         this.isSideNavAvailable = false;
-        this.isSideNavOpened = false;
-        console.log(this.isSideNavAvailable);
       }
       localStorage.setItem('sideNavAvailable', JSON.stringify(this.isSideNavAvailable));
-      localStorage.setItem('sideNavOpened', JSON.stringify(this.sideNav.opened));
     });
   }
 
@@ -72,17 +65,21 @@ export class MainComponent implements OnInit, OnDestroy {
       .pipe(delay(1), untilDestroyed(this))
       .subscribe( breakpoint => {
         if (breakpoint.matches) {
+          this.isMobile = true;
           this.sideNav.mode = 'over';
           this.sideNav.close();
-          this.isMobile = true;
         } else {
+          this.isMobile = false;
           this.sideNav.mode = 'side';
           this.sideNav.open();
-          this.isMobile = false;
         }
       });
   }
 
+  public goBack(): void {
+    this.location.back();
+    this.sideNav.close();
+  }
 
   public mobileBehavior(): void {
     if (this.isMobile) {

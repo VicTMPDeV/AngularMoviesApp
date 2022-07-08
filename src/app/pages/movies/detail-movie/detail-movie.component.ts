@@ -42,7 +42,7 @@ export class DetailMovieComponent implements OnInit {
         });
 
         this.movie = this.movieBuilder(this.movieDto, this.movieActorsDto);
-        console.log(this.movie);
+
       }); 
 
   }
