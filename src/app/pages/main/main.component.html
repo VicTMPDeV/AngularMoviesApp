@@ -27,7 +27,7 @@
                     <mat-icon mat-list-icon>star_rate</mat-icon>
                 </a>
                 <mat-divider class="menu-divider"></mat-divider>
-                <a mat-list-item routerLink="studios" (click)="mobileBehavior()">
+                <a mat-list-item routerLink="companies" (click)="mobileBehavior()">
                     <span>Estudios</span>
                     <mat-icon mat-list-icon>movie</mat-icon>
                 </a>
@@ -62,7 +62,7 @@
                 
                 <button mat-icon-button 
                         *ngIf="!isSideNavAvailable"
-                        (click)="location.back()">
+                        (click)="goBack()">
                     <mat-icon>arrow_back</mat-icon>
                 </button>
 
