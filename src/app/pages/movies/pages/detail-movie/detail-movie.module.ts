@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { DetailMovieRoutingModule } from '@pages/movies/pages/detail-movie/detail-movie-routing.module';
 import { DetailMovieComponent } from '@pages/movies/pages/detail-movie/detail-movie.component';
 import { SpinnerModule } from '../../../../components/spinner/spinner.module';
+import { InfoMovieModule } from '../../../../components/info-movie/info-movie.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { SpinnerModule } from '../../../../components/spinner/spinner.module';
     DetailMovieRoutingModule,
     MatIconModule,
     MatButtonModule,
-    SpinnerModule
+    SpinnerModule,
+    InfoMovieModule
   ]
 })
 export class DetailMovieModule { }

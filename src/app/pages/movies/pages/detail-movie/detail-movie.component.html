@@ -1,5 +1,5 @@
 <div *ngIf="movie; else noResponseYet">
-    <!-- TODO layout-->
+    <app-info-movie [movieDetail]="movie"></app-info-movie>
     <pre>{{movie | json}}</pre>
     <div class="edit-button">
         <button mat-fab color="primary" routerLink="edit/:id">
