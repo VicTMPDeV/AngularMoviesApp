@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 //Featured Service
 import { NavigationService } from '@services/navigation-service/navigation.service';
 import { ResponsiveService } from '@services/responsive-service/responsive.service';
+import { Constants } from './constants/constants';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   public isSideNavAvailable: boolean = JSON.parse(localStorage.getItem('isSideNavAvailable')!) ?? true;
   public isDarkTheme!: boolean;
   public isMobile!: boolean;
-  public logoImage: string = 'assets/images/logoVictorFilled.png';
+  public logoImage: string = Constants.LOGO_IMAGE_FILLED;
 
 
   constructor(private _navigationService: NavigationService,
@@ -74,8 +75,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     this.isDarkTheme = !this.isDarkTheme;
     (() => {
       (this.isDarkTheme)
-        ? this.logoImage = 'assets/images/logoVictor.png'
-        : this.logoImage = 'assets/images/logoVictorFilled.png';
+        ? this.logoImage = Constants.LOGO_IMAGE
+        : this.logoImage = Constants.LOGO_IMAGE_FILLED
     })();
   }
 

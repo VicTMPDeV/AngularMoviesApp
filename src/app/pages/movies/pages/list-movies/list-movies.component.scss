@@ -1,11 +1,13 @@
 .create-button {
     position: fixed;
     top: 88.5vh;
-    right: 3.5vw;
+    right: 2vw;
 }
 
 .movies-list {
-    margin: 0px;
-    padding: 0px;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
 }
 
