@@ -1,5 +1,5 @@
 <div *ngIf="moviesList.length != 0; else noResponseYet">
-    <div fxLayoutAlign="center" fxLayoutGap="25px grid" fxLayout="row wrap" fxLayout.xs="column">
+    <div class="movies-list" fxLayoutAlign="center" fxLayoutGap="25px grid" fxLayout="row wrap" fxLayout.xs="column">
         <div *ngFor="let movie of moviesList" fxFlex="20" fxFlex.lg="30" fxFlex.sm="30">
             <app-card-movie [movieData]="movie" [routerLink]="['/movies',movie.id]"></app-card-movie>
         </div>
@@ -8,8 +8,6 @@
         <mat-icon>add</mat-icon>
     </button>
 </div>
-<ng-template class="mat-spinner--container" #noResponseYet>
-    <div class="mat-spinner--container">
-        <app-spinner></app-spinner>
-    </div>
+<ng-template #noResponseYet>
+    <app-spinner></app-spinner>
 </ng-template>
