@@ -1,15 +1,10 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from '../../../../environments/environment.pre';
-import { CompanyDto } from '../models/dto/companyDto.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompaniesService {
-
-  private _baseUrl: string = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 

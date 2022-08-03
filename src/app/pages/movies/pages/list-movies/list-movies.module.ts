@@ -9,7 +9,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 //Featured Modules
 import { ListMoviesRoutingModule } from './list-movies-routing.module';
 import { ListMoviesComponent } from './list-movies.component';
-import { CardMovieModule } from '../../components/card-movie/card-movie.module';
+import { CardMovieModule } from '../../../../components/card-movie/card-movie.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 

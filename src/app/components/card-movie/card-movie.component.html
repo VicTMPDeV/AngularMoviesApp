@@ -1,14 +1,14 @@
-<mat-card>
+<mat-card class="mat-card__list">
 
-    <mat-card-header>
+    <mat-card-header class="mat-card-header__list">
         <mat-card-title>{{movie.title}}</mat-card-title>
     </mat-card-header>
 
     <img mat-card-image [src]="movie | imageMoviePipe">
 
     <mat-card-content>
-        <ul class="mat-card__tags">
-            <li class="mat-card__tags-item" 
+        <ul class="mat-card-content__list">
+            <li class="mat-card-content__list-item" 
                 *ngFor="let genre of movie.genre">
                 <strong>#{{genre}}</strong>
             </li>

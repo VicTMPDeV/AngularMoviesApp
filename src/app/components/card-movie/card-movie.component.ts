@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MovieDto } from '../../models/dto/movieDto.interface';
+import { Component, Input } from '@angular/core';
+import { MovieDto } from 'src/app/models/movies/dto/movieDto.interface';
 
 @Component({
   selector: 'app-card-movie',

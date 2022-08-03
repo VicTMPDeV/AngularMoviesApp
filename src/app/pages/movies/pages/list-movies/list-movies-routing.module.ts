@@ -18,12 +18,7 @@ const routes: Routes = [
     path: ':id',  
     loadChildren: () => import('../detail-movie/detail-movie.module').then( m => m.DetailMovieModule)
   },
-  // TODO -> Tiene sentido? cualquier cosa que reciba la puede tomar como un id
-  // {
-  //   path: '**',
-  //   redirectTo: '',
-  //   pathMatch: 'full'
-  // }
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({

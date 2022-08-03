@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MovieDto } from '../../models/dto/movieDto.interface';
-import { MoviesService } from '../../services/movies.service';
+import { MoviesService } from 'src/app/services/movies-service/movies.service';
+import { MovieDto } from '../../../../models/movies/dto/movieDto.interface';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class ListMoviesComponent implements OnInit {
   ngOnInit(): void {
 
     this._moviesService.getMovies()
-      .subscribe( moviesResponse => this.moviesList = moviesResponse);
+      .subscribe( response => this.moviesList = response);
 
   }
 

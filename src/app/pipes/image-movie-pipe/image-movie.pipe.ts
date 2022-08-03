@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { MovieDto } from "../models/dto/movieDto.interface";
+import { MovieDto } from 'src/app/models/movies/dto/movieDto.interface';
 
 @Pipe({
   name: 'imageMoviePipe'

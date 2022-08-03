@@ -1,5 +1,6 @@
-import { ActorDto } from "../../actors/models/dto/actorDto.interface";
-import { CompanyDto } from "../../companies/models/dto/companyDto.interface";
+import { ActorDto } from 'src/app/models/actors/dto/actorDto.interface';
+import { CompanyDto } from 'src/app/models/companies/dto/companyDto.interface';
+
 
 export interface Movie {
     id?:        number; //Opcional porque al crear la película no se que id le tocaría (depende del backend, no de mi).

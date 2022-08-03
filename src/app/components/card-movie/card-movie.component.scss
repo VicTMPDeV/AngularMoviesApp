@@ -1,0 +1,56 @@
+.mat-card__list {
+    border-radius: 25px;
+}
+
+::ng-deep .tooltip-card {
+    background: #033A92;
+    color: white;
+}
+
+@media screen and (max-width: 480px) {
+
+    // Image
+    mat-card img {
+        object-fit: cover;
+        height: 250px;
+    }
+
+}
+
+@media screen and (min-width: 481px) {
+
+    // Image
+    mat-card img {
+        object-fit: cover;
+        height: 350px;
+    }
+
+}
+
+// Header
+.mat-card-header__list {
+    justify-content: center;
+    align-items: center;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.mat-card-header-text__list {
+    font-size: medium;
+}
+
+// Content
+.mat-card-content__list {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    font-size: small;
+    padding-inline-start: 0;
+}
+
+.mat-card-content__list-item {
+    list-style-type: none;
+    margin-left: 10px;
+}
+
+
