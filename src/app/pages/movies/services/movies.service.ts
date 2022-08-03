@@ -9,16 +9,14 @@ import { MovieDto } from '../models/dto/movieDto.interface';
 })
 export class MoviesService {
 
-  private _baseUrl: string = environment.baseUrl;
-
   constructor( private http: HttpClient ) { }
 
   public getMovies(): Observable<MovieDto[]>{
-    return this.http.get<MovieDto[]>(`${this._baseUrl}/movies`);
+    return this.http.get<MovieDto[]>(`${environment.baseUrl}/movies`);
   }
 
   public getMovieById( id: number ): Observable<MovieDto>{
-    return this.http.get<MovieDto>(`${this._baseUrl}/movies/${id}`);
+    return this.http.get<MovieDto>(`${environment.baseUrl}/movies/${id}`);
   }
 
 }
