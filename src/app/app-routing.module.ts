@@ -8,15 +8,15 @@ const routes: Routes = [
     children:[
       {
         path:'movies', 
-        loadChildren: () => import('./pages/movies/pages/list-movies/list-movies.module').then( m => m.ListMoviesModule)
+        loadChildren: () => import('@pages/movies/pages/list-movies/list-movies.module').then( m => m.ListMoviesModule)
       },
       {
         path:'actors', 
-        loadChildren: () => import('./pages/actors/pages/list-actors/list-actors.module').then( m => m.ListActorsModule)
+        loadChildren: () => import('@pages/actors/pages/list-actors/list-actors.module').then( m => m.ListActorsModule)
       },
       {
         path:'companies', 
-        loadChildren: () => import('./pages/companies/pages/list-companies/list-companies.module').then( m => m.ListCompaniesModule)
+        loadChildren: () => import('@pages/companies/pages/list-companies/list-companies.module').then( m => m.ListCompaniesModule)
       },  
       {
         path: '', redirectTo: 'movies', pathMatch:'full'

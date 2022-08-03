@@ -3,8 +3,8 @@ import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular
 import { MatSidenav } from '@angular/material/sidenav';
 import { Subscription } from 'rxjs';
 //Featured Service
-import { NavigationService } from './services/navigation-service/navigation.service';
-import { ResponsiveService } from './services/responsive-service/responsive.service';
+import { NavigationService } from '@services/navigation-service/navigation.service';
+import { ResponsiveService } from '@services/responsive-service/responsive.service';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   public isSideNavAvailable: boolean = JSON.parse(localStorage.getItem('isSideNavAvailable')!) ?? true;
   public isDarkTheme!: boolean;
   public isMobile!: boolean;
-  public logoImage: string = '../../../assets/images/logoVictorFilled.png';
+  public logoImage: string = 'assets/images/logoVictorFilled.png';
 
 
   constructor(private _navigationService: NavigationService,
@@ -74,8 +74,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     this.isDarkTheme = !this.isDarkTheme;
     (() => {
       (this.isDarkTheme)
-        ? this.logoImage = '../../../assets/images/logoVictor.png'
-        : this.logoImage = '../../../assets/images/logoVictorFilled.png';
+        ? this.logoImage = 'assets/images/logoVictor.png'
+        : this.logoImage = 'assets/images/logoVictorFilled.png';
     })();
   }
 

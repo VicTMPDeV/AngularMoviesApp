@@ -3,9 +3,7 @@
     'light-theme': isDarkTheme !== true
 }">
     <mat-sidenav-container fullscreen>
-
         <mat-sidenav #sideNav>
-
             <mat-toolbar color="primary">
                 <span>Menú</span>
                 <span class="spacer"></span>
@@ -13,7 +11,6 @@
                     <mat-icon>close</mat-icon>
                 </button>
             </mat-toolbar>
-
             <mat-nav-list>
                 <mat-divider class="menu-divider"></mat-divider>
                 <a mat-list-item routerLink="movies" (click)="setMobileBehavior()">
@@ -49,29 +46,22 @@
                 </div>
             </mat-nav-list>
         </mat-sidenav>
-
         <mat-sidenav-content>
-
             <mat-toolbar color="primary">
                 <button mat-icon-button 
                         *ngIf="isSideNavAvailable && !sideNav.opened" 
                         (click)="sideNav.toggle()">
                     <mat-icon>menu</mat-icon>
                 </button>
-                
                 <button mat-icon-button 
                         *ngIf="!isSideNavAvailable"
                         (click)="goBack()">
                     <mat-icon>arrow_back</mat-icon>
                 </button>
-
             </mat-toolbar>
-
             <div class="content">
                 <router-outlet></router-outlet>
             </div>
-
         </mat-sidenav-content>
-
     </mat-sidenav-container>
 </div>

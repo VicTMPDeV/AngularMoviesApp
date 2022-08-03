@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListMoviesComponent } from './list-movies.component';
+import { ListMoviesComponent } from '@pages/movies/pages/list-movies/list-movies.component';
+
 
 const routes: Routes = [
   {
@@ -8,15 +9,15 @@ const routes: Routes = [
   },
   {
     path: 'add',  
-    loadChildren: () => import('../add-movie/add-movie.module').then(m => m.AddMovieModule)
+    loadChildren: () => import('@pages/movies/pages/add-movie/add-movie.module').then(m => m.AddMovieModule)
   },
   {
     path: 'edit/:id',  
-    loadChildren: () => import('../add-movie/add-movie.module').then(m => m.AddMovieModule)
+    loadChildren: () => import('@pages/movies/pages/add-movie/add-movie.module').then(m => m.AddMovieModule)
   },
   {
     path: ':id',  
-    loadChildren: () => import('../detail-movie/detail-movie.module').then( m => m.DetailMovieModule)
+    loadChildren: () => import('@pages/movies/pages/detail-movie/detail-movie.module').then( m => m.DetailMovieModule)
   },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

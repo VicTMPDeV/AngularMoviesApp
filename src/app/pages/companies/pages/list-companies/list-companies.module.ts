@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListCompaniesComponent } from './list-companies.component';
-import { ListCompaniesRoutingModule } from './list-companies-routing.module';
+import { SpinnerModule } from '@components/spinner/spinner.module';
+import { ListCompaniesComponent } from '@pages/companies/pages/list-companies/list-companies.component';
+import { ListCompaniesRoutingModule } from '@pages/companies/pages/list-companies/list-companies-routing.module';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import { ListCompaniesRoutingModule } from './list-companies-routing.module';
   ],
   imports: [
     CommonModule,
-    ListCompaniesRoutingModule
+    ListCompaniesRoutingModule,
+    SpinnerModule
   ]
 })
 export class ListCompaniesModule { }

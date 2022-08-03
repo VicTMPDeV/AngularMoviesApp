@@ -1,8 +1,6 @@
-//@angular Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-//Featured Modules
-import { DetailCompanyComponent } from './detail-company.component';
+import { DetailCompanyComponent } from '@pages/companies/pages/detail-company/detail-company.component';
 
 
 @NgModule({

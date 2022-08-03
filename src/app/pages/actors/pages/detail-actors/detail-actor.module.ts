@@ -1,8 +1,6 @@
-//@angular Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-//Featured Modules
-import { DetailActorComponent } from './detail-actor.component';
+import { DetailActorComponent } from '@pages/actors/pages/detail-actors/detail-actor.component';
 
 
 @NgModule({

@@ -1,6 +1,7 @@
 //@angular Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from "@angular/common/http";
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //@angular Material Modules
@@ -15,7 +16,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
 //Featured Components
 import { AppComponent } from './app.component';
-import { HttpClientModule } from "@angular/common/http";
 
 
 @NgModule({

@@ -1,14 +1,10 @@
-//@angular Modules
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-//Material Modules
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-//Featured Components
-import { DetailMovieComponent } from './detail-movie.component';
-//Featured Modules
-import { DetailMovieRoutingModule } from './detail-movie-routing.module';
+import { DetailMovieComponent } from '@pages/movies/pages/detail-movie/detail-movie.component';
+import { DetailMovieRoutingModule } from '@pages/movies/pages/detail-movie/detail-movie-routing.module';
 
 
 @NgModule({

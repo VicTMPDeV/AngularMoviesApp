@@ -29,9 +29,6 @@
       "@constants/*": [
         "src/app/constants/*"
       ],
-      "@errors/*": [
-        "src/app/errors/*"
-      ],
       "@models/*": [
         "src/app/models/*"
       ],

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
-import { Genre, Movie } from 'src/app/models/movies/movie.interface';
-import { ActorsService } from 'src/app/services/actors-service/actors.service';
-import { MoviesService } from 'src/app/services/movies-service/movies.service';
-import { ActorDto } from '../../../../models/actors/dto/actorDto.interface';
-import { CompanyDto } from '../../../../models/companies/dto/companyDto.interface';
-import { MovieDto } from '../../../../models/movies/dto/movieDto.interface';
+import { ActorsService } from '@services/actors-service/actors.service';
+import { MoviesService } from '@services/movies-service/movies.service';
+import { Genre, Movie } from '@models/movies/movie.interface';
+import { ActorDto } from '@models/actors/dto/actorDto.interface';
+import { CompanyDto } from '@models/companies/dto/companyDto.interface';
+import { MovieDto } from '@models/movies/dto/movieDto.interface';
+
 
 @Component({
   selector: 'app-detail-movie',

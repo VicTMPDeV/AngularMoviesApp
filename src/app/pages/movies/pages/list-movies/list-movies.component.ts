@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MoviesService } from 'src/app/services/movies-service/movies.service';
-import { MovieDto } from '../../../../models/movies/dto/movieDto.interface';
+import { MoviesService } from '@services/movies-service/movies.service';
+import { MovieDto } from '@models/movies/dto/movieDto.interface';
 
 
 @Component({

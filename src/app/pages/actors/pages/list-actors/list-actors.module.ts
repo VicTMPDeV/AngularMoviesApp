@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListActorsRoutingModule } from './list-actors-routing.module';
-import { ListActorsComponent } from './list-actors.component';
+import { SpinnerModule } from '@components/spinner/spinner.module';
+import { ListActorsRoutingModule } from '@pages/actors/pages/list-actors/list-actors-routing.module';
+import { ListActorsComponent } from '@pages/actors/pages/list-actors/list-actors.component';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import { ListActorsComponent } from './list-actors.component';
   ],
   imports: [
     CommonModule,
-    ListActorsRoutingModule
+    ListActorsRoutingModule,
+    SpinnerModule
   ]
 })
 export class ListActorsModule { }
