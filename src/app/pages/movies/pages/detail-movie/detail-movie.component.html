@@ -1,12 +1,14 @@
 <div *ngIf="movie; else noResponseYet">
     <!-- TODO layout-->
     <pre>{{movie | json}}</pre>
-    <button mat-fab color="primary" routerLink="edit/:id" class="edit-button">
-        <mat-icon>edit</mat-icon>
-    </button>
-    <button mat-fab color="warn" class="delete-button">
-        <mat-icon>delete</mat-icon>
-    </button>
+    <div class="edit-button">
+        <button mat-fab color="primary" routerLink="edit/:id">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-fab color="warn">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
 </div>
 <ng-template #noResponseYet>
     <app-spinner></app-spinner>

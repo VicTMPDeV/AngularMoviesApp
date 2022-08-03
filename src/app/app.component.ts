@@ -35,7 +35,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   public getSidenavAvailability(): Subscription{
     return this._navigationService.getCurrentUrl()
       .subscribe((currentUrl: string) => {
-        console.log('NEXT: ', currentUrl);
         if (this.urlSideNavAvailable.includes(currentUrl)) {
           this.isSideNavAvailable = true;
         } else {
