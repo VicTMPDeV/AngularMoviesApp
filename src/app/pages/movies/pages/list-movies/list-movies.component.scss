@@ -1,6 +1,6 @@
 .create-button {
     position: fixed;
-    top: 88.5vh;
+    bottom: 2vh;
     right: 2vw;
 }
 
@@ -9,5 +9,14 @@
     flex-direction: row !important;
     flex-wrap: wrap !important;
     justify-content: space-between !important;
+}
+
+//Media-Queries
+@media (max-width: 480px) {
+    .create-button {
+        position: fixed;
+        bottom: 3vh;
+        right: 5vw;
+    }
 }
 
