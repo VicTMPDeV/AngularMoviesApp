@@ -1,0 +1,22 @@
+.create-button {
+    position: fixed;
+    bottom: 2vh;
+    right: 2vw;
+}
+
+.movies-list {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+}
+
+//Media-Queries
+@media (max-width: 480px) {
+    .create-button {
+        position: fixed;
+        bottom: 3vh;
+        right: 5vw;
+    }
+}
+

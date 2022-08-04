@@ -1,18 +1,35 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NotFoundComponent } from '@pages/not-found/not-found.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
-    path:'',
-    loadChildren: () => import('./pages/main/main.module').then( m => m.MainModule)
-  },
-  {
-    path:'auth', 
-    redirectTo:''
-  },
-  {
-    path:'**',
-    redirectTo:''
+    path:'', component: AppComponent,
+    children:[
+      {
+        path:'movies', 
+        loadChildren: () => import('@pages/movies/pages/list-movies/list-movies.module').then( m => m.ListMoviesModule)
+      },
+      {
+        path:'actors', 
+        loadChildren: () => import('@pages/actors/pages/list-actors/list-actors.module').then( m => m.ListActorsModule)
+      },
+      {
+        path:'companies', 
+        loadChildren: () => import('@pages/companies/pages/list-companies/list-companies.module').then( m => m.ListCompaniesModule)
+      },
+      {
+        path:'not-found',
+        component: NotFoundComponent
+      },  
+      {
+        path: '', redirectTo: 'movies', pathMatch:'full'
+      },
+      {
+        path: '**', redirectTo: 'not-found', pathMatch: 'full'
+      }
+    ]
   }
 ];
 

@@ -1,0 +1,14 @@
+<mat-card class="mat-card__list">
+    <mat-card-header class="mat-card-header__list">
+        <mat-card-title>{{movie.title | truncateText}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="movie | imageMovie">
+    <mat-card-content>
+        <ul class="mat-card-content__list">
+            <li class="mat-card-content__list-item" 
+                *ngFor="let genre of movie.genre">
+                <strong>#{{genre}}</strong>
+            </li>
+        </ul>
+    </mat-card-content>
+</mat-card>

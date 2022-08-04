@@ -1,0 +1,27 @@
+::ng-deep mat-dialog-container {
+    background-color: var(--primary-color);
+    color: var(--text-primary-color);
+    border-radius: 25px !important;
+}
+
+::ng-deep snack-bar-container {
+    background-color: var(--primary-color);
+    color: var(--text-primary-color);
+    border-radius: 10px !important;
+}
+
+.action-buttons {
+    margin-top: 20px;
+}
+
+.delete {
+    background-color: var(--warn-color);
+}
+
+.no {
+    background-color: var(--accent-color);
+}
+
+h3 {
+    text-align: center;
+}

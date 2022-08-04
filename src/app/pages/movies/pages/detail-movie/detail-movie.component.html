@@ -1,0 +1,15 @@
+<div *ngIf="mappedMovie; else noResponseYet">
+    <app-info-movie [movieDetail]="mappedMovie"></app-info-movie>
+    <!-- <pre>{{mappedMovie | json}}</pre> -->
+    <div class="edit-button">
+        <button mat-fab color="primary" routerLink="edit/:id">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-fab color="warn" (click)="deleteMovie()">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+</div>
+<ng-template #noResponseYet>
+    <app-spinner></app-spinner>
+</ng-template>
