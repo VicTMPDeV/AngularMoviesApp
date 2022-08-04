@@ -18,7 +18,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   public routerSubscription!: Subscription;
   private readonly urlSideNavAvailable: string[] = ['/','/movies','/actors','/companies']; 
   public isSideNavAvailable: boolean = JSON.parse(localStorage.getItem('isSideNavAvailable')!) ?? true;
-  public isDarkTheme!: boolean;
+  public isDarkTheme: boolean = JSON.parse(localStorage.getItem('isDarkTheme')!) ?? false;
   public isMobile!: boolean;
   public logoImage: string = Constants.LOGO_IMAGE_FILLED;
 
@@ -69,6 +69,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public toggleTheme(): void {
     this.isDarkTheme = !this.isDarkTheme;
+    localStorage.setItem('isDarkTheme', JSON.stringify(this.isDarkTheme));
     (() => {
       (this.isDarkTheme)
         ? this.logoImage = Constants.LOGO_IMAGE
