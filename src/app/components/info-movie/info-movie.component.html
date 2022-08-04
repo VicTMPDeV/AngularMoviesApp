@@ -1,1 +1,40 @@
-<img [src]="">
+<img [src]="movieDetail | imageMovie">
+<div class="content">
+    <div class="content__first-row">
+        <div>
+            <strong>Puntuación</strong>
+            <p>{{movieDetail.imdbRating}}</p>
+        </div>
+        <div>
+            <strong>Duración</strong>
+            <p>{{movieDetail.duration}}</p>
+        </div>
+    </div>
+    <div class="content__actors">
+        <div>
+            <strong>Actores</strong>
+            <hr>
+        </div>
+        <div>
+            <p *ngFor="let actor of movieDetail.actors">{{actor.first_name}}&nbsp;{{actor.last_name}}</p>
+        </div>
+    </div>
+    <div class="content__studio">
+        <div>
+            <strong>Estudio</strong>
+            <hr>
+        </div>
+        <div>
+            <p>{{movieDetail.company?.name}}</p>
+        </div>
+    </div>
+    <div class="content__genres">
+        <div>
+            <strong>Géneros</strong>
+            <hr>
+        </div>
+        <div>
+            <p *ngFor="let genre of movieDetail.genres"><strong>#{{genre}}</strong></p>
+        </div>
+    </div>
+</div>

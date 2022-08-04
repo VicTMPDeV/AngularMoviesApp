@@ -9,7 +9,6 @@ import { ActorsService } from '@services/actors-service/actors.service';
 import { CompaniesService } from '@services/companies-service/companies.service';
 import { DataBuilderService } from '@services/data-service/data-builder.service';
 import { MoviesService } from '@services/movies-service/movies.service';
-import { interval, Subscription } from 'rxjs';
 import { NavigationService } from '@services/navigation-service/navigation.service';
 
 
@@ -44,7 +43,6 @@ export class DetailMovieComponent implements OnInit {
     this._moviesService.getMovieById(this._activatedRoute.snapshot.paramMap.get('id')!) 
       .subscribe( {
         next: (movieResponse: MovieDto) => {
-          const suscription: Subscription = interval(1000).subscribe(console.log);
           movieDto = movieResponse;
           movieDto.actors.forEach( (actorId: number) => {
             this._actorsService.getActorById(actorId)
@@ -57,7 +55,6 @@ export class DetailMovieComponent implements OnInit {
               companies = companiesResp;
               this.mappedMovie = this._dataService.movieBuilder(movieDto, movieActors, companies); 
             });
-            suscription.unsubscribe();
         },
         error: (errorResponse: HttpErrorResponse) => {
           console.error('ERROR: ',errorResponse.error);
