@@ -1,40 +1,55 @@
-<img [src]="movieDetail | imageMovie">
-<div class="content">
-    <div class="content__first-row">
-        <div>
-            <strong>Puntuación</strong>
-            <p>{{movieDetail.imdbRating}}</p>
+<div class="info-movie">
+    <div class="info-movie__image-container">
+        <img class="info-movie__image-container__image" [src]="movieDetail | imageMovie">
+    </div>
+    <div class="info-movie__content">
+        <div class="info-movie__content__first-row">
+            <div class="info-movie__content__first-row__left">
+                <strong>Puntuación</strong>
+                <p>{{movieDetail.imdbRating}}</p>
+            </div>
+            <div class="info-movie__content__first-row__right">
+                <strong>Duración</strong>
+                <p>{{movieDetail.duration}}&nbsp;min</p>
+            </div>
         </div>
-        <div>
-            <strong>Duración</strong>
-            <p>{{movieDetail.duration}}</p>
+        <div class="info-movie__content__actors">
+            <div>
+                <strong>Actores</strong>
+                <mat-divider></mat-divider>
+            </div>
+            <div>
+                <ul class="info-movie__content__actors__list">
+                    <li class="info-movie__content__actors__list__list-item" 
+                        *ngFor="let actor of movieDetail.actors">
+                        <span>{{actor.first_name}}&nbsp;{{actor.last_name}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="info-movie__content__studio">
+            <div>
+                <strong>Estudio</strong>
+                <mat-divider></mat-divider>
+            </div>
+            <div class="info-movie__content__studio__item">
+                <p>{{movieDetail.company?.name}}</p>
+            </div>
+        </div>
+        <div class="info-movie__content__genres">
+            <div>
+                <strong>Géneros</strong>
+                <mat-divider></mat-divider>
+            </div>
+            <div>
+                <ul class="info-movie__content__genres__list">
+                    <li class="info-movie__content__genres__list__list-item" 
+                        *ngFor="let genre of movieDetail.genres">
+                        <strong>#{{genre}}</strong>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-    <div class="content__actors">
-        <div>
-            <strong>Actores</strong>
-            <hr>
-        </div>
-        <div>
-            <p *ngFor="let actor of movieDetail.actors">{{actor.first_name}}&nbsp;{{actor.last_name}}</p>
-        </div>
-    </div>
-    <div class="content__studio">
-        <div>
-            <strong>Estudio</strong>
-            <hr>
-        </div>
-        <div>
-            <p>{{movieDetail.company?.name}}</p>
-        </div>
-    </div>
-    <div class="content__genres">
-        <div>
-            <strong>Géneros</strong>
-            <hr>
-        </div>
-        <div>
-            <p *ngFor="let genre of movieDetail.genres"><strong>#{{genre}}</strong></p>
-        </div>
-    </div>
+
 </div>

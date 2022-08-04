@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ImageMoviePipeModule } from '@pipes/image-movie-pipe/image-movie-pipe.module';
 import { InfoMovieComponent } from './info-movie.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 @NgModule({
@@ -10,6 +11,7 @@ import { InfoMovieComponent } from './info-movie.component';
   ],
   imports: [
     CommonModule,
+    MatDividerModule,
     ImageMoviePipeModule
   ],
   exports: [

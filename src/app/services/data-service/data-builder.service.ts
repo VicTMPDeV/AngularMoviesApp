@@ -30,12 +30,12 @@ export class DataBuilderService {
     this.mappedMovie.actors = actorsDto;
     this.mappedMovie.company = {} as CompanyDto;
 
-    movieDto.genre.forEach(value => {
-      this.mappedMovie.genres.push( (<any>Genre)[value]);
+    movieDto.genre.forEach(genre => {
+      this.mappedMovie.genres.push((<any>Genre)[genre]);
     });
     
-    companyDto.forEach(company => {
-      company.movies.forEach(movieValue => {
+    companyDto.forEach((company: CompanyDto) => {
+      company.movies.filter(movieValue => {
         if(this.mappedMovie.id === movieValue){
           this.mappedMovie.company = company;
         }

@@ -9,8 +9,7 @@ import { NavigationService } from '@services/navigation-service/navigation.servi
   selector: 'app-list-movies',
   templateUrl: './list-movies.component.html',
   styleUrls: ['./list-movies.component.scss'],
-  providers: [],
-  encapsulation: ViewEncapsulation.None //VIP -> Propagar estilos generales en lugar de encapsular el componente
+  providers: []
 })
 export class ListMoviesComponent implements OnInit {
 
