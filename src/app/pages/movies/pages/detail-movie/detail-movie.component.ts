@@ -29,9 +29,7 @@ export class DetailMovieComponent implements OnInit {
               private _navigationService: NavigationService) { }
 
   ngOnInit(): void {
-
     this.getMappedMovie();
-    
   }
 
   public getMappedMovie(): void{

@@ -1,16 +1,14 @@
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { BehaviorSubject, filter, map, Observable } from 'rxjs';
 import { Constants } from '@constants/constants';
+import { filter, map, Observable } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class NavigationService {
-
-  private _toolbarText$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor(private _router: Router,
               private _location: Location){}
@@ -33,14 +31,6 @@ export class NavigationService {
 
   public getErrorPage(): void{
     this._router.navigateByUrl(Constants.ROUTE_NOT_FOUND);
-  }
-
-  public getToolbarText(): Observable<string> {
-    return this._toolbarText$.asObservable();
-  }
-
-  public setToolbarText(value: string): void {
-    this._toolbarText$.next(value);
   }
 
 }
