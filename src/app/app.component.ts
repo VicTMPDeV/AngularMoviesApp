@@ -1,8 +1,6 @@
-//@angular Components
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Subscription } from 'rxjs';
-//Featured Service
 import { NavigationService } from '@services/navigation-service/navigation.service';
 import { ResponsiveService } from '@services/responsive-service/responsive.service';
 import { Constants } from './constants/constants';
@@ -24,7 +22,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   public isMobile!: boolean;
   public logoImage: string = Constants.LOGO_IMAGE_FILLED;
 
-
   constructor(private _navigationService: NavigationService,
               private _responsiveService: ResponsiveService) {}
 
@@ -39,7 +36,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
           this.isSideNavAvailable = true;
         } else {
           this.isSideNavAvailable = false;
-          this.sideNav.close(); //añado un efecto colateral al mostrar el icono
+          this.sideNav.close(); 
         }
         localStorage.setItem('isSideNavAvailable', JSON.stringify(this.isSideNavAvailable));
       });

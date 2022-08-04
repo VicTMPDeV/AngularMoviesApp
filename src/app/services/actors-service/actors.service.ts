@@ -11,7 +11,7 @@ export class ActorsService {
 
   constructor( private http: HttpClient ) { }
 
-  public getActorsById( id: number ): Observable<ActorDto>{
+  public getActorById( id: number ): Observable<ActorDto>{
     return this.http.get<ActorDto>(`${environment.baseUrl}/actors/${id}`);
   }
 

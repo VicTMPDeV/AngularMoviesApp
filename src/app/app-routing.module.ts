@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NotFoundComponent } from '@pages/not-found/not-found.component';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path:'companies', 
         loadChildren: () => import('@pages/companies/pages/list-companies/list-companies.module').then( m => m.ListCompaniesModule)
+      },
+      {
+        path:'not-found',
+        component: NotFoundComponent
       },  
       {
         path: '', redirectTo: 'movies', pathMatch:'full'

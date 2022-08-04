@@ -11,7 +11,7 @@ export interface Movie {
     duration:   number;
     imdbRating: number;
     actors:     ActorDto[];
-    companies?:  CompanyDto;
+    company?:   CompanyDto;
 }
 
 export enum Genre {
