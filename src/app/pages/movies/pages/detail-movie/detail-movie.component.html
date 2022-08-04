@@ -1,6 +1,6 @@
-<div *ngIf="movie; else noResponseYet">
-    <app-info-movie [movieDetail]="movie"></app-info-movie>
-    <pre>{{movie | json}}</pre>
+<div *ngIf="mappedMovie; else noResponseYet">
+    <app-info-movie [movieDetail]="mappedMovie"></app-info-movie>
+    <pre>{{mappedMovie | json}}</pre>
     <div class="edit-button">
         <button mat-fab color="primary" routerLink="edit/:id">
             <mat-icon>edit</mat-icon>
