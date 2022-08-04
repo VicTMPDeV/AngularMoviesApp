@@ -228,9 +228,6 @@ $darktheme: (
   background: $mat-dark-theme-background,
 );
 
-// ----------------------------------------------------
-// CSS Classes
-// ----------------------------------------------------
 .light-theme {
   @include mat.all-component-themes($lightTheme);
 }

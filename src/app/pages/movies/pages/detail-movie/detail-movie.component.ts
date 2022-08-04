@@ -1,6 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, PRIMARY_OUTLET } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActorDto } from '@models/actors/dto/actorDto.interface';
 import { CompanyDto } from '@models/companies/dto/companyDto.interface';
 import { MovieDto } from '@models/movies/dto/movieDto.interface';
@@ -10,6 +12,7 @@ import { CompaniesService } from '@services/companies-service/companies.service'
 import { DataBuilderService } from '@services/data-service/data-builder.service';
 import { MoviesService } from '@services/movies-service/movies.service';
 import { NavigationService } from '@services/navigation-service/navigation.service';
+import { ConfirmDialogComponent } from '../../../../components/confirm-dialog/confirm-dialog.component';
 
 
 @Component({
@@ -26,7 +29,9 @@ export class DetailMovieComponent implements OnInit {
               private _actorsService: ActorsService,
               private _companiesService: CompaniesService,
               private _dataService: DataBuilderService,
-              private _navigationService: NavigationService) { }
+              private _navigationService: NavigationService,
+              private _dialog: MatDialog,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getMappedMovie();
@@ -60,6 +65,32 @@ export class DetailMovieComponent implements OnInit {
         }
       })
 
+  }
+
+  public deleteMovie(): void {
+
+    const dialog = this._dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: {...this.mappedMovie}
+    });
+
+    dialog.afterClosed()
+      .subscribe( (result) => {
+        if(result){
+          this._moviesService.deleteMovie(this.mappedMovie.id!)
+            .subscribe(()=>{
+              this.showSnackBar('Película Borrada');
+              this._navigationService.getReloadPage();
+            })
+        }
+      })
+  
+  }
+
+  showSnackBar( message: string ){
+    this._snackBar.open( message, 'Ok!', {
+      duration: 250000
+    });
   }
 
 }

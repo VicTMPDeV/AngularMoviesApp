@@ -19,4 +19,8 @@ export class MoviesService {
     return this.http.get<MovieDto>(`${environment.baseUrl}/movies/${id}`);
   }
 
+  public deleteMovie( id: number ): Observable<MovieDto>{
+    return this.http.delete<MovieDto>(`${environment.baseUrl}/movies/${id}`);
+  }
+
 }
