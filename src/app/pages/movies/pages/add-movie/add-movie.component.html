@@ -1,21 +1,22 @@
 <div class="form-movie" fxLayout="column" fxFlex="100%" 
-     fxFlex.gt-md="75%" fxFlexOffset.gt-md="12.5%" 
-     fxFlex.gt-lg="33.3%" fxFlexOffset.gt-md="33.3%">
+     fxFlexOffset.gt-md="30%" fxFlex.gt-md="40%"  
+     fxFlex.gt-lg="33.3%" fxFlexOffset.gt-lg="33.3%">
      
     <mat-form-field class="form-movie__field" appearance="fill">
         <mat-label>Título</mat-label>
-        <input matInput type="text"/>
+        <input matInput type="text">
     </mat-form-field>
 
     <mat-form-field class="form-movie__field" appearance="fill">
         <mat-label>Póster (url)</mat-label>
-        <input matInput type="url"/>
+        <input matInput type="url">
     </mat-form-field>
 
     <mat-form-field class="form-movie__field" appearance="fill">
         <mat-label>Géneros</mat-label>
-        <input matInput type="text"/>
-        <mat-icon matSuffix class="form-movie__field__icon">add</mat-icon>
+        <mat-select>
+            <mat-option>thriller</mat-option>
+        </mat-select>
     </mat-form-field>
 
     <mat-form-field class="form-movie__field" appearance="fill">
@@ -34,17 +35,17 @@
 
     <mat-form-field class="form-movie__field" appearance="fill">
         <mat-label>Año</mat-label>
-        <input matInput type="number"/>
+        <input matInput type="number">
     </mat-form-field>
 
     <mat-form-field class="form-movie__field" appearance="fill">
         <mat-label>Duración</mat-label>
-        <input matInput type="number"/>
+        <input matInput type="number">
     </mat-form-field>
 
     <mat-form-field class="form-movie__field" appearance="fill">
         <mat-label>Puntuación</mat-label>
-        <input matInput type="number"/>
+        <input matInput type="number">
     </mat-form-field>
 
     <div class="save-button">
