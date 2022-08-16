@@ -26,10 +26,6 @@ body {
   align-content: stretch;
 }
 
-.spacer {
-  flex: 1 1 auto;
-}
-
 mat-sidenav mat-icon.mat-list-icon {
   margin-right: 15px;
 }
@@ -70,7 +66,6 @@ mat-sidenav mat-divider.menu-divider {
 
 .dark-theme .mat-drawer {
   background-color: #2F343B;
-  color: white;
 }
 
 .mat-list-base {
@@ -82,6 +77,13 @@ mat-sidenav mat-divider.menu-divider {
   position: sticky;
   top: 0;
   z-index: 1;
+  display: flex;
+
+    &__title {
+      display: flex;
+      flex-grow: 1;
+      padding-left: 16px;
+    }
 }
 
 //Container
