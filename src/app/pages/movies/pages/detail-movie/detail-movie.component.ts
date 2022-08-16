@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, PRIMARY_OUTLET } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActorDto } from '@models/actors/dto/actorDto.interface';
@@ -18,11 +18,20 @@ import { ConfirmDialogComponent } from '../../../../components/confirm-dialog/co
 @Component({
   selector: 'app-detail-movie',
   templateUrl: './detail-movie.component.html',
-  styleUrls: ['./detail-movie.component.scss']
+  styles: [`
+      .edit-button {
+        display: flex;
+        gap: 15px;
+        justify-content: right;
+        position: fixed;
+        bottom: 2.5vh;
+        right: 5vw;
+      }
+    `]
 })
 export class DetailMovieComponent implements OnInit {
 
-  public mappedMovie!: Movie;
+  public movie!: Movie;
 
   constructor(private _activatedRoute: ActivatedRoute,
               private _moviesService: MoviesService,
@@ -34,10 +43,10 @@ export class DetailMovieComponent implements OnInit {
               private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.getMappedMovie();
+    this.getMovie();
   }
 
-  public getMappedMovie(): void{
+  public getMovie(): void{
 
     let movieDto: MovieDto = {} as MovieDto;
     let movieActors: ActorDto[] = [];
@@ -56,7 +65,7 @@ export class DetailMovieComponent implements OnInit {
           this._companiesService.getCompanies()
             .subscribe((companiesResp: CompanyDto[]) => {
               companies = companiesResp;
-              this.mappedMovie = this._dataService.movieBuilder(movieDto, movieActors, companies); 
+              this.movie = this._dataService.movieBuilder(movieDto, movieActors, companies); 
             });
         },
         error: (errorResponse: HttpErrorResponse) => {
@@ -71,13 +80,13 @@ export class DetailMovieComponent implements OnInit {
 
     const dialog = this._dialog.open(ConfirmDialogComponent, {
       width: '300px',
-      data: {...this.mappedMovie}
+      data: {...this.movie}
     });
 
     dialog.afterClosed()
       .subscribe( (result) => {
         if(result){
-          this._moviesService.deleteMovie(this.mappedMovie.id!)
+          this._moviesService.deleteMovie(this.movie.id!)
             .subscribe(()=>{
               this.showSnackBar('Película Borrada');
               this._navigationService.getReloadPage();

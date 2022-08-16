@@ -4,9 +4,7 @@ import { MovieDto } from '@models/movies/dto/movieDto.interface';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.pre';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class MoviesService {
 
   constructor( private http: HttpClient ) { }

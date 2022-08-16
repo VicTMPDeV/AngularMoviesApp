@@ -1,6 +1,7 @@
 .info-movie {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 
     @media screen and (max-width: 480px) {
         flex-direction: column;
@@ -24,6 +25,7 @@
     &__content {
 
         margin-left: 25px;
+        margin-bottom: 45px;
 
         @media screen and (max-width: 480px) {
             margin-left: 0;
@@ -63,7 +65,7 @@
         }
 
         &__actors {
-            margin-top: 25px;
+            margin-top: 15px;
 
             &__list {
                 display: flex;

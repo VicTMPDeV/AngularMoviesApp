@@ -4,9 +4,7 @@ import { Observable } from 'rxjs';
 import { ActorDto } from '@models/actors/dto/actorDto.interface';
 import { environment } from 'src/environments/environment.pre';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ActorsService {
 
   constructor( private http: HttpClient ) { }
