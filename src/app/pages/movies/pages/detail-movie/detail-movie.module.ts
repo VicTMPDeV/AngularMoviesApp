@@ -9,6 +9,9 @@ import { SpinnerModule } from '@components/spinner/spinner.module';
 import { DetailMovieRoutingModule } from '@pages/movies/pages/detail-movie/detail-movie-routing.module';
 import { ConfirmDialogModule } from '@components/confirm-dialog/confirm-dialog.module';
 import { DetailMovieComponent } from '@pages/movies/pages/detail-movie/detail-movie.component';
+import { MoviesService } from '@services/movies-service/movies.service';
+import { ActorsService } from '@services/actors-service/actors.service';
+import { CompaniesService } from '@services/companies-service/companies.service';
 
 
 @NgModule({
@@ -25,6 +28,11 @@ import { DetailMovieComponent } from '@pages/movies/pages/detail-movie/detail-mo
     SpinnerModule,
     InfoMovieModule,
     ConfirmDialogModule
+  ],
+  providers: [
+    MoviesService,
+    ActorsService,
+    CompaniesService
   ]
 })
 export class DetailMovieModule { }

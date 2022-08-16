@@ -10,7 +10,7 @@ import { NavigationService } from '../navigation-service/navigation.service';
 })
 export class DataBuilderService {
 
-  public mappedMovie: Movie = {} as Movie;
+  public movie: Movie = {} as Movie;
 
   constructor(private _navigationService: NavigationService) { }
 
@@ -20,29 +20,29 @@ export class DataBuilderService {
 
   public movieBuilder(movieDto: MovieDto, actorsDto: ActorDto[], companyDto: CompanyDto[]): Movie {
     
-    this.mappedMovie.id = movieDto.id;
-    this.mappedMovie.title = movieDto.title;
-    this.mappedMovie.poster = movieDto.poster!;
-    this.mappedMovie.genres = [];
-    this.mappedMovie.year = movieDto.year;
-    this.mappedMovie.duration = movieDto.duration;
-    this.mappedMovie.imdbRating = movieDto.imdbRating;
-    this.mappedMovie.actors = actorsDto;
-    this.mappedMovie.company = {} as CompanyDto;
+    this.movie.id = movieDto.id;
+    this.movie.title = movieDto.title;
+    this.movie.poster = movieDto.poster!;
+    this.movie.genres = [];
+    this.movie.year = movieDto.year;
+    this.movie.duration = movieDto.duration;
+    this.movie.imdbRating = movieDto.imdbRating;
+    this.movie.actors = actorsDto;
+    this.movie.company = {} as CompanyDto;
 
     movieDto.genre.forEach(genre => {
-      this.mappedMovie.genres.push((<any>Genre)[genre]);
+      this.movie.genres.push((<any>Genre)[genre]);
     });
     
     companyDto.forEach((company: CompanyDto) => {
       company.movies.filter(movieValue => {
-        if(this.mappedMovie.id === movieValue){
-          this.mappedMovie.company = company;
+        if(this.movie.id === movieValue){
+          this.movie.company = company;
         }
       })
     });
 
-    return this.mappedMovie;
+    return this.movie;
   }
   
 }

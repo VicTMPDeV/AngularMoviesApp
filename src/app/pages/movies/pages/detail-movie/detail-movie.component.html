@@ -1,8 +1,8 @@
-<div *ngIf="mappedMovie; else noResponseYet">
-    <app-info-movie [movieDetail]="mappedMovie"></app-info-movie>
-    <!-- <pre>{{mappedMovie | json}}</pre> -->
+<div *ngIf="movie; else noResponseYet">
+    <app-info-movie [movieDetail]="movie"></app-info-movie>
+    <!-- <pre>{{movie | json}}</pre> -->
     <div class="edit-button">
-        <button mat-fab color="accent" [routerLink]="['/movies/edit', mappedMovie.id]">
+        <button mat-fab color="accent" [routerLink]="['/movies/edit', movie.id]">
             <mat-icon>edit</mat-icon>
         </button>
         <button mat-fab color="warn" (click)="deleteMovie()">

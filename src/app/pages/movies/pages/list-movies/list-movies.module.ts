@@ -8,6 +8,9 @@ import { CardMovieModule } from '@components/card-movie/card-movie.module';
 import { SpinnerModule } from '@components/spinner/spinner.module';
 import { ListMoviesRoutingModule } from '@pages/movies/pages/list-movies/list-movies-routing.module';
 import { ListMoviesComponent } from '@pages/movies/pages/list-movies/list-movies.component';
+import { ActorsService } from '@services/actors-service/actors.service';
+import { CompaniesService } from '@services/companies-service/companies.service';
+import { MoviesService } from '@services/movies-service/movies.service';
 
 
 @NgModule({
@@ -23,6 +26,9 @@ import { ListMoviesComponent } from '@pages/movies/pages/list-movies/list-movies
     MatIconModule,
     MatListModule,
     SpinnerModule
+  ],
+  providers: [
+    MoviesService
   ]
 })
 export class ListMoviesModule { }
