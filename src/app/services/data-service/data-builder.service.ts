@@ -3,7 +3,6 @@ import { ActorDto } from '@models/actors/dto/actorDto.interface';
 import { CompanyDto } from '@models/companies/dto/companyDto.interface';
 import { MovieDto } from '@models/movies/dto/movieDto.interface';
 import { Genre, Movie } from '@models/movies/movie.interface';
-import { NavigationService } from '../navigation-service/navigation.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +10,6 @@ import { NavigationService } from '../navigation-service/navigation.service';
 export class DataBuilderService {
 
   public movie: Movie = {} as Movie;
-
-  constructor(private _navigationService: NavigationService) { }
-
-  public showUrl(): void {
-    this._navigationService.getCurrentUrl().subscribe(value => console.log('EOOOO', value));
-  }
 
   public movieBuilder(movieDto: MovieDto, actorsDto: ActorDto[], companyDto: CompanyDto[]): Movie {
     

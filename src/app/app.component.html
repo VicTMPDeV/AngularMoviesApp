@@ -58,6 +58,10 @@
                         (click)="goBack()">
                     <mat-icon>arrow_back</mat-icon>
                 </button>
+                <span class="mat-toolbar--fixed__title" 
+                      *ngIf="toolbarTittle$ | async as toolbarTittle">
+                      {{ toolbarTittle }}
+                </span>
             </mat-toolbar>
             <div class="content">
                 <router-outlet></router-outlet>

@@ -1,9 +1,10 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { NavigationService } from '@services/navigation-service/navigation.service';
 import { ResponsiveService } from '@services/responsive-service/responsive.service';
 import { Constants } from './constants/constants';
+import { ToolbarServiceService } from '@services/toolbar-service/toolbar-service.service';
 
 
 @Component({
@@ -16,19 +17,23 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('sideNav', {static:true}) //Para poder disponer de el en el hook onInit
   public sideNav!: MatSidenav; 
   public routerSubscription!: Subscription;
-  private readonly urlSideNavAvailable: string[] = ['/','/movies','/actors','/companies']; 
+  private readonly urlSideNavAvailable: string[] = ['/','/movies','/actors','/companies']; //A CONSTANTES
   public isSideNavAvailable: boolean = JSON.parse(localStorage.getItem('isSideNavAvailable')!) ?? true;
+  public toolbarTittle$!: Observable<string>;
   public isDarkTheme!: boolean;
   public isMobile!: boolean;
   public logoImage: string = Constants.LOGO_IMAGE_FILLED;
 
   constructor(private _navigationService: NavigationService,
-              private _responsiveService: ResponsiveService) {}
+              private _responsiveService: ResponsiveService,
+              private _toolbarService: ToolbarServiceService,
+              private _changeDetector: ChangeDetectorRef) {}
 
   ngOnInit(): void {
+    this.toolbarTittle$ = this._toolbarService.getToolbarText();
     this.routerSubscription = this.getSidenavAvailability();
   }
-
+  
   public getSidenavAvailability(): Subscription{
     return this._navigationService.getCurrentUrl()
       .subscribe((currentUrl: string) => {
@@ -54,6 +59,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
             this.sideNav.mode = 'side';
           }
       });
+  }
+
+  ngAfterContentChecked() {
+    this._changeDetector.detectChanges();
   }
 
   public goBack(): void {

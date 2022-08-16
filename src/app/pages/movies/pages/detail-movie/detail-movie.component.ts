@@ -12,7 +12,8 @@ import { CompaniesService } from '@services/companies-service/companies.service'
 import { DataBuilderService } from '@services/data-service/data-builder.service';
 import { MoviesService } from '@services/movies-service/movies.service';
 import { NavigationService } from '@services/navigation-service/navigation.service';
-import { ConfirmDialogComponent } from '../../../../components/confirm-dialog/confirm-dialog.component';
+import { ToolbarServiceService } from '@services/toolbar-service/toolbar-service.service';
+import { ConfirmDialogComponent } from '@components/confirm-dialog/confirm-dialog.component';
 
 
 @Component({
@@ -39,10 +40,12 @@ export class DetailMovieComponent implements OnInit {
               private _companiesService: CompaniesService,
               private _dataService: DataBuilderService,
               private _navigationService: NavigationService,
+              private _toolbarService: ToolbarServiceService,
               private _dialog: MatDialog,
               private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    this._toolbarService.setToolbarText('DETALLE DE PELÍCULA');
     this.getMovie();
   }
 
