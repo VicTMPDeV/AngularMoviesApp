@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Constants } from '@constants/constants';
 import { MovieDto } from '@models/movies/dto/movieDto.interface';
 import { MoviesService } from '@services/movies-service/movies.service';
 import { NavigationService } from '@services/navigation-service/navigation.service';
@@ -21,7 +22,7 @@ export class ListMoviesComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this._toolbarService.setToolbarText('PELÍCULAS'); //TODO -> MOVER A CONSTANTES
+    this._toolbarService.setToolbarText(Constants.MOVIE_LIST); 
 
     this._moviesService.getMovies()
       .subscribe({
@@ -29,7 +30,7 @@ export class ListMoviesComponent implements OnInit {
           this.moviesList = response;
         },
         error: (err: HttpErrorResponse) => {
-          console.error('ERROR: ', err.error); //PONER CONSTANTE ERROR
+          console.error(Constants.ERROR, err.error); 
           this._navigationService.getErrorPage();
         }
       });

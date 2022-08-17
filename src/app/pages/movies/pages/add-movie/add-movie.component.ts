@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { Genre } from '@models/movies/movie.interface';
+import { Movie } from '@models/movies/movie.interface';
+import { ToolbarServiceService } from '@services/toolbar-service/toolbar-service.service';
+import { Constants } from '@constants/constants';
 
 
 @Component({
@@ -40,14 +44,28 @@ export class AddMovieComponent implements OnInit {
     }
   ]
 
+  public movie: Movie = {} as Movie;
+
   movieForm: FormGroup = new FormGroup({
 
   });
   
-  constructor() { }
+  constructor(private _router: Router,
+              private _activatedRoute: ActivatedRoute,
+              private _toolbarService: ToolbarServiceService) { }
 
   ngOnInit(): void {
 
+    if(this._router.url === Constants.ROUTE_MOVIES_ADD){
+      this._toolbarService.setToolbarText(Constants.ADD_MOVIE);
+    }else{
+      this._toolbarService.setToolbarText(Constants.EDIT_MOVIE 
+        + this._activatedRoute.snapshot.paramMap.get(Constants.ROUTE_PARAM_ID)!);
+    }
+  }
+
+  public saveMovie(): void {
+    console.log(this.movie);
   }
 
     //TODO -> Objeto MovieMapped -> Si está vacío es una pelicula nueva, sino es edición

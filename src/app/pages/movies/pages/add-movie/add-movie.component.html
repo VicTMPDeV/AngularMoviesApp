@@ -4,17 +4,17 @@
      
     <mat-form-field class="form-movie__field" appearance="fill">
         <mat-label>Título</mat-label>
-        <input matInput type="text">
+        <input matInput type="text" required [(ngModel)]="movie.title">
     </mat-form-field>
 
     <mat-form-field class="form-movie__field" appearance="fill">
         <mat-label>Póster (url)</mat-label>
-        <input matInput type="url">
+        <input matInput type="url" [(ngModel)]="movie.poster">
     </mat-form-field>
 
     <mat-form-field class="form-movie__field" appearance="fill">
         <mat-label>Géneros</mat-label>
-        <mat-select>
+        <mat-select required [(ngModel)]="movie.genres">
             <mat-option *ngFor="let genre of genres" [value]="genre">
                 {{genre}}
             </mat-option>
@@ -23,16 +23,16 @@
 
     <mat-form-field class="form-movie__field" appearance="fill">
         <mat-label>Actores</mat-label>
-        <mat-select>
+        <mat-select required [(ngModel)]="movie.actors">
             <mat-option *ngFor="let actor of actors" [value]='actor'>
-                {{actor.first_name}} {{actor.last_name}}
+                {{actor.first_name}}&nbsp;{{actor.last_name}}
             </mat-option>
         </mat-select>
     </mat-form-field>
     
     <mat-form-field class="form-movie__field" appearance="fill">
         <mat-label>Estudio</mat-label>
-        <mat-select>
+        <mat-select required [(ngModel)]="movie.company">
             <mat-option *ngFor="let company of companies" [value]='company'>
                 {{company.name}}
             </mat-option>
@@ -41,21 +41,21 @@
 
     <mat-form-field class="form-movie__field" appearance="fill">
         <mat-label>Año</mat-label>
-        <input matInput type="number">
+        <input matInput type="number" required [(ngModel)]="movie.year">
     </mat-form-field>
 
     <mat-form-field class="form-movie__field" appearance="fill">
         <mat-label>Duración</mat-label>
-        <input matInput type="number">
+        <input matInput type="number" required [(ngModel)]="movie.duration">
     </mat-form-field>
 
     <mat-form-field class="form-movie__field" appearance="fill">
         <mat-label>Puntuación</mat-label>
-        <input matInput type="number">
+        <input matInput type="number" required [(ngModel)]="movie.imdbRating">
     </mat-form-field>
 
     <div class="save-button">
-        <button mat-fab color="accent">
+        <button mat-fab color="accent" (click)="saveMovie()">
             <mat-icon>save</mat-icon>
         </button>
     </div>

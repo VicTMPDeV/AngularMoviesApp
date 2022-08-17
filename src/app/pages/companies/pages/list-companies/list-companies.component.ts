@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Constants } from '@constants/constants';
+import { ToolbarServiceService } from '@services/toolbar-service/toolbar-service.service';
+
 
 @Component({
   selector: 'app-list-companies',
@@ -6,4 +9,13 @@ import { Component } from '@angular/core';
   styleUrls: []
   
 })
-export class ListCompaniesComponent {}
+export class ListCompaniesComponent implements OnInit {
+
+  constructor(private _toolbarService: ToolbarServiceService) { }
+
+  ngOnInit(): void {
+
+    this._toolbarService.setToolbarText(Constants.COMPANY_LIST);
+
+  }
+}
