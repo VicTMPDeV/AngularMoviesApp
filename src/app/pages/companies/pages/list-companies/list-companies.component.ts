@@ -14,8 +14,6 @@ export class ListCompaniesComponent implements OnInit {
   constructor(private _toolbarService: ToolbarServiceService) { }
 
   ngOnInit(): void {
-
     this._toolbarService.setToolbarText(Constants.COMPANY_LIST);
-
   }
 }

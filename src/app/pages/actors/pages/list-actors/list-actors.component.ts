@@ -13,8 +13,6 @@ export class ListActorsComponent implements OnInit {
   constructor(private _toolbarService: ToolbarServiceService) { }
 
   ngOnInit(): void {
-
     this._toolbarService.setToolbarText(Constants.ACTOR_LIST);
-
   }
 }

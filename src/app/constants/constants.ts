@@ -1,8 +1,5 @@
 export class Constants {
 
-    //API
-
-
     //ASSETS
     public static NO_IMAGE: string = 'assets/images/no_image_available.jpg';
     public static LOGO_IMAGE: string = 'assets/images/logoVictor.png';
