@@ -14,6 +14,7 @@ import { MoviesService } from '@services/movies-service/movies.service';
 import { NavigationService } from '@services/navigation-service/navigation.service';
 import { ToolbarServiceService } from '@services/toolbar-service/toolbar-service.service';
 import { ConfirmDialogComponent } from '@components/confirm-dialog/confirm-dialog.component';
+import { Constants } from '@constants/constants';
 
 
 @Component({
@@ -45,17 +46,11 @@ export class DetailMovieComponent implements OnInit {
               private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this._toolbarService.setToolbarText('DETALLE DE PELÍCULA');
-    this.getMovie();
-  }
-
-  public getMovie(): void{
-
     let movieDto: MovieDto = {} as MovieDto;
     let movieActors: ActorDto[] = [];
     let companies: CompanyDto[] = [];
 
-    this._moviesService.getMovieById(this._activatedRoute.snapshot.paramMap.get('id')!) 
+    this._moviesService.getMovieById(this._activatedRoute.snapshot.paramMap.get(Constants.ROUTE_PARAM_ID)!) 
       .subscribe( {
         next: (movieResponse: MovieDto) => {
           movieDto = movieResponse;
@@ -69,6 +64,7 @@ export class DetailMovieComponent implements OnInit {
             .subscribe((companiesResp: CompanyDto[]) => {
               companies = companiesResp;
               this.movie = this._dataService.movieBuilder(movieDto, movieActors, companies); 
+              this._toolbarService.setToolbarText(`${this.movie.title} (${this.movie.year})`);
             });
         },
         error: (errorResponse: HttpErrorResponse) => {
@@ -76,13 +72,12 @@ export class DetailMovieComponent implements OnInit {
           this._navigationService.getErrorPage();
         }
       })
-
   }
 
   public deleteMovie(): void {
 
     const dialog = this._dialog.open(ConfirmDialogComponent, {
-      width: '300px',
+      width: Constants.DELETE_DIALOG_WIDTH,
       data: {...this.movie}
     });
 
@@ -91,7 +86,7 @@ export class DetailMovieComponent implements OnInit {
         if(result){
           this._moviesService.deleteMovie(this.movie.id!)
             .subscribe(()=>{
-              this.showSnackBar('Película Borrada');
+              this.showSnackBar(Constants.DELETE_MOVIE_MESSAGE);
               this._navigationService.getReloadPage();
             })
         }
@@ -100,8 +95,8 @@ export class DetailMovieComponent implements OnInit {
   }
 
   showSnackBar( message: string ){
-    this._snackBar.open( message, 'Ok!', {
-      duration: 250000
+    this._snackBar.open( message, Constants.DELETED_MESSAGE_BUTTON_LABEL, {
+      duration: Constants.DELETED_MESSAGE_DURATION
     });
   }
 

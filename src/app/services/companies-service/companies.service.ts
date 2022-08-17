@@ -12,5 +12,8 @@ export class CompaniesService {
   public getCompanies(): Observable<CompanyDto[]>{
     return this.http.get<CompanyDto[]>(`${environment.baseUrl}/companies`);
   }
+
+  // TODO -> Cuando añado una nueva película, el estudio relacionado se tiene que actualizar
+  // public addMovieToCompany(): Observable
   
 }

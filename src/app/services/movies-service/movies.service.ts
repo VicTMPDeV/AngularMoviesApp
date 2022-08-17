@@ -9,15 +9,19 @@ export class MoviesService {
 
   constructor( private http: HttpClient ) { }
 
-  public getMovies(): Observable<MovieDto[]>{
+  public getMovies(): Observable<MovieDto[]> {
     return this.http.get<MovieDto[]>(`${environment.baseUrl}/movies`);
   }
 
-  public getMovieById( id: string ): Observable<MovieDto>{
+  public getMovieById( id: string ): Observable<MovieDto> {
     return this.http.get<MovieDto>(`${environment.baseUrl}/movies/${id}`);
   }
 
-  public deleteMovie( id: number ): Observable<MovieDto>{
+  public addMovie( movieDto: MovieDto ): Observable<MovieDto> {
+    return this.http.post<MovieDto>(`${environment.baseUrl}/movies`, movieDto);
+  }
+
+  public deleteMovie( id: number ): Observable<MovieDto> {
     return this.http.delete<MovieDto>(`${environment.baseUrl}/movies/${id}`);
   }
 

@@ -1,20 +1,19 @@
-//Media-Queries
-@media (max-width: 480px) {
+
+html,
+body {
+  height: 100%;
+}
+
+@media screen and (max-width: 480px) {
   mat-sidenav {
     width: 75vw;
   }
 }
 
-@media (min-width: 480px) {
+@media screen and (min-width: 480px) {
   mat-sidenav {
     width: 250px;
   }
-}
-
-//Main Css
-html,
-body {
-  height: 100%;
 }
 
 //Sidenav
@@ -33,6 +32,13 @@ mat-sidenav mat-icon.mat-list-icon {
 mat-sidenav mat-divider.menu-divider {
   margin-left: 1em;
   margin-right: 1em;
+}
+
+.flex-sidenav--toolbar {
+
+  &__icon {
+    padding-bottom: 5px;
+  }
 }
 
 .mat-sidenav__logo {
@@ -79,10 +85,23 @@ mat-sidenav mat-divider.menu-divider {
   z-index: 1;
   display: flex;
 
+  @media screen and (max-width: 480px) {
+    padding-left: 5px;
+  }
+
     &__title {
       display: flex;
       flex-grow: 1;
       padding-left: 16px;
+  
+      @media screen and (max-width: 480px) {
+        font-size: medium;
+        padding-left: 5px;
+      }
+    }
+
+    &__icon {
+      padding-bottom: 5px;
     }
 }
 
