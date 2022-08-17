@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class ToolbarServiceService {
 
-  private _toolbarText$: BehaviorSubject<string> = new BehaviorSubject<string>(''); 
+  private _toolbarText$: BehaviorSubject<string> = new BehaviorSubject<string>(''); //PONER CONSTANTES EMPTY
 
   public getToolbarText(): Observable<string> {
     return this._toolbarText$.asObservable();

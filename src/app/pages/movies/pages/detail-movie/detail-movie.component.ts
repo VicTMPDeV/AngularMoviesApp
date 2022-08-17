@@ -45,7 +45,7 @@ export class DetailMovieComponent implements OnInit {
               private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this._toolbarService.setToolbarText('DETALLE DE PELÍCULA');
+    this._toolbarService.setToolbarText('DETALLE DE PELÍCULA'); //MOVER A CONSTANTES
     this.getMovie();
   }
 
@@ -55,7 +55,7 @@ export class DetailMovieComponent implements OnInit {
     let movieActors: ActorDto[] = [];
     let companies: CompanyDto[] = [];
 
-    this._moviesService.getMovieById(this._activatedRoute.snapshot.paramMap.get('id')!) 
+    this._moviesService.getMovieById(this._activatedRoute.snapshot.paramMap.get('id')!) //MOVER ID A CONSTANTES
       .subscribe( {
         next: (movieResponse: MovieDto) => {
           movieDto = movieResponse;

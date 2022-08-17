@@ -15,21 +15,27 @@
     <mat-form-field class="form-movie__field" appearance="fill">
         <mat-label>Géneros</mat-label>
         <mat-select>
-            <mat-option>thriller</mat-option>
+            <mat-option *ngFor="let genre of genres" [value]="genre">
+                {{genre}}
+            </mat-option>
         </mat-select>
     </mat-form-field>
 
     <mat-form-field class="form-movie__field" appearance="fill">
         <mat-label>Actores</mat-label>
         <mat-select>
-            <mat-option>LEONARDO DI CAPRIO</mat-option>
+            <mat-option *ngFor="let actor of actors" [value]='actor'>
+                {{actor.first_name}} {{actor.last_name}}
+            </mat-option>
         </mat-select>
     </mat-form-field>
     
     <mat-form-field class="form-movie__field" appearance="fill">
         <mat-label>Estudio</mat-label>
         <mat-select>
-            <mat-option>WARNER BROS</mat-option>
+            <mat-option *ngFor="let company of companies" [value]='company'>
+                {{company.name}}
+            </mat-option>
         </mat-select>
     </mat-form-field>
 
