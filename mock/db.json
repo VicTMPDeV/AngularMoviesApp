@@ -1,6 +1,24 @@
 {
   "movies": [
     {
+      "id": 1,
+      "title": "Dancing Lady",
+      "poster": "http://dummyimage.com/400x600.png/cc0000/ffffff",
+      "genre": [
+        "Comedy",
+        "Musical",
+        "Romance"
+      ],
+      "year": 2006,
+      "duration": 161,
+      "imdbRating": 8.27,
+      "actors": [
+        4,
+        5,
+        6
+      ]
+    },
+    {
       "id": 2,
       "title": "Mooring, The",
       "poster": "http://dummyimage.com/400x600.png/dddddd/000000",
@@ -29,6 +47,24 @@
       "imdbRating": 6.25,
       "actors": [
         1
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Spring Break Shark Attack",
+      "poster": "http://dummyimage.com/400x600.png/cc0000/ffffff",
+      "genre": [
+        "Adventure",
+        "Drama",
+        "Horror"
+      ],
+      "year": 1985,
+      "duration": 190,
+      "imdbRating": 3.66,
+      "actors": [
+        8,
+        9,
+        10
       ]
     },
     {
@@ -117,20 +153,6 @@
         7,
         8,
         9
-      ]
-    },
-    {
-      "id": 10,
-      "title": "Butterflies Have No Memories",
-      "poster": "http://dummyimage.com/400x600.png/dddddd/000000",
-      "genre": [],
-      "year": 1990,
-      "duration": 73,
-      "imdbRating": 4.39,
-      "actors": [
-        6,
-        9,
-        11
       ]
     }
   ],

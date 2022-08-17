@@ -10,7 +10,7 @@ import { Movie } from '@models/movies/movie.interface';
 export class ImageMoviePipe implements PipeTransform {
 
   transform(movie: MovieDto | Movie): string {
-    return (!movie.poster) ? Constants.NO_IMAGE : movie.poster;
+    return movie.poster ?? Constants.NO_IMAGE;
   }
 
 }

@@ -8,7 +8,17 @@ export class Constants {
     //ERRORS
     public static ERROR: string = 'ERROR: ';
 
-    //HEADER - TOOLBAR
+    //FORM-LABELS
+    public static MOVIE_TITLE_LABEL: string = 'Título';
+    public static MOVIE_POSTER_LABEL: string = 'Póster (url)';
+    public static MOVIE_GENRE_LABEL: string = 'Géneros';
+    public static MOVIE_ACTORS_LABEL: string = 'Actores';
+    public static MOVIE_COMPANY_LABEL: string = 'Estudio';
+    public static MOVIE_YEAR_LABEL: string = 'Año';
+    public static MOVIE_DURATION_LABEL: string = 'Duración';
+    public static MOVIE_RATING_LABEL: string = 'Puntuación';
+
+    //HEADER-TOOLBAR
     public static MOVIE_LIST: string = 'Películas';
     public static ADD_MOVIE: string = 'Nueva Película';
     public static EDIT_MOVIE: string = 'Editar Película: ';
@@ -23,6 +33,7 @@ export class Constants {
 
     //NUMBERS
     public static ZERO: number = 0;
+    public static ONE: number = 1;
     public static FIVE: number = 5;
     public static TWENTY: number = 20;
 

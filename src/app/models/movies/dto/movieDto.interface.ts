@@ -1,7 +1,7 @@
 export interface MovieDto {
-    id:         number;
+    id?:        number;
     title:      string;
-    poster:     null | string;
+    poster:     string | null;
     genre:      string[];
     year:       number;
     duration:   number;

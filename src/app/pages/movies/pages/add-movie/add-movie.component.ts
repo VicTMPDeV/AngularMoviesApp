@@ -5,6 +5,12 @@ import { Genre } from '@models/movies/movie.interface';
 import { Movie } from '@models/movies/movie.interface';
 import { ToolbarServiceService } from '@services/toolbar-service/toolbar-service.service';
 import { Constants } from '@constants/constants';
+import { ActorDto } from '@models/actors/dto/actorDto.interface';
+import { MoviesService } from '@services/movies-service/movies.service';
+import { MovieDto } from '../../../../models/movies/dto/movieDto.interface';
+import { DataBuilderService } from '@services/data-service/data-builder.service';
+import { CompaniesService } from '@services/companies-service/companies.service';
+import { NavigationService } from '@services/navigation-service/navigation.service';
 
 
 @Component({
@@ -15,18 +21,23 @@ import { Constants } from '@constants/constants';
 })
 export class AddMovieComponent implements OnInit {
 
-  public genres = Object.values(Genre);
+  public CONST: typeof Constants = Constants; //Referencia para el uso en templates
+
+  public genres: Genre[] = Object.values<Genre>(Genre);
 
   public actors = [
     {
+      id: 1,
       first_name: 'Isaak',
       last_name: 'McQuode'
     },
     {
+      id: 2,
       first_name: 'Rory',
       last_name: 'Chanders'
     },
     {
+      id: 3,
       first_name: 'Lew',
       last_name: 'Meehan'
     }
@@ -46,16 +57,21 @@ export class AddMovieComponent implements OnInit {
 
   public movie: Movie = {} as Movie;
 
+  public movieDto: MovieDto = {} as MovieDto;
+
   movieForm: FormGroup = new FormGroup({
 
   });
   
   constructor(private _router: Router,
               private _activatedRoute: ActivatedRoute,
-              private _toolbarService: ToolbarServiceService) { }
+              private _toolbarService: ToolbarServiceService,
+              private _navigationService: NavigationService,
+              private _dataBuilderService: DataBuilderService,
+              private _moviesService: MoviesService,
+              private _companiesService: CompaniesService) { }
 
   ngOnInit(): void {
-
     if(this._router.url === Constants.ROUTE_MOVIES_ADD){
       this._toolbarService.setToolbarText(Constants.ADD_MOVIE);
     }else{
@@ -64,8 +80,20 @@ export class AddMovieComponent implements OnInit {
     }
   }
 
+  public removeGenreChip(genre: Genre): void {
+    this.movie.genres?.splice(this.movie.genres.indexOf(genre), Constants.ONE);
+  }
+
+  public removeActorChip(actor: ActorDto): void {
+    this.movie.actors?.splice(this.movie.actors.indexOf(actor), Constants.ONE);
+  }
+
   public saveMovie(): void {
-    console.log(this.movie);
+    this._moviesService.addMovie(this._dataBuilderService.movieDtoBuilder(this.movie))
+      .subscribe(resp => {
+        console.log('RESPUESTA POST: ', resp);
+        this._navigationService.getBackLocation();
+      })
   }
 
     //TODO -> Objeto MovieMapped -> Si está vacío es una pelicula nueva, sino es edición

@@ -11,6 +11,7 @@
 
         &__image {
             border-radius: 10px;
+            height: 600px;
 
             @media screen and (max-width: 480px) {
                 border-radius: 10px;
