@@ -9,9 +9,12 @@ export class ActorsService {
 
   constructor( private http: HttpClient ) { }
 
+  public getActors(): Observable<ActorDto[]> {
+    return this.http.get<ActorDto[]>(`${environment.baseUrl}/actors`);
+  } 
+
   public getActorById( id: number ): Observable<ActorDto>{
     return this.http.get<ActorDto>(`${environment.baseUrl}/actors/${id}`);
   }
 
-  
 }
