@@ -7,11 +7,11 @@ import { ToolbarServiceService } from '@services/toolbar-service/toolbar-service
 import { Constants } from '@constants/constants';
 import { ActorDto } from '@models/actors/dto/actorDto.interface';
 import { MoviesService } from '@services/movies-service/movies.service';
-import { MovieDto } from '../../../../models/movies/dto/movieDto.interface';
-import { DataBuilderService } from '@services/data-service/data-builder.service';
+import { MovieDto } from '@models/movies/dto/movieDto.interface';
+import { DataService } from '@services/data-service/data.service';
 import { CompaniesService } from '@services/companies-service/companies.service';
 import { NavigationService } from '@services/navigation-service/navigation.service';
-import { CompanyDto } from '../../../../models/companies/dto/companyDto.interface';
+import { CompanyDto } from '@models/companies/dto/companyDto.interface';
 import { ActorsService } from '@services/actors-service/actors.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -25,23 +25,27 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class AddMovieComponent implements OnInit {
 
   public CONST: typeof Constants = Constants; //Referencia para el uso en templates
+  public isUpdate: boolean = false;
 
-  public genres: Genre[] = Object.values<Genre>(Genre);
-  public actors: ActorDto[] = []; 
-  public companies: CompanyDto[] = [];
+  public genresList: Genre[] = Object.values<Genre>(Genre);
+  public actorsList: ActorDto[] = []; 
+  public companiesList: CompanyDto[] = [];
 
-  public movie: Movie = {} as Movie;
+  public movie!: Movie;
+  
   public movieDto: MovieDto = {} as MovieDto;
+  public movieActors: ActorDto[] = [];
+  public movieCompany: CompanyDto = {} as CompanyDto;
 
-  movieForm: FormGroup = new FormGroup({
+  // movieForm: FormGroup = new FormGroup({
 
-  });
+  // });
   
   constructor(private _router: Router,
               private _activatedRoute: ActivatedRoute,
               private _toolbarService: ToolbarServiceService,
               private _navigationService: NavigationService,
-              private _dataBuilderService: DataBuilderService,
+              private _dataService: DataService,
               private _moviesService: MoviesService,
               private _companiesService: CompaniesService,
               private _actorsService: ActorsService) { }
@@ -51,20 +55,39 @@ export class AddMovieComponent implements OnInit {
     this.loadActors();
     this.loadCompanies();
 
-    if(this._router.url === Constants.ROUTE_MOVIES_ADD){
+    if(this._router.url === Constants.ROUTE_MOVIES_ADD){ //ADD MOVIE
+
+      this.isUpdate = false;
+      this.movie = {} as Movie;
       this._toolbarService.setToolbarText(Constants.ADD_MOVIE);
-    }else{
+
+    }else{ //UPDATE MOVIE
+
+      this.isUpdate = true;
       const movieId = this._activatedRoute.snapshot.paramMap.get(Constants.ROUTE_PARAM_ID) ?? Constants.ZERO.toString();
-      this._toolbarService.setToolbarText(Constants.EDIT_MOVIE + movieId );
       
       this._moviesService.getMovieById(movieId)
         .subscribe({
           next:(response: MovieDto) => {
+            
             this.movieDto = response;
-            console.log(this.movieDto);
-            console.log(this.actors);
-            console.log(this.companies);
-            //TODO -> CONTINUE HERE -> mirar VALUE del input para setearlo cuando entre por aqui, así se entiende que es editar
+
+            this._toolbarService.setToolbarText(Constants.EDIT_MOVIE + this.movieDto.title );
+
+            this.movieDto.actors.forEach( (actorId: number) => {
+              this.actorsList?.filter((actor: ActorDto)=>{
+                if( actor.id == actorId){
+                  this.movieActors.push(actor);
+                }
+              })
+            });
+
+            this.movieCompany = this.companiesList?.find((company: CompanyDto) => {
+              return company.movies?.includes(this.movieDto.id!);
+            })!;
+
+            this.movie = this._dataService.movieBuilder(this.movieDto, this.movieActors, this.movieCompany, []); 
+
           },
           error: (errorResponse: HttpErrorResponse) => {
             console.error('ERROR: ',errorResponse.error);
@@ -72,20 +95,19 @@ export class AddMovieComponent implements OnInit {
           }
         })
     }
-
   }
 
   public loadActors(): void {
     this._actorsService.getActors()
       .subscribe((response: ActorDto[]) => {
-        this.actors = response;
+        this.actorsList = response;
       })
   }
 
   public loadCompanies(): void {
     this._companiesService.getCompanies()
       .subscribe((response: CompanyDto[]) => {
-        this.companies = response;
+        this.companiesList = response;
       })
   }
 
@@ -98,16 +120,23 @@ export class AddMovieComponent implements OnInit {
   }
 
   public saveMovie(): void {
-    console.log(this.movie);
-    this._moviesService.addMovie(this._dataBuilderService.movieDtoBuilder(this.movie))
-      .subscribe(resp => {
-        console.log('RESPUESTA POST: ', resp);
-        this._navigationService.getBackLocation();
-      })
+    console.log('PELICULA ACTUALIZADA', this.movie);// TODO -> falta cambiar los datos de movieDto por los de movie editada.
+    if(this.movieDto.id){
+      //UPDATE
+      // TODO -> falta cambiar los datos de movieDto por los de movie editada.
+      this._moviesService.updateMovie(this.movieDto)
+        .subscribe( movie => {
+          console.log('UPDATE: ', movie);
+          this._navigationService.getBackLocation();
+        })
+    }else{
+      //CREATE
+      this._moviesService.addMovie(this._dataService.movieDtoBuilder(this.movie))
+        .subscribe( resp => {
+          console.log('RESPUESTA POST: ', resp); //TODO -> Actualizar Estudio
+          this._navigationService.getBackLocation();
+        })
+    }
   }
-
-    //TODO -> Objeto MovieMapped -> Si está vacío es una pelicula nueva, sino es edición
-
-  //TODO2 -> Además me tengo que traer todos los actores y estudios para el combo del formulario
 
 }

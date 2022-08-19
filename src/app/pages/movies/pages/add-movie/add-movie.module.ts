@@ -15,6 +15,7 @@ import { AddMovieComponent } from '@pages/movies/pages/add-movie/add-movie.compo
 import { CompaniesService } from '@services/companies-service/companies.service';
 import { MoviesService } from '@services/movies-service/movies.service';
 import { ActorsService } from '@services/actors-service/actors.service';
+import { SpinnerModule } from '@components/spinner/spinner.module';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ActorsService } from '@services/actors-service/actors.service';
     MatButtonModule,
     MatIconModule,
     MatSelectModule,
-    MatChipsModule
+    MatChipsModule,
+    SpinnerModule
   ],
   providers: [
     MoviesService,
