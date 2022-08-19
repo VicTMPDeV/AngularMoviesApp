@@ -13,7 +13,7 @@ export class CompaniesService {
     return this.http.get<CompanyDto[]>(`${environment.baseUrl}/companies`);
   }
 
-  // TODO -> Cuando añado una nueva película, el estudio relacionado se tiene que actualizar
+  // TODO -> Cuando añado una nueva película, el estudio relacionado se tiene que actualizar PUT, no POST
   // public addMovieToCompany(): Observable
   
 }

@@ -7,13 +7,14 @@ import { Genre, Movie } from '@models/movies/movie.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class DataBuilderService {
+export class DataService {
 
   private movie: Movie = {} as Movie;
   private movieDto: MovieDto = {} as MovieDto;
 
 
-  public movieBuilder(movieDto: MovieDto, actorsDto: ActorDto[], companyDto: CompanyDto[]): Movie {
+  public movieBuilder(movieDto: MovieDto, movieActors: ActorDto[], 
+    movieCompany: CompanyDto = {} as CompanyDto, companyList: CompanyDto[] = []): Movie {
     
     this.movie.id = movieDto.id;
     this.movie.title = movieDto.title;
@@ -22,14 +23,14 @@ export class DataBuilderService {
     this.movie.year = movieDto.year;
     this.movie.duration = movieDto.duration;
     this.movie.imdbRating = movieDto.imdbRating;
-    this.movie.actors = actorsDto;
-    this.movie.company = {} as CompanyDto;
+    this.movie.actors = movieActors;
+    this.movie.company = movieCompany;
 
     movieDto.genre?.forEach(genre => {
       this.movie.genres.push((<any>Genre)[genre]);
     });
     
-    companyDto.forEach((company: CompanyDto) => {
+    companyList?.forEach((company: CompanyDto) => {
       company.movies.filter(movieValue => {
         if(this.movie.id === movieValue){
           this.movie.company = company;

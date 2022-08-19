@@ -1,20 +1,20 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
+import { ConfirmDialogComponent } from '@components/confirm-dialog/confirm-dialog.component';
+import { Constants } from '@constants/constants';
 import { ActorDto } from '@models/actors/dto/actorDto.interface';
 import { CompanyDto } from '@models/companies/dto/companyDto.interface';
 import { MovieDto } from '@models/movies/dto/movieDto.interface';
 import { Movie } from '@models/movies/movie.interface';
 import { ActorsService } from '@services/actors-service/actors.service';
 import { CompaniesService } from '@services/companies-service/companies.service';
-import { DataBuilderService } from '@services/data-service/data-builder.service';
+import { DataService } from '@services/data-service/data.service';
 import { MoviesService } from '@services/movies-service/movies.service';
 import { NavigationService } from '@services/navigation-service/navigation.service';
 import { ToolbarServiceService } from '@services/toolbar-service/toolbar-service.service';
-import { ConfirmDialogComponent } from '@components/confirm-dialog/confirm-dialog.component';
-import { Constants } from '@constants/constants';
 
 
 @Component({
@@ -34,37 +34,42 @@ import { Constants } from '@constants/constants';
 export class DetailMovieComponent implements OnInit {
 
   public movie!: Movie;
+  
+  public movieDto: MovieDto = {} as MovieDto;
+  public movieActors: ActorDto[] = [];
+  public companies: CompanyDto[] = [];
 
   constructor(private _activatedRoute: ActivatedRoute,
               private _moviesService: MoviesService,
               private _actorsService: ActorsService,
               private _companiesService: CompaniesService,
-              private _dataService: DataBuilderService,
+              private _dataService: DataService,
               private _navigationService: NavigationService,
               private _toolbarService: ToolbarServiceService,
               private _dialog: MatDialog,
               private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    let movieDto: MovieDto = {} as MovieDto;
-    let movieActors: ActorDto[] = [];
-    let companies: CompanyDto[] = [];
 
     this._moviesService.getMovieById(this._activatedRoute.snapshot.paramMap.get(Constants.ROUTE_PARAM_ID)!) 
       .subscribe( {
         next: (movieResponse: MovieDto) => {
-          movieDto = movieResponse;
-          movieDto.actors.forEach( (actorId: number) => {
+
+          this.movieDto = movieResponse;
+
+          this._toolbarService.setToolbarText(`${this.movieDto.title} (${this.movieDto.year})`);
+
+          this.movieDto.actors.forEach( (actorId: number) => {
             this._actorsService.getActorById(actorId)
               .subscribe((actorResp: ActorDto) => {
-                movieActors.push(actorResp);
+                this.movieActors.push(actorResp);
               });
           });
+
           this._companiesService.getCompanies()
             .subscribe((companiesResp: CompanyDto[]) => {
-              companies = companiesResp;
-              this.movie = this._dataService.movieBuilder(movieDto, movieActors, companies); 
-              this._toolbarService.setToolbarText(`${this.movie.title} (${this.movie.year})`);
+              this.companies = companiesResp;
+              this.movie = this._dataService.movieBuilder(this.movieDto, this.movieActors, {} as CompanyDto, this.companies); 
             });
         },
         error: (errorResponse: HttpErrorResponse) => {

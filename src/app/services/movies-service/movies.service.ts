@@ -21,6 +21,10 @@ export class MoviesService {
     return this.http.post<MovieDto>(`${environment.baseUrl}/movies`, movieDto);
   }
 
+  public updateMovie( movieDto: MovieDto ): Observable<MovieDto> {
+    return this.http.put<MovieDto>(`${environment.baseUrl}/movies/${movieDto.id}`, movieDto);
+  }
+
   public deleteMovie( id: number ): Observable<MovieDto> {
     return this.http.delete<MovieDto>(`${environment.baseUrl}/movies/${id}`);
   }
