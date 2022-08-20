@@ -47,13 +47,13 @@ export class DataService {
     this.movieDto.id = movie.id;
     this.movieDto.title = movie.title;
     this.movieDto.poster = movie.poster ?? null;
-    this.movieDto.genre = Object.values<Genre>(movie.genres);
+    this.movieDto.genre = Object.values<Genre>(movie.genres ?? []);
     this.movieDto.year = movie.year;
     this.movieDto.duration = movie.duration;
     this.movieDto.imdbRating = movie.imdbRating;
     this.movieDto.actors = [];
 
-    movie.actors.forEach((actor: ActorDto) => {
+    movie.actors?.forEach((actor: ActorDto) => {
       this.movieDto.actors.push(actor.id);
     })
 

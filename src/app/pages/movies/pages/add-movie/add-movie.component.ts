@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup } from '@angular/forms';
+
 import { Genre } from '@models/movies/movie.interface';
 import { Movie } from '@models/movies/movie.interface';
 import { ToolbarServiceService } from '@services/toolbar-service/toolbar-service.service';
@@ -13,7 +16,6 @@ import { CompaniesService } from '@services/companies-service/companies.service'
 import { NavigationService } from '@services/navigation-service/navigation.service';
 import { CompanyDto } from '@models/companies/dto/companyDto.interface';
 import { ActorsService } from '@services/actors-service/actors.service';
-import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -48,7 +50,8 @@ export class AddMovieComponent implements OnInit {
               private _dataService: DataService,
               private _moviesService: MoviesService,
               private _companiesService: CompaniesService,
-              private _actorsService: ActorsService) { }
+              private _actorsService: ActorsService,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -74,13 +77,9 @@ export class AddMovieComponent implements OnInit {
 
             this._toolbarService.setToolbarText(Constants.EDIT_MOVIE + this.movieDto.title );
 
-            this.movieDto.actors.forEach( (actorId: number) => {
-              this.actorsList?.filter((actor: ActorDto)=>{
-                if( actor.id == actorId){
-                  this.movieActors.push(actor);
-                }
-              })
-            });
+            this.movieActors = this.actorsList?.filter((actor: ActorDto) => {
+              return this.movieDto.actors.includes(actor.id);
+            })
 
             this.movieCompany = this.companiesList?.find((company: CompanyDto) => {
               return company.movies?.includes(this.movieDto.id!);
@@ -120,23 +119,30 @@ export class AddMovieComponent implements OnInit {
   }
 
   public saveMovie(): void {
-    console.log('PELICULA ACTUALIZADA', this.movie);// TODO -> falta cambiar los datos de movieDto por los de movie editada.
-    if(this.movieDto.id){
+    if (this.movieDto.id) {
       //UPDATE
-      // TODO -> falta cambiar los datos de movieDto por los de movie editada.
+      this.movieDto = this._dataService.movieDtoBuilder(this.movie);
       this._moviesService.updateMovie(this.movieDto)
-        .subscribe( movie => {
-          console.log('UPDATE: ', movie);
+        .subscribe(movie => {
+          this.showSnackBar(Constants.UPDATE_MOVIE_MESSAGE);
           this._navigationService.getBackLocation();
         })
-    }else{
+    } else {
       //CREATE
       this._moviesService.addMovie(this._dataService.movieDtoBuilder(this.movie))
-        .subscribe( resp => {
+        .subscribe(resp => {
           console.log('RESPUESTA POST: ', resp); //TODO -> Actualizar Estudio
+          this.showSnackBar(Constants.CREATE_MOVIE_MESSAGE);
           this._navigationService.getBackLocation();
         })
     }
+
+  }
+
+  public showSnackBar(message: string) {
+    this._snackBar.open(message, Constants.MESSAGE_BUTTON_LABEL, {
+      duration: Constants.MESSAGE_DURATION
+    });
   }
 
 }

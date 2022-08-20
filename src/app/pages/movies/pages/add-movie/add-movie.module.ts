@@ -16,6 +16,7 @@ import { CompaniesService } from '@services/companies-service/companies.service'
 import { MoviesService } from '@services/movies-service/movies.service';
 import { ActorsService } from '@services/actors-service/actors.service';
 import { SpinnerModule } from '@components/spinner/spinner.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { SpinnerModule } from '@components/spinner/spinner.module';
     MatIconModule,
     MatSelectModule,
     MatChipsModule,
+    MatSnackBarModule,
     SpinnerModule
   ],
   providers: [

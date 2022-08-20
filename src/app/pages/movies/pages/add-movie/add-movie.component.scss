@@ -27,3 +27,9 @@
 .mat-select-trigger {
     height: fit-content;
 }
+
+::ng-deep snack-bar-container {
+    background-color: var(--primary-color);
+    color: var(--text-primary-color);
+    border-radius: 10px !important;
+}
