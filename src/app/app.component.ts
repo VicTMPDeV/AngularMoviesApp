@@ -17,7 +17,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('sideNav', {static:true}) //Para poder disponer de el en el hook onInit
   public sideNav!: MatSidenav; 
   public routerSubscription!: Subscription;
-  private readonly urlSideNavAvailable: string[] = ['/','/movies','/actors','/companies']; //A CONSTANTES
+  private readonly urlSideNavAvailable: string[] = ['/','/movies','/actors','/companies']; //TODO-> CONSTANTES
   public isSideNavAvailable: boolean = JSON.parse(localStorage.getItem('isSideNavAvailable')!) ?? true;
   public toolbarTittle$!: Observable<string>;
   public isDarkTheme!: boolean;

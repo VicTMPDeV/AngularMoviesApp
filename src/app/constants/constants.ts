@@ -30,7 +30,7 @@ export class Constants {
     public static UPDATE_MOVIE_MESSAGE: string = 'Película Editada con éxito';
     public static DELETE_MOVIE_MESSAGE: string = 'Película Borrada con éxito';
     public static DIALOG_WIDTH: string = '300px';
-    public static MESSAGE_DURATION: number = 250000;
+    public static MESSAGE_DURATION: number = 5000;
     public static MESSAGE_BUTTON_LABEL: string = 'Ok!';
 
     //NUMBERS

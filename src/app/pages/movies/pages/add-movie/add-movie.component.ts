@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { Genre } from '@models/movies/movie.interface';
 import { Movie } from '@models/movies/movie.interface';
@@ -39,9 +39,13 @@ export class AddMovieComponent implements OnInit {
   public movieActors: ActorDto[] = [];
   public movieCompany: CompanyDto = {} as CompanyDto;
 
-  // movieForm: FormGroup = new FormGroup({
-
-  // });
+  movieForm: FormGroup = this._formBuilder.group({
+    title   : ['',],
+    urlImage: ['',],
+    year    : ['',],
+    duration: ['',],
+    rating  : ['',]
+  });
   
   constructor(private _router: Router,
               private _activatedRoute: ActivatedRoute,
@@ -51,7 +55,8 @@ export class AddMovieComponent implements OnInit {
               private _moviesService: MoviesService,
               private _companiesService: CompaniesService,
               private _actorsService: ActorsService,
-              private _snackBar: MatSnackBar) { }
+              private _snackBar: MatSnackBar,
+              private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
 
@@ -148,7 +153,8 @@ export class AddMovieComponent implements OnInit {
 
   public showSnackBar(message: string) {
     this._snackBar.open(message, Constants.MESSAGE_BUTTON_LABEL, {
-      duration: Constants.MESSAGE_DURATION
+      duration: Constants.MESSAGE_DURATION,
+      panelClass: ['snack-bar-container--custom']
     });
   }
 
