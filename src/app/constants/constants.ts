@@ -26,10 +26,12 @@ export class Constants {
     public static COMPANY_LIST: string = 'Estudios';
 
     //MESSAGES
-    public static DELETE_MOVIE_MESSAGE: string = 'Película Borrada';
-    public static DELETE_DIALOG_WIDTH: string = '300px';
-    public static DELETED_MESSAGE_DURATION: number = 250000;
-    public static DELETED_MESSAGE_BUTTON_LABEL: string = 'Ok!';
+    public static CREATE_MOVIE_MESSAGE: string = 'Película Añadida con éxito';
+    public static UPDATE_MOVIE_MESSAGE: string = 'Película Editada con éxito';
+    public static DELETE_MOVIE_MESSAGE: string = 'Película Borrada con éxito';
+    public static DIALOG_WIDTH: string = '300px';
+    public static MESSAGE_DURATION: number = 250000;
+    public static MESSAGE_BUTTON_LABEL: string = 'Ok!';
 
     //NUMBERS
     public static ZERO: number = 0;

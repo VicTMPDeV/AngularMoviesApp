@@ -82,7 +82,7 @@ export class DetailMovieComponent implements OnInit {
   public deleteMovie(): void {
 
     const dialog = this._dialog.open(ConfirmDialogComponent, {
-      width: Constants.DELETE_DIALOG_WIDTH,
+      width: Constants.DIALOG_WIDTH,
       data: {...this.movie}
     });
 
@@ -99,9 +99,9 @@ export class DetailMovieComponent implements OnInit {
   
   }
 
-  showSnackBar( message: string ){
-    this._snackBar.open( message, Constants.DELETED_MESSAGE_BUTTON_LABEL, {
-      duration: Constants.DELETED_MESSAGE_DURATION
+  public showSnackBar( message: string ){
+    this._snackBar.open( message, Constants.MESSAGE_BUTTON_LABEL, {
+      duration: Constants.MESSAGE_DURATION
     });
   }
 
