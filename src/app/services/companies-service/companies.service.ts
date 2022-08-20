@@ -9,11 +9,13 @@ export class CompaniesService {
 
   constructor(private http: HttpClient) { }
 
+  //TODO -> ENDPOINT.COMPANIES Constante de companies
   public getCompanies(): Observable<CompanyDto[]>{
     return this.http.get<CompanyDto[]>(`${environment.baseUrl}/companies`);
   }
 
-  // TODO -> Cuando añado una nueva película, el estudio relacionado se tiene que actualizar PUT, no POST
-  // public addMovieToCompany(): Observable
+  public updateCompnay( companyDto: CompanyDto ): Observable<CompanyDto> {
+    return this.http.put<CompanyDto>(`${environment.baseUrl}/companies/${companyDto.id}`, companyDto);
+  }
   
 }

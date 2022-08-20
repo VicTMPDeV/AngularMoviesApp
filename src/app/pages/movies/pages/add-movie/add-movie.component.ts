@@ -123,20 +123,27 @@ export class AddMovieComponent implements OnInit {
       //UPDATE
       this.movieDto = this._dataService.movieDtoBuilder(this.movie);
       this._moviesService.updateMovie(this.movieDto)
-        .subscribe(movie => {
+        .subscribe( updatedMovie => {
+          console.log('RESPUESTA PUT: ', updatedMovie); //TODO -> Actualizar Estudio
+          console.log('COMPANY: ', this.movieCompany); //TODO -> PRIMERO HABRA QUE BUSCAR LA COMANY ANTERIOR Y ELIMINAR LA PELICULA
+          this.movieCompany.movies.push(this.movie.id!);
+          // this._companiesService.updateCompnay(this.movieCompany);
           this.showSnackBar(Constants.UPDATE_MOVIE_MESSAGE);
           this._navigationService.getBackLocation();
         })
     } else {
       //CREATE
-      this._moviesService.addMovie(this._dataService.movieDtoBuilder(this.movie))
-        .subscribe(resp => {
-          console.log('RESPUESTA POST: ', resp); //TODO -> Actualizar Estudio
+      this.movieDto = this._dataService.movieDtoBuilder(this.movie);
+      this._moviesService.addMovie(this.movieDto)
+        .subscribe( createdMovie => {
+          console.log('RESPUESTA POST: ', createdMovie); //TODO -> Actualizar Estudio
+          console.log('COMPANY: ', this.movieCompany);
+          this.movieCompany.movies.push(this.movie.id!);
+          // this._companiesService.updateCompnay(this.movieCompany);
           this.showSnackBar(Constants.CREATE_MOVIE_MESSAGE);
           this._navigationService.getBackLocation();
         })
     }
-
   }
 
   public showSnackBar(message: string) {
