@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AddMovieRoutingModule } from '@pages/movies/pages/add-movie/add-movie-routing.module';
 import { AddMovieComponent } from '@pages/movies/pages/add-movie/add-movie.component';
@@ -16,7 +17,6 @@ import { CompaniesService } from '@services/companies-service/companies.service'
 import { MoviesService } from '@services/movies-service/movies.service';
 import { ActorsService } from '@services/actors-service/actors.service';
 import { SpinnerModule } from '@components/spinner/spinner.module';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
