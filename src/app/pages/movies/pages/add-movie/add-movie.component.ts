@@ -74,13 +74,9 @@ export class AddMovieComponent implements OnInit {
 
             this._toolbarService.setToolbarText(Constants.EDIT_MOVIE + this.movieDto.title );
 
-            this.movieDto.actors.forEach( (actorId: number) => {
-              this.actorsList?.filter((actor: ActorDto)=>{
-                if( actor.id == actorId){
-                  this.movieActors.push(actor);
-                }
-              })
-            });
+            this.movieActors = this.actorsList?.filter((actor: ActorDto) => {
+              return this.movieDto.actors.includes(actor.id);
+            })
 
             this.movieCompany = this.companiesList?.find((company: CompanyDto) => {
               return company.movies?.includes(this.movieDto.id!);
@@ -120,10 +116,9 @@ export class AddMovieComponent implements OnInit {
   }
 
   public saveMovie(): void {
-    console.log('PELICULA ACTUALIZADA', this.movie);// TODO -> falta cambiar los datos de movieDto por los de movie editada.
     if(this.movieDto.id){
       //UPDATE
-      // TODO -> falta cambiar los datos de movieDto por los de movie editada.
+      this.movieDto = this._dataService.movieDtoBuilder(this.movie);
       this._moviesService.updateMovie(this.movieDto)
         .subscribe( movie => {
           console.log('UPDATE: ', movie);

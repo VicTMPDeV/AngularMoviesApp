@@ -96,6 +96,7 @@
             &__list {
                 display: flex;
                 flex-direction: row;
+                flex-wrap: wrap;
                 justify-content: flex-start;
                 font-size: small;
                 padding-inline-start: 0;
