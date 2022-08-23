@@ -115,6 +115,10 @@ export class AddMovieComponent implements OnInit {
     this.movie.actors?.splice(this.movie.actors.indexOf(actor), Constants.ONE);
   }
 
+  public removeCompanyChip(): void {
+    this.movie.company = {} as CompanyDto;
+  }
+
   public saveMovie(): void {
     if (this.movieDto.id) {
       //UPDATE
