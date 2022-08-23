@@ -111,17 +111,19 @@ export class AddMovieComponent implements OnInit {
       rating  : ['',[Validators.required, Validators.min(0), Validators.max(10)]]
     });
   }
-
-  public genreControl: FormControl = this._formBuilder.control('');
-
+  
   public get genresArray(): FormArray {
     return this.movieForm.get('genres') as FormArray;
   }
 
-  public addGenre() {
-    if (this.genreControl.invalid) { return; }
+  public genreControl: FormControl = this._formBuilder.control('');
 
+  public addGenre(): void {
     this.genresArray.push(new FormControl(this.genreControl.value));
+  }
+
+  public deleteGenre(index: number):void {
+    this.genresArray.removeAt(index);
   }
 
 
@@ -137,10 +139,6 @@ export class AddMovieComponent implements OnInit {
       .subscribe((response: CompanyDto[]) => {
         this.companiesList = response;
       })
-  }
-
-  public removeGenreChip(genre: any): void {
-    this.movie.genres?.splice(this.movie.genres.indexOf(genre), Constants.ONE);
   }
 
   public removeActorChip(actor: ActorDto): void {
