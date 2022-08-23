@@ -56,9 +56,7 @@
                     "rating": "Puntuación"
                 }
             },
-            "remove": {
-
-            }
+            "remove": {}
         },
         "notfound": {
             "title": "HA OCURRIDO UN ERROR",
