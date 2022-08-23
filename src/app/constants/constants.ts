@@ -9,8 +9,8 @@ export class Constants {
     public static ERROR: string = 'ERROR: ';
 
     //FORM-LABELS
-    public static MOVIE_TITLE_LABEL: string = 'Título';
-    public static MOVIE_POSTER_LABEL: string = 'Póster (url)';
+    public static MOVIE_TITLE_LABEL: string = 'pages.movies.add.form.title';
+    public static MOVIE_POSTER_LABEL: string = 'pages.movies.add.form.imageUrl';
     public static MOVIE_GENRE_LABEL: string = 'Géneros';
     public static MOVIE_ACTORS_LABEL: string = 'Actores';
     public static MOVIE_COMPANY_LABEL: string = 'Estudio';

@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { AddMovieRoutingModule } from '@pages/movies/pages/add-movie/add-movie-routing.module';
 import { AddMovieComponent } from '@pages/movies/pages/add-movie/add-movie.component';
@@ -36,7 +37,8 @@ import { SpinnerModule } from '@components/spinner/spinner.module';
     MatSelectModule,
     MatChipsModule,
     MatSnackBarModule,
-    SpinnerModule
+    SpinnerModule,
+    TranslateModule.forChild()
   ],
   providers: [
     MoviesService,

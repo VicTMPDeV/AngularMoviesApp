@@ -17,11 +17,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports:[
+  imports: [
     CommonModule,
     BrowserAnimationsModule,
     BrowserModule,
@@ -31,7 +35,9 @@ import { AppComponent } from './app.component';
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
-      }
+      },
+      isolate: false,
+      extend: true
     }),
     AppRoutingModule,
     MatButtonModule,
@@ -48,6 +54,3 @@ import { AppComponent } from './app.component';
 })
 export class AppModule { }
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
-}

@@ -4,6 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { TranslateModule } from '@ngx-translate/core';
+
 import { InfoMovieModule } from '@components/info-movie/info-movie.module';
 import { SpinnerModule } from '@components/spinner/spinner.module';
 import { DetailMovieRoutingModule } from '@pages/movies/pages/detail-movie/detail-movie-routing.module';
@@ -27,7 +29,8 @@ import { CompaniesService } from '@services/companies-service/companies.service'
     MatSnackBarModule,
     SpinnerModule,
     InfoMovieModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    TranslateModule.forChild()
   ],
   providers: [
     MoviesService,

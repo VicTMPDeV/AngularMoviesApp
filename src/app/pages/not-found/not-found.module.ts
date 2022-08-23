@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NotFoundComponent } from './not-found.component';
 import { MatButtonModule } from '@angular/material/button';
-
+import { TranslateModule } from '@ngx-translate/core';
+import { NotFoundComponent } from './not-found.component';
 
 
 @NgModule({
@@ -11,7 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
   ],
   imports: [
     CommonModule,
-    MatButtonModule
+    MatButtonModule,
+    TranslateModule.forChild()
   ]
 })
 export class NotFoundModule { }

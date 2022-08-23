@@ -1,0 +1,33 @@
+{
+    "pages": {
+       
+        "movies": {
+
+            "list": {
+
+            },
+            "detail": {
+
+            },
+            "add": {
+
+                "form": {
+                    "title": "Título",
+                    "imageUrl": "Póster (url)"
+                }
+
+            },
+            "remove": {
+
+            }
+        },
+
+        "actors": {
+
+        },
+
+        "companies": {
+
+        }
+    }
+}

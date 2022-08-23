@@ -161,34 +161,6 @@
         9,
         11
       ]
-    },
-    {
-      "title": "DUMBO",
-      "poster": "SDFDASFASFASF",
-      "genre": [],
-      "actors": [],
-      "id": 11
-    },
-    {
-      "title": "DUMBO",
-      "poster": "JKDAFKSDAJFKLAJFS",
-      "genre": [
-        "Adventure"
-      ],
-      "year": 1989,
-      "duration": 89,
-      "imdbRating": 10,
-      "actors": [
-        1
-      ],
-      "id": 12
-    },
-    {
-      "title": "SDFSAFASF",
-      "poster": "ASDFDASFS",
-      "genre": [],
-      "actors": [],
-      "id": 13
     }
   ],
   "actors": [

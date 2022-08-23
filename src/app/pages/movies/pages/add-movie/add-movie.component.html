@@ -5,12 +5,12 @@
         fxFlex.gt-lg="33.3%" fxFlexOffset.gt-lg="33.3%">
 
         <mat-form-field class="form-movie__field" appearance="fill">
-            <mat-label>{{CONST.MOVIE_TITLE_LABEL}}</mat-label>
+            <mat-label>{{CONST.MOVIE_TITLE_LABEL | translate}}</mat-label>
             <input matInput type="text" required name="movieName" [(ngModel)]="movie.title">
         </mat-form-field>
 
         <mat-form-field class="form-movie__field" appearance="fill">
-            <mat-label>{{CONST.MOVIE_POSTER_LABEL}}</mat-label>
+            <mat-label>{{CONST.MOVIE_POSTER_LABEL | translate}}</mat-label>
             <input matInput type="url" name="moviePoster" [(ngModel)]="movie.poster">
         </mat-form-field>
 

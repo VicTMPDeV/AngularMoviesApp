@@ -6,10 +6,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { CardMovieModule } from '@components/card-movie/card-movie.module';
 import { SpinnerModule } from '@components/spinner/spinner.module';
+import { TranslateModule } from '@ngx-translate/core';
 import { ListMoviesRoutingModule } from '@pages/movies/pages/list-movies/list-movies-routing.module';
 import { ListMoviesComponent } from '@pages/movies/pages/list-movies/list-movies.component';
-import { ActorsService } from '@services/actors-service/actors.service';
-import { CompaniesService } from '@services/companies-service/companies.service';
 import { MoviesService } from '@services/movies-service/movies.service';
 
 
@@ -25,7 +24,8 @@ import { MoviesService } from '@services/movies-service/movies.service';
     MatButtonModule,
     MatIconModule,
     MatListModule,
-    SpinnerModule
+    SpinnerModule,
+    TranslateModule.forChild()
   ],
   providers: [
     MoviesService
