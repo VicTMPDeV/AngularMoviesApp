@@ -145,7 +145,8 @@ export class AddMovieComponent implements OnInit {
 
   public showSnackBar(message: string) {
     this._snackBar.open(message, Constants.MESSAGE_BUTTON_LABEL, {
-      duration: Constants.MESSAGE_DURATION
+      duration: Constants.MESSAGE_DURATION,
+      panelClass: ['snack-bar-container--custom']
     });
   }
 
