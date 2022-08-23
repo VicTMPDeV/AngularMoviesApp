@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+
 import { ConfirmDialogComponent } from '@components/confirm-dialog/confirm-dialog.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -16,7 +18,8 @@ import { MatDividerModule } from '@angular/material/divider';
     FlexLayoutModule,
     MatDialogModule,
     MatDividerModule,
-    MatButtonModule
+    MatButtonModule,
+    TranslateModule.forChild()
   ],
   exports: [
     ConfirmDialogComponent

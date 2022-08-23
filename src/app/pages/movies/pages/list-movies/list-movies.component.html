@@ -1,10 +1,16 @@
 <div *ngIf="moviesList.length != 0; else noResponseYet">
-    <div class="movies-list" fxLayoutAlign="center" fxLayoutGap="25px grid" fxLayout="row wrap" fxLayout.xs="column">
-        <div *ngFor="let movie of moviesList" fxFlex.lt-md="100" fxFlex="33.3" fxFlex.gt-lg="20">
-            <app-card-movie [movieData]="movie" [routerLink]="['/movies', movie.id]"></app-card-movie>
+    <div class="movies-list" fxLayoutAlign="center" fxLayoutGap="25px grid" 
+         fxLayout="row wrap" fxLayout.xs="column">
+        <div *ngFor="let movie of moviesList" 
+             fxFlex.lt-md="100" fxFlex="33.3" fxFlex.gt-lg="20">
+            <app-card-movie [movieData]="movie" 
+                            [routerLink]="['/movies', movie.id]">
+            </app-card-movie>
         </div>
     </div>
-    <button mat-fab color="accent" routerLink="add" class="create-button">
+    <button mat-fab color="accent" 
+            class="create-button"
+            routerLink="add">
         <mat-icon>add</mat-icon>
     </button>
 </div>

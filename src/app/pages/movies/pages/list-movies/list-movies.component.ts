@@ -29,8 +29,8 @@ export class ListMoviesComponent implements OnInit {
         next: (response: MovieDto[]) => {
           this.moviesList = response;
         },
-        error: (err: HttpErrorResponse) => {
-          console.error(Constants.ERROR, err.error); 
+        error: (errorResponse: HttpErrorResponse) => {
+          console.error(Constants.ERROR, errorResponse.error); 
           this._navigationService.getErrorPage();
         }
       });

@@ -1,0 +1,66 @@
+{
+    "dialogs": {
+        "actors": {},
+        "companies": {},
+        "generic": {
+            "ok": "Ok!",
+            "question": "¿Desea continuar?",
+            "yes": "Sí",
+            "no": "No"
+        },
+        "movies": {
+            "created": "Película Añadida con éxito",
+            "updated": "Película Editada con éxito",
+            "deleted": "Película Borrada con éxito",
+            "title": "Va a borrar la Película: "
+        } 
+    },
+    "layout": {
+        "sidenav": {
+            "menu-label": "Menú",
+            "movies-label": "Películas",
+            "actors-label": "Actores",
+            "companies-label": "Estudios"
+        },
+        "header": {
+            "movies-list-label": "Películas",
+            "movies-add-label": "Nueva Película",
+            "movies-edit-label":"Edición Película",
+            "actors-list-label": "Actores",
+            "companies-list-label": "Estudios"
+        }
+    },
+    "pages": {
+        "actors": {},
+        "companies": {},
+        "movies": {
+            "list": {},
+            "detail": {
+                "labels": {
+                    "rating": "Puntuación",
+                    "duration": "Duración",
+                    "actors":"Actores",
+                    "company":"Estudio",
+                    "genres":"Géneros"
+                }
+            },
+            "add": {
+                "form": {
+                    "title": "Título",
+                    "imageUrl": "Póster (url)",
+                    "genres": "Géneros",
+                    "actors": "Actores",
+                    "company": "Estudio",
+                    "year": "Año",
+                    "duration": "Duración",
+                    "rating": "Puntuación"
+                }
+            },
+            "remove": {}
+        },
+        "notfound": {
+            "title": "HA OCURRIDO UN ERROR",
+            "button-label": "Recargar Página"
+        }
+    }
+}

@@ -1,10 +1,12 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Observable, Subscription, BehaviorSubject } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+
 import { NavigationService } from '@services/navigation-service/navigation.service';
 import { ResponsiveService } from '@services/responsive-service/responsive.service';
-import { Constants } from './constants/constants';
 import { ToolbarServiceService } from '@services/toolbar-service/toolbar-service.service';
+import { Constants } from './constants/constants';
 
 
 @Component({
@@ -23,11 +25,17 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   public isDarkTheme!: boolean;
   public isMobile!: boolean;
   public logoImage: string = Constants.LOGO_IMAGE_FILLED;
+  public CONST: typeof Constants = Constants;
 
-  constructor(private _navigationService: NavigationService,
+  constructor(private _translate: TranslateService,
+              private _navigationService: NavigationService,
               private _responsiveService: ResponsiveService,
               private _toolbarService: ToolbarServiceService,
-              private _changeDetector: ChangeDetectorRef) {}
+              private _changeDetector: ChangeDetectorRef) {
+                this._translate.addLangs(['es'])
+                this._translate.setDefaultLang('es');
+                this._translate.use('es');
+              }
 
   ngOnInit(): void {
     this.toolbarTittle$ = this._toolbarService.getToolbarText();

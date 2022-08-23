@@ -9,6 +9,7 @@ export class MoviesService {
 
   constructor( private http: HttpClient ) { }
 
+  //TODO -> ENDPOINT.MOVIES Constante de movies
   public getMovies(): Observable<MovieDto[]> {
     return this.http.get<MovieDto[]>(`${environment.baseUrl}/movies`);
   }

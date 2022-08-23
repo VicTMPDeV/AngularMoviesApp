@@ -5,17 +5,17 @@
     <div class="info-movie__content">
         <div class="info-movie__content__first-row">
             <div class="info-movie__content__first-row__left">
-                <strong>Puntuación</strong>
+                <strong>{{CONST.MOVIEDETAIL_RATING_LABEL | translate}}</strong>
                 <p>{{movieDetail.imdbRating}}</p>
             </div>
             <div class="info-movie__content__first-row__right">
-                <strong>Duración</strong>
+                <strong>{{CONST.MOVIEDETAIL_DURATION_LABEL | translate}}</strong>
                 <p>{{movieDetail.duration}}&nbsp;min</p>
             </div>
         </div>
         <div class="info-movie__content__actors">
             <div>
-                <strong>Actores</strong>
+                <strong>{{CONST.MOVIEDETAIL_ACTORS_LABEL | translate}}</strong>
                 <mat-divider></mat-divider>
             </div>
             <div>
@@ -29,7 +29,7 @@
         </div>
         <div class="info-movie__content__studio">
             <div>
-                <strong>Estudio</strong>
+                <strong>{{CONST.MOVIEDETAIL_COMPANY_LABEL | translate}}</strong>
                 <mat-divider></mat-divider>
             </div>
             <div class="info-movie__content__studio__item">
@@ -38,7 +38,7 @@
         </div>
         <div class="info-movie__content__genres">
             <div>
-                <strong>Géneros</strong>
+                <strong>{{CONST.MOVIEDETAIL_GENRES_LABEL | translate}}</strong>
                 <mat-divider></mat-divider>
             </div>
             <div>

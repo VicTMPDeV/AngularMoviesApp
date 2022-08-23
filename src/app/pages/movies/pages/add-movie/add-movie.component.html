@@ -1,20 +1,21 @@
 <div *ngIf="!isUpdate || (isUpdate && movie); else noResponseYet">
-    <div class="form-movie" fxLayout="column" fxFlex="100%" fxFlexOffset.gt-md="30%" fxFlex.gt-md="40%"
+    <form (ngSubmit)="saveMovie()" autocomplete="off" #movieForm="ngForm"
+        class="form-movie" fxLayout="column" fxFlex="100%" fxFlexOffset.gt-md="30%" fxFlex.gt-md="40%"
         fxFlex.gt-lg="33.3%" fxFlexOffset.gt-lg="33.3%">
 
         <mat-form-field class="form-movie__field" appearance="fill">
-            <mat-label>{{CONST.MOVIE_TITLE_LABEL}}</mat-label>
-            <input matInput type="text" required [(ngModel)]="movie.title">
+            <mat-label>{{CONST.MOVIE_TITLE_LABEL | translate}}</mat-label>
+            <input matInput type="text" required name="movieName" [(ngModel)]="movie.title">
         </mat-form-field>
 
         <mat-form-field class="form-movie__field" appearance="fill">
-            <mat-label>{{CONST.MOVIE_POSTER_LABEL}}</mat-label>
-            <input matInput type="url" [(ngModel)]="movie.poster">
+            <mat-label>{{CONST.MOVIE_POSTER_LABEL | translate}}</mat-label>
+            <input matInput type="url" name="moviePoster" [(ngModel)]="movie.poster">
         </mat-form-field>
 
         <mat-form-field class="form-movie__field" appearance="fill">
-            <mat-label>{{CONST.MOVIE_GENRE_LABEL}}</mat-label>
-            <mat-select multiple required [(ngModel)]="movie.genres">
+            <mat-label>{{CONST.MOVIE_GENRE_LABEL | translate}}</mat-label>
+            <mat-select multiple required name="movieGenres" [(ngModel)]="movie.genres">
                 <mat-select-trigger>
                     <mat-chip-list>
                         <mat-chip *ngFor="let genre of movie.genres" removable (removed)="removeGenreChip(genre)">
@@ -30,8 +31,8 @@
         </mat-form-field>
 
         <mat-form-field class="form-movie__field" appearance="fill">
-            <mat-label>{{CONST.MOVIE_ACTORS_LABEL}}</mat-label>
-            <mat-select multiple required [(ngModel)]="movie.actors">
+            <mat-label>{{CONST.MOVIE_ACTORS_LABEL | translate}}</mat-label>
+            <mat-select multiple required name="movieActors" [(ngModel)]="movie.actors">
                 <mat-select-trigger>
                     <mat-chip-list>
                         <mat-chip *ngFor="let actor of movie.actors" removable (removed)="removeActorChip(actor)">
@@ -47,8 +48,16 @@
         </mat-form-field>
 
         <mat-form-field class="form-movie__field" appearance="fill">
-            <mat-label>{{CONST.MOVIE_COMPANY_LABEL}}</mat-label>
-            <mat-select required [(ngModel)]="movie.company">
+            <mat-label>{{CONST.MOVIE_COMPANY_LABEL | translate}}</mat-label>
+            <mat-select required name="movieCompany" [(ngModel)]="movie.company">
+                <mat-select-trigger>
+                    <mat-chip-list>
+                        <mat-chip *ngIf="movie.company" removable (removed)="removeCompanyChip()">
+                            {{movie.company.name}}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
+                </mat-select-trigger>
                 <mat-option *ngFor="let company of companiesList" [value]='company'>
                     {{company.name}}
                 </mat-option>
@@ -56,96 +65,26 @@
         </mat-form-field>
 
         <mat-form-field class="form-movie__field" appearance="fill">
-            <mat-label>{{CONST.MOVIE_YEAR_LABEL}}</mat-label>
-            <input matInput type="number" required [(ngModel)]="movie.year">
+            <mat-label>{{CONST.MOVIE_YEAR_LABEL | translate}}</mat-label>
+            <input matInput type="number" required name="movieYear" [(ngModel)]="movie.year">
         </mat-form-field>
 
         <mat-form-field class="form-movie__field" appearance="fill">
-            <mat-label>{{CONST.MOVIE_DURATION_LABEL}}</mat-label>
-            <input matInput type="number" required [(ngModel)]="movie.duration">
+            <mat-label>{{CONST.MOVIE_DURATION_LABEL | translate}}</mat-label>
+            <input matInput type="number" required name="movieDuration" [(ngModel)]="movie.duration">
         </mat-form-field>
 
         <mat-form-field class="form-movie__field" appearance="fill">
-            <mat-label>{{CONST.MOVIE_RATING_LABEL}}</mat-label>
-            <input matInput type="number" min="0" step="0.1" max="10" required [(ngModel)]="movie.imdbRating">
+            <mat-label>{{CONST.MOVIE_RATING_LABEL | translate}}</mat-label>
+            <input matInput type="number" min="0" step="0.1" max="10" required name="movieRating" [(ngModel)]="movie.imdbRating">
         </mat-form-field>
 
         <div class="save-button">
-            <button mat-fab color="accent" (click)="saveMovie()">
+            <button mat-fab color="accent" type="submit">
                 <mat-icon>save</mat-icon>
             </button>
         </div>
-    </div>
-
-    <!-- <form class="form-movie" [formGroup]="movieForm">
-   
-   <mat-form-field class="form-movie__field" appearance="fill">
-       <mat-label>Título</mat-label>
-       <input matInput type="text" formControlName="title"/>
-   </mat-form-field>
-
-   <mat-form-field class="form-movie__field" appearance="fill">
-       <mat-label>Póster (url)</mat-label>
-       <input matInput type="url" formControlName="poster"/>
-   </mat-form-field>
-
-   <mat-form-field class="form-movie__field" appearance="fill">
-       <mat-label>Géneros</mat-label>
-       <input matInput type="text" formControlName="genres"/>
-       <mat-icon matSuffix class="form-movie__field__icon">add</mat-icon>
-   </mat-form-field>
-   <ng-container *ngIf="genres.length > 0">
-       <p>
-           <span *ngFor="let genre of genres" class="form-movie__text">
-               #{{genre}}&nbsp;&nbsp;
-               <mat-icon matSuffix 
-               (click)="deleteGenre(genre)"
-               class="form-movie__text__icon"
-               >remove_circle_outline</mat-icon>
-           </span>
-       </p>
-   </ng-container>
-
-   <mat-form-field class="form-movie__field" appearance="fill">
-       <mat-label>Actores</mat-label>
-       <mat-select formControlName="actors" (selectionChange)="addActor()">
-           <mat-option *ngFor="let actor of actors$ | async" 
-           [value]='actor'>{{getActorName(actor)}}</mat-option>
-       </mat-select>
-   </mat-form-field>
-   <ng-container *ngIf="actors.length > 0">
-         <p *ngFor="let actor of actors" class="form-movie__text">
-             {{getActorName(actor)}}
-               <mat-icon matSuffix class="form-movie__text__icon"
-                                   (click)="deleteActor(actor.id)">
-                   remove_circle_outline
-               </mat-icon>
-         </p>
-   </ng-container>
-
-   <mat-form-field class="form-movie__field" appearance="fill">
-       <mat-label>Estudio</mat-label>
-       <mat-select formControlName="company">
-           <mat-option *ngFor="let company of companies$ | async" 
-           [value]='company'>{{company.name}}</mat-option>
-       </mat-select>
-   </mat-form-field>
-
-   <mat-form-field class="create-film-card__content__form__third-field" appearance="fill">
-       <mat-label>Año</mat-label>
-       <input matInput type="number" formControlName="year"/>
-   </mat-form-field>
-
-   <mat-form-field class="form-movie__third-field margin-right" appearance="fill">
-       <mat-label>Duración</mat-label>
-       <input matInput type="number" formControlName="duration"/>
-   </mat-form-field>
-
-   <mat-form-field class="form-movie__third-field margin-right" appearance="fill">
-       <mat-label>Puntuación</mat-label>
-       <input matInput type="number" formControlName="imdbRating"/>
-   </mat-form-field>
-</form> -->
+    </form>
 </div>
 <ng-template #noResponseYet>
     <app-spinner></app-spinner>
