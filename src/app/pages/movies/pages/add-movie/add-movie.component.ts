@@ -39,9 +39,6 @@ export class AddMovieComponent implements OnInit {
   public movieActors: ActorDto[] = [];
   public movieCompany: CompanyDto = {} as CompanyDto;
 
-  // movieForm: FormGroup = new FormGroup({
-
-  // });
   
   constructor(private _router: Router,
               private _activatedRoute: ActivatedRoute,
@@ -138,7 +135,7 @@ export class AddMovieComponent implements OnInit {
         .subscribe( createdMovie => {
           console.log('RESPUESTA POST: ', createdMovie); //TODO -> Actualizar Estudio
           console.log('COMPANY: ', this.movieCompany);
-          this.movieCompany.movies.push(this.movie.id!);
+          // this.movieCompany.movies.push(this.movie.id!);
           // this._companiesService.updateCompnay(this.movieCompany);
           this.showSnackBar(Constants.CREATE_MOVIE_MESSAGE);
           this._navigationService.getBackLocation();
