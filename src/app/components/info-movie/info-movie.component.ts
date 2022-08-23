@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+
+import { Constants } from '@constants/constants';
 import { Movie } from '@models/movies/movie.interface';
 
 @Component({
@@ -8,6 +10,8 @@ import { Movie } from '@models/movies/movie.interface';
 })
 export class InfoMovieComponent {
 
+  public CONST: typeof Constants = Constants;
+  
   @Input()
   public movieDetail!:Movie;
 

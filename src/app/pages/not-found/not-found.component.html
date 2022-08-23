@@ -1,4 +1,6 @@
 <div class="not-found">
-    <h1>HA OCURRIDO UN ERROR</h1>
-    <button mat-raised-button color="accent" (click)="goToMoviesPage()">Recargar página</button>
+    <h1>{{CONST.NOTFOUND_TITLE | translate}}</h1>
+    <button mat-raised-button color="accent" (click)="goToMoviesPage()">
+        {{CONST.NOTFOUND_BUTTON_LABEL | translate}}
+    </button>
 </div>

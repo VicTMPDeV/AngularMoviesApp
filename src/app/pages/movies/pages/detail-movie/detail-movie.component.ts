@@ -3,8 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { ConfirmDialogComponent } from '@components/confirm-dialog/confirm-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
+
 import { Constants } from '@constants/constants';
+import { ConfirmDialogComponent } from '@components/confirm-dialog/confirm-dialog.component';
 import { ActorDto } from '@models/actors/dto/actorDto.interface';
 import { CompanyDto } from '@models/companies/dto/companyDto.interface';
 import { MovieDto } from '@models/movies/dto/movieDto.interface';
@@ -47,7 +49,8 @@ export class DetailMovieComponent implements OnInit {
               private _navigationService: NavigationService,
               private _toolbarService: ToolbarServiceService,
               private _dialog: MatDialog,
-              private _snackBar: MatSnackBar) { }
+              private _snackBar: MatSnackBar,
+              private _translate: TranslateService) { }
 
   ngOnInit(): void {
 
@@ -73,7 +76,7 @@ export class DetailMovieComponent implements OnInit {
             });
         },
         error: (errorResponse: HttpErrorResponse) => {
-          console.error('ERROR: ',errorResponse.error);
+          console.error(Constants.ERROR, errorResponse.error);
           this._navigationService.getErrorPage();
         }
       })
@@ -91,7 +94,7 @@ export class DetailMovieComponent implements OnInit {
         if(result){
           this._moviesService.deleteMovie(this.movie.id!)
             .subscribe(()=>{
-              this.showSnackBar(Constants.DELETE_MOVIE_MESSAGE);
+              this.showSnackBar(this._translate.instant(Constants.DELETED_MOVIE_MESSAGE));
               this._navigationService.getReloadPage();
             })
         }
@@ -100,7 +103,7 @@ export class DetailMovieComponent implements OnInit {
   }
 
   public showSnackBar( message: string ){
-    this._snackBar.open( message, Constants.MESSAGE_BUTTON_LABEL, {
+    this._snackBar.open( message, this._translate.instant(Constants.MESSAGE_BUTTON_LABEL), {
       duration: Constants.MESSAGE_DURATION
     });
   }

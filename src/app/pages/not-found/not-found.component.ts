@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Constants } from '@constants/constants';
 import { NavigationService } from '../../services/navigation-service/navigation.service';
 
 @Component({
@@ -8,6 +9,8 @@ import { NavigationService } from '../../services/navigation-service/navigation.
 })
 export class NotFoundComponent {
 
+  public CONST: typeof Constants = Constants;
+  
   constructor(private _navigationService: NavigationService) { }
 
   public goToMoviesPage(): void { 

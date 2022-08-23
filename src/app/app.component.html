@@ -5,32 +5,41 @@
     <mat-sidenav-container fullscreen>
         <mat-sidenav #sideNav>
             <mat-toolbar color="primary">
-                <span>Menú</span>
+                <span>{{CONST.MENU_LABEL | translate}}</span>
                 <span class="spacer"></span>
                 <button mat-icon-button (click)="sideNav.toggle()">
-                    <mat-icon class="flex-sidenav--toolbar__icon">close</mat-icon>
+                    <mat-icon class="flex-sidenav--toolbar__icon">
+                        close
+                    </mat-icon>
                 </button>
             </mat-toolbar>
             <mat-nav-list>
                 <mat-divider class="menu-divider"></mat-divider>
                 <a mat-list-item routerLink="movies" (click)="setMobileBehavior()">
-                    <span>Películas</span>
-                    <mat-icon mat-list-icon>theaters</mat-icon>
+                    <span>{{CONST.MOVIES_LABEL | translate}}</span>
+                    <mat-icon mat-list-icon>
+                        theaters
+                    </mat-icon>
                 </a>
                 <mat-divider class="menu-divider"></mat-divider>
                 <a mat-list-item routerLink="actors" (click)="setMobileBehavior()">
-                    <span>Actores</span>
-                    <mat-icon mat-list-icon>star_rate</mat-icon>
+                    <span>{{CONST.ACTORS_LABEL | translate}}</span>
+                    <mat-icon mat-list-icon>
+                        star_rate
+                    </mat-icon>
                 </a>
                 <mat-divider class="menu-divider"></mat-divider>
                 <a mat-list-item routerLink="companies" (click)="setMobileBehavior()">
-                    <span>Estudios</span>
-                    <mat-icon mat-list-icon>movie</mat-icon>
+                    <span>{{CONST.COMPANIES_LABEL | translate}}</span>
+                    <mat-icon mat-list-icon>
+                        movie
+                    </mat-icon>
                 </a>
                 <mat-divider class="menu-divider"></mat-divider>
                 <div mat-list-item>
                     <div class="flex-sidenav__logo">
-                        <a href="https://github.com/VicTMPDeV/AngularMoviesApp" target="_blank" #link>
+                        <a href="https://github.com/VicTMPDeV/AngularMoviesApp" 
+                           target="_blank" #link>
                             <img class="mat-sidenav__logo" [src]="logoImage" />
                         </a>
                     </div>
@@ -52,17 +61,21 @@
                         class="mat-toolbar--fixed__button"
                         *ngIf="isSideNavAvailable && !sideNav.opened" 
                         (click)="sideNav.toggle()">
-                    <mat-icon class="mat-toolbar--fixed__icon">menu</mat-icon>
+                    <mat-icon class="mat-toolbar--fixed__icon">
+                        menu
+                    </mat-icon>
                 </button>
                 <button mat-icon-button
                         class="mat-toolbar--fixed__button" 
                         *ngIf="!isSideNavAvailable"
                         (click)="goBack()">
-                    <mat-icon class="mat-toolbar--fixed__icon">arrow_back</mat-icon>
+                    <mat-icon class="mat-toolbar--fixed__icon">
+                        arrow_back
+                    </mat-icon>
                 </button>
                 <span class="mat-toolbar--fixed__title" 
                       *ngIf="toolbarTittle$ | async as toolbarTittle">
-                      {{ toolbarTittle }}
+                      {{ toolbarTittle | translate }}
                 </span>
             </mat-toolbar>
             <div class="content">

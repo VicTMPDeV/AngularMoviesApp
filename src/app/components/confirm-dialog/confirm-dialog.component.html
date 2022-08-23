@@ -1,9 +1,15 @@
 <div fxLayout="column">
-    <h3>Va a borrar la Película: <h1><br><strong>{{movie.title}}</strong></h1></h3>
-    <h3>¿Desea continuar?</h3>    
+    <h3>{{CONST.MESSAGE_TITLE | translate}}
+        <h1>
+            <br><strong>{{movie.title}}</strong>
+        </h1>
+    </h3>
+    <h3>{{CONST.MESSAGE_QUESTION | translate}}</h3>    
     <mat-divider></mat-divider>
     <div class="action-buttons" fxLayout="row">
-        <button mat-fab (click)="delete()" class="delete">Sí</button>
+        <button mat-fab (click)="delete()" class="delete">
+            {{CONST.MESSAGE_RESPONSE_YES | translate}}
+        </button>
         <span class="spacer"></span>
         <button mat-fab (click)="close()" class="no">No</button>
     </div>

@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatDividerModule } from '@angular/material/divider';
+import { TranslateModule } from '@ngx-translate/core';
+
 import { ImageMoviePipeModule } from '@pipes/image-movie-pipe/image-movie-pipe.module';
 import { InfoMovieComponent } from './info-movie.component';
-import { MatDividerModule } from '@angular/material/divider';
 
 
 @NgModule({
@@ -12,7 +14,8 @@ import { MatDividerModule } from '@angular/material/divider';
   imports: [
     CommonModule,
     MatDividerModule,
-    ImageMoviePipeModule
+    ImageMoviePipeModule,
+    TranslateModule.forChild()
   ],
   exports: [
     InfoMovieComponent

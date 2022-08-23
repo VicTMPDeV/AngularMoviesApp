@@ -1,10 +1,11 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Observable, Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+
 import { NavigationService } from '@services/navigation-service/navigation.service';
 import { ResponsiveService } from '@services/responsive-service/responsive.service';
 import { ToolbarServiceService } from '@services/toolbar-service/toolbar-service.service';
-import { Observable, Subscription } from 'rxjs';
 import { Constants } from './constants/constants';
 
 
@@ -24,6 +25,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   public isDarkTheme!: boolean;
   public isMobile!: boolean;
   public logoImage: string = Constants.LOGO_IMAGE_FILLED;
+  public CONST: typeof Constants = Constants;
 
   constructor(private _translate: TranslateService,
               private _navigationService: NavigationService,

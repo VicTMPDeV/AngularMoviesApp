@@ -1,5 +1,4 @@
 <div *ngIf="!isUpdate || (isUpdate && movie); else noResponseYet">
-       <!-- <form class="form-movie" [formGroup]="movieForm"> -->
     <form (ngSubmit)="saveMovie()" autocomplete="off" #movieForm="ngForm"
         class="form-movie" fxLayout="column" fxFlex="100%" fxFlexOffset.gt-md="30%" fxFlex.gt-md="40%"
         fxFlex.gt-lg="33.3%" fxFlexOffset.gt-lg="33.3%">
@@ -15,7 +14,7 @@
         </mat-form-field>
 
         <mat-form-field class="form-movie__field" appearance="fill">
-            <mat-label>{{CONST.MOVIE_GENRE_LABEL}}</mat-label>
+            <mat-label>{{CONST.MOVIE_GENRE_LABEL | translate}}</mat-label>
             <mat-select multiple required name="movieGenres" [(ngModel)]="movie.genres">
                 <mat-select-trigger>
                     <mat-chip-list>
@@ -32,7 +31,7 @@
         </mat-form-field>
 
         <mat-form-field class="form-movie__field" appearance="fill">
-            <mat-label>{{CONST.MOVIE_ACTORS_LABEL}}</mat-label>
+            <mat-label>{{CONST.MOVIE_ACTORS_LABEL | translate}}</mat-label>
             <mat-select multiple required name="movieActors" [(ngModel)]="movie.actors">
                 <mat-select-trigger>
                     <mat-chip-list>
@@ -49,7 +48,7 @@
         </mat-form-field>
 
         <mat-form-field class="form-movie__field" appearance="fill">
-            <mat-label>{{CONST.MOVIE_COMPANY_LABEL}}</mat-label>
+            <mat-label>{{CONST.MOVIE_COMPANY_LABEL | translate}}</mat-label>
             <mat-select required name="movieCompany" [(ngModel)]="movie.company">
                 <mat-select-trigger>
                     <mat-chip-list>
@@ -66,17 +65,17 @@
         </mat-form-field>
 
         <mat-form-field class="form-movie__field" appearance="fill">
-            <mat-label>{{CONST.MOVIE_YEAR_LABEL}}</mat-label>
+            <mat-label>{{CONST.MOVIE_YEAR_LABEL | translate}}</mat-label>
             <input matInput type="number" required name="movieYear" [(ngModel)]="movie.year">
         </mat-form-field>
 
         <mat-form-field class="form-movie__field" appearance="fill">
-            <mat-label>{{CONST.MOVIE_DURATION_LABEL}}</mat-label>
+            <mat-label>{{CONST.MOVIE_DURATION_LABEL | translate}}</mat-label>
             <input matInput type="number" required name="movieDuration" [(ngModel)]="movie.duration">
         </mat-form-field>
 
         <mat-form-field class="form-movie__field" appearance="fill">
-            <mat-label>{{CONST.MOVIE_RATING_LABEL}}</mat-label>
+            <mat-label>{{CONST.MOVIE_RATING_LABEL | translate}}</mat-label>
             <input matInput type="number" min="0" step="0.1" max="10" required name="movieRating" [(ngModel)]="movie.imdbRating">
         </mat-form-field>
 
