@@ -51,6 +51,14 @@
         <mat-form-field class="form-movie__field" appearance="fill">
             <mat-label>{{CONST.MOVIE_COMPANY_LABEL}}</mat-label>
             <mat-select required name="movieCompany" [(ngModel)]="movie.company">
+                <mat-select-trigger>
+                    <mat-chip-list>
+                        <mat-chip *ngIf="movie.company" removable (removed)="removeCompanyChip()">
+                            {{movie.company.name}}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
+                </mat-select-trigger>
                 <mat-option *ngFor="let company of companiesList" [value]='company'>
                     {{company.name}}
                 </mat-option>
