@@ -1,21 +1,20 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { Genre } from '@models/movies/movie.interface';
-import { Movie } from '@models/movies/movie.interface';
-import { ToolbarServiceService } from '@services/toolbar-service/toolbar-service.service';
 import { Constants } from '@constants/constants';
 import { ActorDto } from '@models/actors/dto/actorDto.interface';
-import { MoviesService } from '@services/movies-service/movies.service';
-import { MovieDto } from '@models/movies/dto/movieDto.interface';
-import { DataService } from '@services/data-service/data.service';
-import { CompaniesService } from '@services/companies-service/companies.service';
-import { NavigationService } from '@services/navigation-service/navigation.service';
 import { CompanyDto } from '@models/companies/dto/companyDto.interface';
+import { MovieDto } from '@models/movies/dto/movieDto.interface';
+import { Genre, Movie } from '@models/movies/movie.interface';
 import { ActorsService } from '@services/actors-service/actors.service';
+import { CompaniesService } from '@services/companies-service/companies.service';
+import { DataService } from '@services/data-service/data.service';
+import { MoviesService } from '@services/movies-service/movies.service';
+import { NavigationService } from '@services/navigation-service/navigation.service';
+import { ToolbarServiceService } from '@services/toolbar-service/toolbar-service.service';
 
 
 @Component({
@@ -39,13 +38,10 @@ export class AddMovieComponent implements OnInit {
   public movieActors: ActorDto[] = [];
   public movieCompany: CompanyDto = {} as CompanyDto;
 
-  movieForm: FormGroup = this._formBuilder.group({
-    title   : ['',],
-    urlImage: ['',],
-    year    : ['',],
-    duration: ['',],
-    rating  : ['',]
-  });
+  private readonly urlPattern: RegExp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+
+  public movieForm!: FormGroup;
+
   
   constructor(private _router: Router,
               private _activatedRoute: ActivatedRoute,
@@ -58,8 +54,10 @@ export class AddMovieComponent implements OnInit {
               private _snackBar: MatSnackBar,
               private _formBuilder: FormBuilder) { }
 
+
   ngOnInit(): void {
 
+    this.buildForm();
     this.loadActors();
     this.loadCompanies();
 
@@ -101,6 +99,32 @@ export class AddMovieComponent implements OnInit {
     }
   }
 
+  public buildForm(): void {
+    this.movieForm = this._formBuilder.group({
+      title   : ['',[Validators.required], ],
+      urlImage: ['',[Validators.pattern(this.urlPattern)]], 
+      genres  : this._formBuilder.array([]),
+      actors  : this._formBuilder.array([]),
+      company : [''],
+      year    : ['',[Validators.required, Validators.min(1895), Validators.max(new Date().getFullYear())]],
+      duration: ['',[Validators.required, Validators.min(0), Validators.max(1260)]],
+      rating  : ['',[Validators.required, Validators.min(0), Validators.max(10)]]
+    });
+  }
+
+  public genreControl: FormControl = this._formBuilder.control('');
+
+  public get genresArray(): FormArray {
+    return this.movieForm.get('genres') as FormArray;
+  }
+
+  public addGenre() {
+    if (this.genreControl.invalid) { return; }
+
+    this.genresArray.push(new FormControl(this.genreControl.value));
+  }
+
+
   public loadActors(): void {
     this._actorsService.getActors()
       .subscribe((response: ActorDto[]) => {
@@ -115,7 +139,7 @@ export class AddMovieComponent implements OnInit {
       })
   }
 
-  public removeGenreChip(genre: Genre): void {
+  public removeGenreChip(genre: any): void {
     this.movie.genres?.splice(this.movie.genres.indexOf(genre), Constants.ONE);
   }
 
@@ -123,32 +147,37 @@ export class AddMovieComponent implements OnInit {
     this.movie.actors?.splice(this.movie.actors.indexOf(actor), Constants.ONE);
   }
 
+  public removeCompanyChip(company: CompanyDto): void {
+    this.movie.company = {} as CompanyDto;
+  }
+
   public saveMovie(): void {
-    if (this.movieDto.id) {
-      //UPDATE
-      this.movieDto = this._dataService.movieDtoBuilder(this.movie);
-      this._moviesService.updateMovie(this.movieDto)
-        .subscribe( updatedMovie => {
-          console.log('RESPUESTA PUT: ', updatedMovie); //TODO -> Actualizar Estudio
-          console.log('COMPANY: ', this.movieCompany); //TODO -> PRIMERO HABRA QUE BUSCAR LA COMANY ANTERIOR Y ELIMINAR LA PELICULA
-          this.movieCompany.movies.push(this.movie.id!);
-          // this._companiesService.updateCompnay(this.movieCompany);
-          this.showSnackBar(Constants.UPDATE_MOVIE_MESSAGE);
-          this._navigationService.getBackLocation();
-        })
-    } else {
-      //CREATE
-      this.movieDto = this._dataService.movieDtoBuilder(this.movie);
-      this._moviesService.addMovie(this.movieDto)
-        .subscribe( createdMovie => {
-          console.log('RESPUESTA POST: ', createdMovie); //TODO -> Actualizar Estudio
-          console.log('COMPANY: ', this.movieCompany);
-          this.movieCompany.movies.push(this.movie.id!);
-          // this._companiesService.updateCompnay(this.movieCompany);
-          this.showSnackBar(Constants.CREATE_MOVIE_MESSAGE);
-          this._navigationService.getBackLocation();
-        })
-    }
+    console.log(this.movieForm.value);
+    // if (this.movieDto.id) {
+    //   //UPDATE
+    //   this.movieDto = this._dataService.movieDtoBuilder(this.movie);
+    //   this._moviesService.updateMovie(this.movieDto)
+    //     .subscribe( updatedMovie => {
+    //       console.log('RESPUESTA PUT: ', updatedMovie); //TODO -> Actualizar Estudio
+    //       console.log('COMPANY: ', this.movieCompany); //TODO -> PRIMERO HABRA QUE BUSCAR LA COMANY ANTERIOR Y ELIMINAR LA PELICULA
+    //       this.movieCompany.movies.push(this.movie.id!);
+    //       // this._companiesService.updateCompnay(this.movieCompany);
+    //       this.showSnackBar(Constants.UPDATE_MOVIE_MESSAGE);
+    //       this._navigationService.getBackLocation();
+    //     })
+    // } else {
+    //   //CREATE
+    //   this.movieDto = this._dataService.movieDtoBuilder(this.movie);
+    //   this._moviesService.addMovie(this.movieDto)
+    //     .subscribe( createdMovie => {
+    //       console.log('RESPUESTA POST: ', createdMovie); //TODO -> Actualizar Estudio
+    //       console.log('COMPANY: ', this.movieCompany);
+    //       this.movieCompany.movies.push(this.movie.id!);
+    //       // this._companiesService.updateCompnay(this.movieCompany);
+    //       this.showSnackBar(Constants.CREATE_MOVIE_MESSAGE);
+    //       this._navigationService.getBackLocation();
+    //     })
+    // }
   }
 
   public showSnackBar(message: string) {
@@ -157,5 +186,14 @@ export class AddMovieComponent implements OnInit {
       panelClass: ['snack-bar-container--custom']
     });
   }
+
+  validateFormField(field: string) {
+    return this.movieForm?.controls?.[field]?.errors;
+  }
+
+  validateFormUrlField( field: string){
+    return this.movieForm.get(field)?.invalid && this.movieForm.get(field)?.touched;
+  }
+
 
 }

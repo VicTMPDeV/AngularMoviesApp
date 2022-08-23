@@ -1,5 +1,7 @@
 <div *ngIf="!isUpdate && movieForm || (isUpdate && movie && movieForm); else noResponseYet">
-    <form class="form-movie" [formGroup]="movieForm"
+    <form class="form-movie"
+          (ngSubmit)="saveMovie()" 
+          [formGroup]="movieForm"
           autocomplete="off" 
           fxLayout="column" 
           fxFlex="100%"  
@@ -11,6 +13,9 @@
             <input matInput 
                    type="text"
                    formControlName="title">
+            <mat-error *ngIf="validateFormField('title')">
+                el titulo no puede estar vacío
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field class="form-movie__field" appearance="fill">
@@ -18,14 +23,18 @@
             <input matInput 
                    type="url"
                    formControlName="urlImage">
+            <mat-error *ngIf="validateFormUrlField('urlImage')">
+                La URL indicada debe comenzar por http:// ó https://
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field class="form-movie__field" appearance="fill">
             <mat-label>{{CONST.MOVIE_GENRE_LABEL}}</mat-label>
-            <mat-select multiple>
+            <mat-select multiple [formControl]="genreControl" (selectionChange)="addGenre()">
                 <mat-select-trigger>
-                    <mat-chip-list>
-                        <mat-chip *ngFor="let genre of movie.genres" 
+                    <mat-chip-list formArrayName="genres">
+                        <mat-chip *ngFor="let genre of genresArray.controls; let i = index"
+                                  [formControlName]="i" 
                                   removable 
                                   (removed)="removeGenreChip(genre)">
                             {{genre}}
@@ -61,7 +70,7 @@
 
         <mat-form-field class="form-movie__field" appearance="fill">
             <mat-label>{{CONST.MOVIE_COMPANY_LABEL}}</mat-label>
-            <mat-select>
+            <mat-select formControlName="company">
                 <mat-option *ngFor="let company of companiesList" 
                             [value]='company'>
                     {{company.name}}
@@ -74,6 +83,10 @@
             <input matInput 
                    type="number"
                    formControlName="year">
+
+            <mat-error *ngIf="validateFormField('year')">
+                el año no puede estar vacío
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field class="form-movie__field" appearance="fill">
@@ -81,6 +94,10 @@
             <input matInput 
                    type="number"
                    formControlName="duration">
+
+            <mat-error *ngIf="validateFormField('duration')">
+                la duración no puede estar vacía
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field class="form-movie__field" appearance="fill">
@@ -91,10 +108,15 @@
                    step="0.1" 
                    max="10"
                    formControlName="rating">
+
+            <mat-error *ngIf="validateFormField('rating')">
+                la puntuación no puede estar vacía
+            </mat-error>
         </mat-form-field>
 
         <div class="save-button">
-            <button mat-fab color="accent" (click)="saveMovie()">
+            <button type="submit" 
+                    mat-fab color="accent">
                 <mat-icon>save</mat-icon>
             </button>
         </div>
@@ -103,3 +125,14 @@
 <ng-template #noResponseYet>
     <app-spinner></app-spinner>
 </ng-template>
+
+<span>Formulario.Value</span>
+<pre>{{movieForm.value | json}}</pre>
+<pre>{{genreControl.value | json}}</pre>
+<!-- <div class="save-button">
+    <button type="submit" 
+            mat-fab color="accent" 
+            [disabled]="movieForm.invalid">
+        <mat-icon>save</mat-icon>
+    </button>
+</div> -->
