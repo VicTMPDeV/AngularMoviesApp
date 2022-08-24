@@ -1,8 +1,9 @@
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Constants } from '@constants/constants';
 import { ActorDto } from '@models/actors/dto/actorDto.interface';
@@ -15,6 +16,8 @@ import { DataService } from '@services/data-service/data.service';
 import { MoviesService } from '@services/movies-service/movies.service';
 import { NavigationService } from '@services/navigation-service/navigation.service';
 import { ToolbarServiceService } from '@services/toolbar-service/toolbar-service.service';
+import { NgForm } from '@angular/forms';
+import { ErrorsDialogComponent } from '@components/errors-dialog/errors-dialog.component';
 
 
 @Component({
@@ -25,18 +28,26 @@ import { ToolbarServiceService } from '@services/toolbar-service/toolbar-service
 })
 export class AddMovieComponent implements OnInit {
 
-  public CONST: typeof Constants = Constants;
-  public isUpdate: boolean = false;
-
+  //Form binding
+  @ViewChild('movieForm') form!: NgForm;
+  //Combo containers
   public genresList: Genre[] = Object.values<Genre>(Genre);
   public actorsList: ActorDto[] = []; 
   public companiesList: CompanyDto[] = [];
-
+  //Form validators
+  public readonly urlPattern: RegExp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+  public urlPatternFieldValid: boolean = false;
+  public numericFieldMaxValid: boolean = false;
+  public numericFieldMinValid: boolean = false;
+  //Object form mapper
   public movie!: Movie;
-  
+  //Object http requests for insert/update
   public movieDto: MovieDto = {} as MovieDto;
   public movieActors: ActorDto[] = [];
   public movieCompany: CompanyDto = {} as CompanyDto;
+  //Rest of attributes
+  public CONST: typeof Constants = Constants;
+  public isUpdate: boolean = false;
 
   
   constructor(private _router: Router,
@@ -47,6 +58,7 @@ export class AddMovieComponent implements OnInit {
               private _moviesService: MoviesService,
               private _companiesService: CompaniesService,
               private _actorsService: ActorsService,
+              private _dialog: MatDialog,
               private _snackBar: MatSnackBar,
               private _translate: TranslateService) { }
 
@@ -107,6 +119,19 @@ export class AddMovieComponent implements OnInit {
       })
   }
 
+  public validateNumericField(field:string): void {
+    this.numericFieldMaxValid = this.form?.controls[field]?.errors?.['max'];
+    this.numericFieldMinValid = this.form?.controls[field]?.errors?.['min'];
+  }
+
+  public validateUrlField(field:string): void {
+    this.urlPatternFieldValid = this.form?.controls[field]?.errors?.['pattern'];
+  }
+
+  public getCurrentYear(): string {
+    return new Date().getFullYear().toString();
+  }
+
   public removeGenreChip(genre: Genre): void {
     this.movie.genres?.splice(this.movie.genres.indexOf(genre), Constants.ONE);
   }
@@ -120,31 +145,42 @@ export class AddMovieComponent implements OnInit {
   }
 
   public saveMovie(): void {
-    if (this.movieDto.id) {
-      //UPDATE
-      this.movieDto = this._dataService.movieDtoBuilder(this.movie);
-      this._moviesService.updateMovie(this.movieDto)
-        .subscribe( updatedMovie => {
-          console.log('RESPUESTA PUT: ', updatedMovie); //TODO -> Actualizar Estudio
-          console.log('COMPANY: ', this.movieCompany); //TODO -> PRIMERO HABRA QUE BUSCAR LA COMANY ANTERIOR Y ELIMINAR LA PELICULA
-          this.movieCompany.movies.push(this.movie.id!);
-          // this._companiesService.updateCompnay(this.movieCompany);
-          this.showSnackBar(this._translate.instant(Constants.UPDATED_MOVIE_MESSAGE));
-          this._navigationService.getBackLocation();
-        })
-    } else {
-      //CREATE
-      this.movieDto = this._dataService.movieDtoBuilder(this.movie);
-      this._moviesService.addMovie(this.movieDto)
-        .subscribe( createdMovie => {
-          console.log('RESPUESTA POST: ', createdMovie); //TODO -> Actualizar Estudio
-          console.log('COMPANY: ', this.movieCompany);
-          // this.movieCompany.movies.push(this.movie.id!);
-          // this._companiesService.updateCompnay(this.movieCompany);
-          this.showSnackBar(this._translate.instant(Constants.CREATED_MOVIE_MESSAGE));
-          this._navigationService.getBackLocation();
-        })
+    
+    if(this.form.invalid){
+      this.form.control.markAllAsTouched();
+      this._dialog.open(ErrorsDialogComponent, {
+        width: Constants.DIALOG_WIDTH
+      });
+      return;
+    }else{
+      this._navigationService.getBackLocation();
     }
+    console.log(this.form);
+    // if (this.movieDto.id) {
+    //   //UPDATE
+    //   this.movieDto = this._dataService.movieDtoBuilder(this.movie);
+    //   this._moviesService.updateMovie(this.movieDto)
+    //     .subscribe( updatedMovie => {
+    //       console.log('RESPUESTA PUT: ', updatedMovie); //TODO -> Actualizar Estudio
+    //       console.log('COMPANY: ', this.movieCompany); //TODO -> PRIMERO HABRA QUE BUSCAR LA COMANY ANTERIOR Y ELIMINAR LA PELICULA
+    //       this.movieCompany.movies.push(this.movie.id!);
+    //       // this._companiesService.updateCompnay(this.movieCompany);
+    //       this.showSnackBar(this._translate.instant(Constants.UPDATED_MOVIE_MESSAGE));
+    //       this._navigationService.getBackLocation();
+    //     })
+    // } else {
+    //   //CREATE
+    //   this.movieDto = this._dataService.movieDtoBuilder(this.movie);
+    //   this._moviesService.addMovie(this.movieDto)
+    //     .subscribe( createdMovie => {
+    //       console.log('RESPUESTA POST: ', createdMovie); //TODO -> Actualizar Estudio
+    //       console.log('COMPANY: ', this.movieCompany);
+    //       // this.movieCompany.movies.push(this.movie.id!);
+    //       // this._companiesService.updateCompnay(this.movieCompany);
+    //       this.showSnackBar(this._translate.instant(Constants.CREATED_MOVIE_MESSAGE));
+    //       this._navigationService.getBackLocation();
+    //     })
+    // }
   }
 
   public showSnackBar(message: string) {

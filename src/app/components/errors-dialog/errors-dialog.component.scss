@@ -1,0 +1,17 @@
+::ng-deep mat-dialog-container {
+    background-color: var(--primary-color);
+    color: var(--text-primary-color);
+    border-radius: 25px !important;
+}
+
+h3 {
+    text-align: center;
+}
+
+.action-buttons {
+    justify-content: center;
+}
+
+.no {
+    background-color: var(--accent-color);
+}
