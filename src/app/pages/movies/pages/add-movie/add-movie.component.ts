@@ -139,40 +139,48 @@ export class AddMovieComponent implements OnInit {
 
   public saveMovie(): void {
     
-    if(this.form.invalid){
+    if(this.form.invalid){ // FORM WITH ERRORS
+
       this.form.control.markAllAsTouched();
       this._dialog.open(ErrorsDialogComponent, {
         width: Constants.DIALOG_WIDTH
       });
       return;
-    }else{
-      // console.log(this.form);
-      if (this.movieDto.id) {
-        //UPDATE
+
+    }else{ // VALID FORM
+
+      if (this.movieDto.id) { //UPDATE
+        
         this.movieDto = this._dataService.movieDtoBuilder(this.movie);
         this._moviesService.updateMovie(this.movieDto)
           .subscribe( updatedMovie => {
             console.log('UPDATED MOVIE -> PUT: ', updatedMovie); //TODO -> Actualizar Estudio
-            console.log('COMPANY: ', this.movieCompany); //TODO -> PRIMERO HABRA QUE BUSCAR LA COMANY ANTERIOR Y ELIMINAR LA PELICULA
+            console.log('COMPANY: ', this.movieCompany); 
+              //TODO -> PRIMERO HABRA QUE BUSCAR LA COMANY ANTERIOR Y ELIMINAR LA PELICULA
+                // const companyToUpdate = this.companies.find((company: CompanyDto) => {
+                //   return company.movies?.includes(this.movie.id!);
+                // })
+                // companyToUpdate?.movies.splice(companyToUpdate?.movies.indexOf(this.movie.id!), Constants.ONE);
+                // this._companiesService.updateCompany(companyToUpdate!).subscribe();
             // this.movieCompany?.movies.push(this.movie.id!);
             // this._companiesService.updateCompnay(this.movieCompany);
             this.showSnackBar(this._translate.instant(Constants.UPDATED_MOVIE_MESSAGE));
             this._navigationService.getBackLocation();
           })
-      } else {
-        //CREATE
+
+      } else { //CREATE
+        
         this.movieDto = this._dataService.movieDtoBuilder(this.movie);
         this._moviesService.addMovie(this.movieDto)
-          .subscribe( createdMovie => {
-            console.log('CREATED MOVIE -> POST: ', createdMovie); //TODO -> Actualizar Estudio
-            console.log('COMPANY: ', this.movieCompany);
-            // this.movieCompany.movies.push(this.movie.id!);
-            // this._companiesService.updateCompnay(this.movieCompany);
+          .subscribe( (createdMovie: MovieDto) => {
+            this.movieCompany = this.movie.company;
+            this.movieCompany.movies.push(createdMovie.id!);
+            this._companiesService.updateCompany(this.movieCompany).subscribe();
+
             this.showSnackBar(this._translate.instant(Constants.CREATED_MOVIE_MESSAGE));
             this._navigationService.getListMoviesPage();
           })
       }
-      this._navigationService.getBackLocation();
     }
   }
 

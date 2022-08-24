@@ -22,7 +22,7 @@ export class Constants {
     public static MESSAGE_RESPONSE_YES: string = 'dialogs.delete.yes';
     public static MESSAGE_RESPONSE_NO: string = 'dialogs.delete.no';
     public static DIALOG_WIDTH: string = '300px';
-    public static MESSAGE_DURATION: number = 250000;
+    public static MESSAGE_DURATION: number = 3000;
 
     //DIALOG-FORM-ERRORS
     public static MESSAGE_FORM_HAS_ERRORS: string = 'dialogs.errors.message';

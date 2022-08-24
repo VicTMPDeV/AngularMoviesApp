@@ -14,7 +14,7 @@ export class CompaniesService {
     return this.http.get<CompanyDto[]>(`${environment.baseUrl}/companies`);
   }
 
-  public updateCompnay( companyDto: CompanyDto ): Observable<CompanyDto> {
+  public updateCompany( companyDto: CompanyDto ): Observable<CompanyDto> {
     return this.http.put<CompanyDto>(`${environment.baseUrl}/companies/${companyDto.id}`, companyDto);
   }
   
