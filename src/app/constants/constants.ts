@@ -5,24 +5,28 @@ export class Constants {
     public static LOGO_IMAGE: string = 'assets/images/logoVictor.png';
     public static LOGO_IMAGE_FILLED: string = 'assets/images/logoVictorFilled.png';
     
-    //DIALOGS
-    public static MESSAGE_BUTTON_LABEL: string  = 'dialogs.generic.ok';
-    public static CREATED_MOVIE_MESSAGE: string = 'dialogs.movies.created';
-    public static UPDATED_MOVIE_MESSAGE: string = 'dialogs.movies.updated';
-    public static DELETED_MOVIE_MESSAGE: string = 'dialogs.movies.deleted';
-    public static MESSAGE_TITLE: string = 'dialogs.movies.title';
-    public static MESSAGE_QUESTION: string = 'dialogs.generic.question';
-    public static MESSAGE_RESPONSE_YES: string = 'dialogs.generic.yes';
-    public static MESSAGE_RESPONSE_NO: string = 'dialogs.generic.no';
-    public static DIALOG_WIDTH: string = '300px';
-    public static MESSAGE_DURATION: number = 250000;
-
     //DETAIL-MOVIE
     public static MOVIEDETAIL_RATING_LABEL: string = 'pages.movies.detail.labels.rating';
     public static MOVIEDETAIL_DURATION_LABEL: string = 'pages.movies.detail.labels.duration';
     public static MOVIEDETAIL_ACTORS_LABEL: string = 'pages.movies.detail.labels.actors';
     public static MOVIEDETAIL_COMPANY_LABEL: string = 'pages.movies.detail.labels.company';
     public static MOVIEDETAIL_GENRES_LABEL: string = 'pages.movies.detail.labels.genres';
+    
+    //DIALOG-DELETE
+    public static MESSAGE_BUTTON_LABEL: string  = 'dialogs.delete.ok';
+    public static CREATED_MOVIE_MESSAGE: string = 'dialogs.movies.created';
+    public static UPDATED_MOVIE_MESSAGE: string = 'dialogs.movies.updated';
+    public static DELETED_MOVIE_MESSAGE: string = 'dialogs.movies.deleted';
+    public static MESSAGE_TITLE: string = 'dialogs.movies.title';
+    public static MESSAGE_QUESTION: string = 'dialogs.delete.question';
+    public static MESSAGE_RESPONSE_YES: string = 'dialogs.delete.yes';
+    public static MESSAGE_RESPONSE_NO: string = 'dialogs.delete.no';
+    public static DIALOG_WIDTH: string = '300px';
+    public static MESSAGE_DURATION: number = 3000;
+
+    //DIALOG-FORM-ERRORS
+    public static MESSAGE_FORM_HAS_ERRORS: string = 'dialogs.errors.message';
+    public static CONFIRM_FORM_HAS_ERRORS: string = 'dialogs.errors.ok';
 
     //ERRORS
     public static ERROR: string = 'ERROR: ';
@@ -36,6 +40,16 @@ export class Constants {
     public static MOVIE_YEAR_LABEL: string = 'pages.movies.add.form.year';
     public static MOVIE_DURATION_LABEL: string = 'pages.movies.add.form.duration';
     public static MOVIE_RATING_LABEL: string = 'pages.movies.add.form.rating';
+
+    //FORM-ERROR-MESSAGES
+    public static MOVIE_REQUIRED_FIELD: string = 'pages.movies.add.form.errors.required';
+    public static MOVIE_URL_PATTERN: string = 'pages.movies.add.form.errors.pattern';
+    public static MOVIE_MIN_YEAR: string = 'pages.movies.add.form.errors.min-year';
+    public static MOVIE_MAX_YEAR: string = 'pages.movies.add.form.errors.max-year';
+    public static MOVIE_MIN_DURATION: string = 'pages.movies.add.form.errors.min-duration';
+    public static MOVIE_MAX_DURATION: string = 'pages.movies.add.form.errors.max-duration';
+    public static MOVIE_MIN_RATING: string = 'pages.movies.add.form.errors.min-rating';
+    public static MOVIE_MAX_RATING: string = 'pages.movies.add.form.errors.max-rating';
 
     //HEADER
     public static MOVIE_LIST: string = 'layout.header.movies-list-label';
@@ -65,7 +79,12 @@ export class Constants {
     public static ROUTE_MOVIES_ADD: string = '/movies/add';
     public static ROUTE_NOT_FOUND: string = 'not-found';
     public static ROUTE_PARAM_ID: string = 'id';
-
+    
+    //ENDPOINTS
+    public static MOVIES_ENDPOINT: string = 'movies';
+    public static ACTORS_ENDPOINT: string = 'actors';
+    public static COMPANIES_ENDPOINT: string = 'companies';
+    
     //SERVICES
     public static EMPTY_VALUE: string = '';
 

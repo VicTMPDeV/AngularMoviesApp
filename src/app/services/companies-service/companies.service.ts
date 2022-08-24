@@ -1,21 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CompanyDto } from '@models/companies/dto/companyDto.interface';
 import { Observable } from 'rxjs';
+
 import { environment } from 'src/environments/environment.pre';
+import { Constants } from '@constants/constants';
+import { CompanyDto } from '@models/companies/dto/companyDto.interface';
+
 
 @Injectable()
 export class CompaniesService {
 
   constructor(private http: HttpClient) { }
 
-  //TODO -> ENDPOINT.COMPANIES Constante de companies
+  //TODO -> PROBAR QUE NO SE HAIGA ROTO NADA
   public getCompanies(): Observable<CompanyDto[]>{
-    return this.http.get<CompanyDto[]>(`${environment.baseUrl}/companies`);
+    return this.http.get<CompanyDto[]>(`${environment.baseUrl}/${Constants.COMPANIES_ENDPOINT}`); 
   }
 
-  public updateCompnay( companyDto: CompanyDto ): Observable<CompanyDto> {
-    return this.http.put<CompanyDto>(`${environment.baseUrl}/companies/${companyDto.id}`, companyDto);
+  public updateCompany( companyDto: CompanyDto ): Observable<CompanyDto> {
+    return this.http.put<CompanyDto>(`${environment.baseUrl}/${Constants.COMPANIES_ENDPOINT}/${companyDto.id}`, companyDto); 
   }
   
 }

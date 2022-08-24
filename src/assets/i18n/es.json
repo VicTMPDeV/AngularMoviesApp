@@ -2,11 +2,15 @@
     "dialogs": {
         "actors": {},
         "companies": {},
-        "generic": {
+        "delete": {
             "ok": "Ok!",
             "question": "¿Desea continuar?",
             "yes": "Sí",
             "no": "No"
+        },
+        "errors": {
+            "message": "El Formulario contiene Errores",
+            "ok": "ENTENDIDO"
         },
         "movies": {
             "created": "Película Añadida con éxito",
@@ -53,7 +57,17 @@
                     "company": "Estudio",
                     "year": "Año",
                     "duration": "Duración",
-                    "rating": "Puntuación"
+                    "rating": "Puntuación",
+                    "errors": {
+                        "required": "Este campo es obligatorio.",
+                        "pattern": "La URL debe comenzar por http:// ó https://",
+                        "min-year": "No había películas antes de 1885.",
+                        "max-year": "El año no puede ser superior al actual: ",
+                        "min-duration": "La duración no puede ser menor que 0.",
+                        "max-duration": "La película más larga que existe dura 1260 minutos.",
+                        "min-rating": "La valoración no puede ser menor que 0.",
+                        "max-rating": "La valoración no puede ser mayor que 10."
+                    }
                 }
             },
             "remove": {}

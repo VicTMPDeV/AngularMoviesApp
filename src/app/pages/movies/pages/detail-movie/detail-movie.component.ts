@@ -93,9 +93,14 @@ export class DetailMovieComponent implements OnInit {
       .subscribe( (result) => {
         if(result){
           this._moviesService.deleteMovie(this.movie.id!)
-            .subscribe(()=>{
+            .subscribe(() => {
+              const companyToUpdate = this.companies.find((company: CompanyDto) => {
+                return company.movies?.includes(this.movie.id!);
+              })
+              companyToUpdate?.movies.splice(companyToUpdate?.movies.indexOf(this.movie.id!), Constants.ONE);
+              this._companiesService.updateCompany(companyToUpdate!).subscribe();
               this.showSnackBar(this._translate.instant(Constants.DELETED_MOVIE_MESSAGE));
-              this._navigationService.getReloadPage();
+              this._navigationService.getListMoviesPage();
             })
         }
       })

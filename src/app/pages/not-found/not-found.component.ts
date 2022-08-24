@@ -14,7 +14,7 @@ export class NotFoundComponent {
   constructor(private _navigationService: NavigationService) { }
 
   public goToMoviesPage(): void { 
-    this._navigationService.getReloadPage();
+    this._navigationService.getListMoviesPage();
   }
 
 }
