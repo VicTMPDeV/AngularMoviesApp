@@ -79,7 +79,12 @@ export class Constants {
     public static ROUTE_MOVIES_ADD: string = '/movies/add';
     public static ROUTE_NOT_FOUND: string = 'not-found';
     public static ROUTE_PARAM_ID: string = 'id';
-
+    
+    //ENDPOINTS
+    public static MOVIES_ENDPOINT: string = 'movies';
+    public static ACTORS_ENDPOINT: string = 'actors';
+    public static COMPANIES_ENDPOINT: string = 'companies';
+    
     //SERVICES
     public static EMPTY_VALUE: string = '';
 
