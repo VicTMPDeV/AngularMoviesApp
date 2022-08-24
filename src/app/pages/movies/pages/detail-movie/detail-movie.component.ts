@@ -95,7 +95,7 @@ export class DetailMovieComponent implements OnInit {
           this._moviesService.deleteMovie(this.movie.id!)
             .subscribe(()=>{
               this.showSnackBar(this._translate.instant(Constants.DELETED_MOVIE_MESSAGE));
-              this._navigationService.getReloadPage();
+              this._navigationService.getListMoviesPage();
             })
         }
       })

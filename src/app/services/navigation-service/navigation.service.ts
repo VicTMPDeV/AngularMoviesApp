@@ -25,7 +25,7 @@ export class NavigationService {
     this._location.back();
   }
 
-  public getReloadPage(): void{
+  public getListMoviesPage(): void{
     this._router.navigateByUrl(Constants.ROUTE_MOVIES);
   }
 

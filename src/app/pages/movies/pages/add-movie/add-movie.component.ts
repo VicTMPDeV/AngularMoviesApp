@@ -37,8 +37,6 @@ export class AddMovieComponent implements OnInit {
   //Form validators
   public readonly urlPattern: RegExp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
   public urlPatternFieldValid: boolean = false;
-  public numericFieldMaxValid: boolean = false;
-  public numericFieldMinValid: boolean = false;
   //Object form mapper
   public movie!: Movie;
   //Object http requests for insert/update
@@ -119,11 +117,6 @@ export class AddMovieComponent implements OnInit {
       })
   }
 
-  public validateNumericField(field:string): void {
-    this.numericFieldMaxValid = this.form?.controls[field]?.errors?.['max'];
-    this.numericFieldMinValid = this.form?.controls[field]?.errors?.['min'];
-  }
-
   public validateUrlField(field:string): void {
     this.urlPatternFieldValid = this.form?.controls[field]?.errors?.['pattern'];
   }
@@ -153,34 +146,34 @@ export class AddMovieComponent implements OnInit {
       });
       return;
     }else{
+      // console.log(this.form);
+      if (this.movieDto.id) {
+        //UPDATE
+        this.movieDto = this._dataService.movieDtoBuilder(this.movie);
+        this._moviesService.updateMovie(this.movieDto)
+          .subscribe( updatedMovie => {
+            console.log('UPDATED MOVIE -> PUT: ', updatedMovie); //TODO -> Actualizar Estudio
+            console.log('COMPANY: ', this.movieCompany); //TODO -> PRIMERO HABRA QUE BUSCAR LA COMANY ANTERIOR Y ELIMINAR LA PELICULA
+            // this.movieCompany?.movies.push(this.movie.id!);
+            // this._companiesService.updateCompnay(this.movieCompany);
+            this.showSnackBar(this._translate.instant(Constants.UPDATED_MOVIE_MESSAGE));
+            this._navigationService.getBackLocation();
+          })
+      } else {
+        //CREATE
+        this.movieDto = this._dataService.movieDtoBuilder(this.movie);
+        this._moviesService.addMovie(this.movieDto)
+          .subscribe( createdMovie => {
+            console.log('CREATED MOVIE -> POST: ', createdMovie); //TODO -> Actualizar Estudio
+            console.log('COMPANY: ', this.movieCompany);
+            // this.movieCompany.movies.push(this.movie.id!);
+            // this._companiesService.updateCompnay(this.movieCompany);
+            this.showSnackBar(this._translate.instant(Constants.CREATED_MOVIE_MESSAGE));
+            this._navigationService.getListMoviesPage();
+          })
+      }
       this._navigationService.getBackLocation();
     }
-    console.log(this.form);
-    // if (this.movieDto.id) {
-    //   //UPDATE
-    //   this.movieDto = this._dataService.movieDtoBuilder(this.movie);
-    //   this._moviesService.updateMovie(this.movieDto)
-    //     .subscribe( updatedMovie => {
-    //       console.log('RESPUESTA PUT: ', updatedMovie); //TODO -> Actualizar Estudio
-    //       console.log('COMPANY: ', this.movieCompany); //TODO -> PRIMERO HABRA QUE BUSCAR LA COMANY ANTERIOR Y ELIMINAR LA PELICULA
-    //       this.movieCompany.movies.push(this.movie.id!);
-    //       // this._companiesService.updateCompnay(this.movieCompany);
-    //       this.showSnackBar(this._translate.instant(Constants.UPDATED_MOVIE_MESSAGE));
-    //       this._navigationService.getBackLocation();
-    //     })
-    // } else {
-    //   //CREATE
-    //   this.movieDto = this._dataService.movieDtoBuilder(this.movie);
-    //   this._moviesService.addMovie(this.movieDto)
-    //     .subscribe( createdMovie => {
-    //       console.log('RESPUESTA POST: ', createdMovie); //TODO -> Actualizar Estudio
-    //       console.log('COMPANY: ', this.movieCompany);
-    //       // this.movieCompany.movies.push(this.movie.id!);
-    //       // this._companiesService.updateCompnay(this.movieCompany);
-    //       this.showSnackBar(this._translate.instant(Constants.CREATED_MOVIE_MESSAGE));
-    //       this._navigationService.getBackLocation();
-    //     })
-    // }
   }
 
   public showSnackBar(message: string) {

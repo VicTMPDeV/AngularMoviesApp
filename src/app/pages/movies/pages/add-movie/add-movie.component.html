@@ -15,7 +15,7 @@
                    [(ngModel)]="movie.title"
                    required>
             <mat-error *ngIf="movieForm?.controls?.['movieTitle']?.errors?.['required']">
-                Este campo es obligatorio. MOVER A CONSTANTES Y TRADUCCION
+                {{CONST.MOVIE_REQUIRED_FIELD | translate}}
             </mat-error>
         </mat-form-field>
 
@@ -28,7 +28,7 @@
                    [pattern]="urlPattern"
                    (blur)="validateUrlField('moviePoster')">
             <mat-error *ngIf="urlPatternFieldValid">
-                La URL no es correcta. Debe comenzar por http:// ó https://. MOVER A CONSTANTES Y TRADUCCION
+                 {{CONST.MOVIE_URL_PATTERN | translate}}
             </mat-error>
         </mat-form-field>
 
@@ -100,16 +100,15 @@
                    name="movieYear" 
                    [(ngModel)]="movie.year"
                    required
-                   min="1895" [max]="getCurrentYear()"
-                   (blur)="validateNumericField('movieYear')"> 
+                   min="1895" [max]="getCurrentYear()"> 
             <mat-error *ngIf="movieForm?.controls?.['movieYear']?.errors?.['required']">
-                Este campo es obligatorio. MOVER A CONSTANTES Y TRADUCCION
+                {{CONST.MOVIE_REQUIRED_FIELD | translate}}
             </mat-error>
-            <mat-error *ngIf="numericFieldMinValid">
-                No había películas antes de 1885. MOVER A CONSTANTES Y TRADUCCION
+            <mat-error *ngIf="movieForm?.controls?.['movieYear']?.errors?.['min']">
+                 {{CONST.MOVIE_MIN_YEAR | translate}}
             </mat-error>
-            <mat-error *ngIf="numericFieldMaxValid">
-                El año no puede ser superior al actual: {{getCurrentYear()}}  MOVER A CONSTANTES Y TRADUCCION
+            <mat-error *ngIf="movieForm?.controls?.['movieYear']?.errors?.['max']">
+                {{CONST.MOVIE_MAX_YEAR | translate}}{{getCurrentYear()}}  
             </mat-error>
         </mat-form-field>
 
@@ -120,16 +119,15 @@
                    name="movieDuration" 
                    [(ngModel)]="movie.duration"
                    required
-                   min="0" max="1260"
-                   (blur)="validateNumericField('movieDuration')">
+                   min="0" max="1260">
             <mat-error *ngIf="movieForm?.controls?.['movieDuration']?.errors?.['required']">
-                Este campo es obligatorio. MOVER A CONSTANTES Y TRADUCCION
+                {{CONST.MOVIE_REQUIRED_FIELD | translate}}
             </mat-error>
-            <mat-error *ngIf="numericFieldMinValid">
-                La duración no puede ser menor que 0. MOVER A CONSTANTES Y TRADUCCION
+            <mat-error *ngIf="movieForm?.controls?.['movieDuration']?.errors?.['min']">
+                {{CONST.MOVIE_MIN_DURATION | translate}}  
             </mat-error>
-            <mat-error *ngIf="numericFieldMaxValid">
-                La película más larga que existe dura 1260 minutos. MOVER A CONSTANTES Y TRADUCCION
+            <mat-error *ngIf="movieForm?.controls?.['movieDuration']?.errors?.['max']">
+                {{CONST.MOVIE_MAX_DURATION | translate}} 
             </mat-error>
         </mat-form-field>
 
@@ -140,16 +138,15 @@
                    name="movieRating" 
                    [(ngModel)]="movie.imdbRating"
                    required
-                   min="0" step="0.1" max="10"
-                   (blur)="validateNumericField('movieRating')">
+                   min="0" step="0.1" max="10">
             <mat-error *ngIf="movieForm?.controls?.['movieRating']?.errors?.['required']">
-                Este campo es obligatorio. MOVER A CONSTANTES Y TRADUCCION
+                {{CONST.MOVIE_REQUIRED_FIELD | translate}}
             </mat-error>
-            <mat-error *ngIf="numericFieldMinValid">
-                La valoración no puede ser menor que 0. MOVER A CONSTANTES Y TRADUCCION
+            <mat-error *ngIf="movieForm?.controls?.['movieRating']?.errors?.['min']">
+                {{CONST.MOVIE_MIN_RATING | translate}}
             </mat-error>
-            <mat-error *ngIf="numericFieldMaxValid">
-                La valoración no puede ser mayor que 10. MOVER A CONSTANTES Y TRADUCCION
+            <mat-error *ngIf="movieForm?.controls?.['movieRating']?.errors?.['max']">
+                {{CONST.MOVIE_MAX_RATING | translate}}
             </mat-error>
         </mat-form-field>
 
@@ -161,10 +158,10 @@
         </div>
 
         <!-- TESTS -->
-        <pre><span>FORM Valid -> </span>{{movieForm.valid | json}}</pre>
+        <!-- <pre><span>FORM Valid -> </span>{{movieForm.valid | json}}</pre>
         <pre><span>FORM Pristine -> </span>{{movieForm.pristine | json}}</pre>
         <pre><span>FORM Touched -> </span>{{movieForm.touched| json}}</pre>
-        <pre><span>FORM Value -> </span>{{movieForm.value | json}}</pre>
+        <pre><span>FORM Value -> </span>{{movieForm.value | json}}</pre> -->
 
     </form>
 </div>
