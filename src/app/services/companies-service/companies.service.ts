@@ -12,7 +12,7 @@ export class CompaniesService {
 
   constructor(private http: HttpClient) { }
 
-  //TODO -> PROBAR QUE NO SE HAIGA ROTO NADA
+
   public getCompanies(): Observable<CompanyDto[]>{
     return this.http.get<CompanyDto[]>(`${environment.baseUrl}/${Constants.COMPANIES_ENDPOINT}`); 
   }

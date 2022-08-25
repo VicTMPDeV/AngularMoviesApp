@@ -12,7 +12,7 @@ export class ActorsService {
 
   constructor( private http: HttpClient ) { }
 
-  //TODO -> PROBAR QUE NO SE HAIGA ROTO NADA
+  
   public getActors(): Observable<ActorDto[]> {
     return this.http.get<ActorDto[]>(`${environment.baseUrl}/${Constants.ACTORS_ENDPOINT}`);
   } 
