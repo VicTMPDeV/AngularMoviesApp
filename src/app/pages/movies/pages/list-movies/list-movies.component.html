@@ -1,4 +1,4 @@
-<div *ngIf="moviesList.length != 0; else noResponseYet">
+<div *ngIf="moviesList.length != 0 || emptyData; else noResponseYet">
     <div class="movies-list" fxLayoutAlign="center" fxLayoutGap="25px grid" 
          fxLayout="row wrap" fxLayout.xs="column">
         <div *ngFor="let movie of moviesList" 

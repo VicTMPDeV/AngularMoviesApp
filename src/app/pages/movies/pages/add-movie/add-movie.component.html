@@ -1,4 +1,4 @@
-<div *ngIf="!isUpdate || (isUpdate && movie); else noResponseYet">
+<div *ngIf="!isUpdate || (isUpdate && movieFormMapper); else noResponseYet">
     <form class="form-movie"
           #movieForm="ngForm" 
           (ngSubmit)="saveMovie()"
@@ -12,7 +12,7 @@
             <input matInput 
                    type="text"  
                    name="movieTitle" 
-                   [(ngModel)]="movie.title"
+                   [(ngModel)]="movieFormMapper.title"
                    required>
             <mat-error *ngIf="movieForm?.controls?.['movieTitle']?.errors?.['required']">
                 {{CONST.MOVIE_REQUIRED_FIELD | translate}}
@@ -24,7 +24,7 @@
             <input matInput 
                    type="url" 
                    name="moviePoster" 
-                   [(ngModel)]="movie.poster"
+                   [(ngModel)]="movieFormMapper.poster"
                    [pattern]="urlPattern"
                    (blur)="validateUrlField('moviePoster')">
             <mat-error *ngIf="urlPatternFieldValid">
@@ -34,10 +34,10 @@
 
         <mat-form-field class="form-movie__field" appearance="fill">
             <mat-label>{{CONST.MOVIE_GENRE_LABEL | translate}}</mat-label>
-            <mat-select multiple name="movieGenres" [(ngModel)]="movie.genres">
+            <mat-select multiple name="movieGenres" [(ngModel)]="movieFormMapper.genres">
                 <mat-select-trigger>
                     <mat-chip-list>
-                        <mat-chip *ngFor="let genre of movie.genres" 
+                        <mat-chip *ngFor="let genre of movieFormMapper.genres" 
                                   removable 
                                   (removed)="removeGenreChip(genre)">
                             {{genre}}
@@ -55,10 +55,10 @@
             <mat-label>{{CONST.MOVIE_ACTORS_LABEL | translate}}</mat-label>
             <mat-select multiple 
                         name="movieActors" 
-                        [(ngModel)]="movie.actors">
+                        [(ngModel)]="movieFormMapper.actors">
                 <mat-select-trigger>
                     <mat-chip-list>
-                        <mat-chip *ngFor="let actor of movie.actors" 
+                        <mat-chip *ngFor="let actor of movieFormMapper.actors" 
                                   removable 
                                   (removed)="removeActorChip(actor)">
                             {{actor.first_name}}&nbsp;{{actor.last_name}}
@@ -75,17 +75,7 @@
         <mat-form-field class="form-movie__field" appearance="fill">
             <mat-label>{{CONST.MOVIE_COMPANY_LABEL | translate}}</mat-label>
             <mat-select name="movieCompany" 
-                        [(ngModel)]="movie.company">
-                <mat-select-trigger>
-                    <mat-chip-list>
-                        <mat-chip *ngIf="movie.company" 
-                                  removable 
-                                  (removed)="removeCompanyChip()">
-                            {{movie.company.name}}
-                            <mat-icon matChipRemove>cancel</mat-icon>
-                        </mat-chip>
-                    </mat-chip-list>
-                </mat-select-trigger>
+                        [(ngModel)]="movieFormMapper.company">
                 <mat-option *ngFor="let company of companiesList" 
                             [value]='company'>
                     {{company.name}}
@@ -98,7 +88,7 @@
             <input matInput 
                    type="number" 
                    name="movieYear" 
-                   [(ngModel)]="movie.year"
+                   [(ngModel)]="movieFormMapper.year"
                    required
                    min="1895" [max]="getCurrentYear()"> 
             <mat-error *ngIf="movieForm?.controls?.['movieYear']?.errors?.['required']">
@@ -117,7 +107,7 @@
             <input matInput 
                    type="number"
                    name="movieDuration" 
-                   [(ngModel)]="movie.duration"
+                   [(ngModel)]="movieFormMapper.duration"
                    required
                    min="0" max="1260">
             <mat-error *ngIf="movieForm?.controls?.['movieDuration']?.errors?.['required']">
@@ -136,7 +126,7 @@
             <input matInput 
                    type="number" 
                    name="movieRating" 
-                   [(ngModel)]="movie.imdbRating"
+                   [(ngModel)]="movieFormMapper.imdbRating"
                    required
                    min="0" step="0.1" max="10">
             <mat-error *ngIf="movieForm?.controls?.['movieRating']?.errors?.['required']">

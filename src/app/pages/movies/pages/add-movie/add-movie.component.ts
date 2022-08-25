@@ -38,11 +38,11 @@ export class AddMovieComponent implements OnInit {
   public readonly urlPattern: RegExp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
   public urlPatternFieldValid: boolean = false;
   //Object form mapper
-  public movie!: Movie;
+  public movieFormMapper!: Movie;
   //Object http requests for insert/update
   public movieDto: MovieDto = {} as MovieDto;
-  public movieActors: ActorDto[] = [];
-  public movieCompany: CompanyDto = {} as CompanyDto;
+  public movieActorsDto: ActorDto[] = [];
+  public movieCompanyDto: CompanyDto = {} as CompanyDto;
   //Rest of attributes
   public CONST: typeof Constants = Constants;
   public isUpdate: boolean = false;
@@ -68,7 +68,7 @@ export class AddMovieComponent implements OnInit {
     if(this._router.url === Constants.ROUTE_MOVIES_ADD){ //ADD MOVIE
 
       this.isUpdate = false;
-      this.movie = {} as Movie;
+      this.movieFormMapper = {} as Movie;
       this._toolbarService.setToolbarText(Constants.ADD_MOVIE);
 
     }else{ //UPDATE MOVIE
@@ -84,15 +84,15 @@ export class AddMovieComponent implements OnInit {
 
             this._toolbarService.setToolbarText(Constants.EDIT_MOVIE);
 
-            this.movieActors = this.actorsList?.filter((actor: ActorDto) => {
+            this.movieActorsDto = this.actorsList?.filter((actor: ActorDto) => {
               return this.movieDto.actors.includes(actor.id);
             })
 
-            this.movieCompany = this.companiesList?.find((company: CompanyDto) => {
+            this.movieCompanyDto = this.companiesList?.find((company: CompanyDto) => {
               return company.movies?.includes(this.movieDto.id!);
             })!;
 
-            this.movie = this._dataService.movieBuilder(this.movieDto, this.movieActors, this.movieCompany, []); 
+            this.movieFormMapper = this._dataService.movieBuilder(this.movieDto, this.movieActorsDto, this.movieCompanyDto); 
 
           },
           error: (errorResponse: HttpErrorResponse) => {
@@ -126,19 +126,19 @@ export class AddMovieComponent implements OnInit {
   }
 
   public removeGenreChip(genre: Genre): void {
-    this.movie.genres?.splice(this.movie.genres.indexOf(genre), Constants.ONE);
+    this.movieFormMapper.genres?.splice(this.movieFormMapper.genres.indexOf(genre), Constants.ONE);
   }
 
   public removeActorChip(actor: ActorDto): void {
-    this.movie.actors?.splice(this.movie.actors.indexOf(actor), Constants.ONE);
+    this.movieFormMapper.actors?.splice(this.movieFormMapper.actors.indexOf(actor), Constants.ONE);
   }
 
   public removeCompanyChip(): void {
-    this.movie.company = {} as CompanyDto;
+    this.movieFormMapper.company = {} as CompanyDto;
   }
 
   public saveMovie(): void {
-    
+
     if(this.form.invalid){ // FORM WITH ERRORS
 
       this.form.control.markAllAsTouched();
@@ -151,35 +151,40 @@ export class AddMovieComponent implements OnInit {
 
       if (this.movieDto.id) { //UPDATE
         
-        this.movieDto = this._dataService.movieDtoBuilder(this.movie);
+        this.movieDto = this._dataService.movieDtoBuilder(this.movieFormMapper);
         this._moviesService.updateMovie(this.movieDto)
-          .subscribe( updatedMovie => {
-            console.log('UPDATED MOVIE -> PUT: ', updatedMovie); //TODO -> Actualizar Estudio
-            console.log('COMPANY: ', this.movieCompany); 
-              //TODO -> PRIMERO HABRA QUE BUSCAR LA COMANY ANTERIOR Y ELIMINAR LA PELICULA
-                // const companyToUpdate = this.companies.find((company: CompanyDto) => {
-                //   return company.movies?.includes(this.movie.id!);
-                // })
-                // companyToUpdate?.movies.splice(companyToUpdate?.movies.indexOf(this.movie.id!), Constants.ONE);
-                // this._companiesService.updateCompany(companyToUpdate!).subscribe();
-            // this.movieCompany?.movies.push(this.movie.id!);
-            // this._companiesService.updateCompnay(this.movieCompany);
+          .subscribe( (updatedMovie: MovieDto) => {
+
+            if(this.movieFormMapper.company !== this.movieCompanyDto){
+
+              this.movieCompanyDto.movies.splice(this.movieCompanyDto?.movies?.indexOf(updatedMovie.id!), Constants.ONE);
+              this._companiesService.updateCompany(this.movieCompanyDto).subscribe();
+              this.movieCompanyDto = this.movieFormMapper.company;
+              this.movieCompanyDto.movies.push(updatedMovie.id!);
+              this._companiesService.updateCompany(this.movieCompanyDto).subscribe();
+
+            }
+
             this.showSnackBar(this._translate.instant(Constants.UPDATED_MOVIE_MESSAGE));
-            this._navigationService.getBackLocation();
-          })
+
+          });
+
+        this._navigationService.getBackLocation();
 
       } else { //CREATE
         
-        this.movieDto = this._dataService.movieDtoBuilder(this.movie);
+        this.movieDto = this._dataService.movieDtoBuilder(this.movieFormMapper);
+
         this._moviesService.addMovie(this.movieDto)
           .subscribe( (createdMovie: MovieDto) => {
-            this.movieCompany = this.movie.company;
-            this.movieCompany.movies.push(createdMovie.id!);
-            this._companiesService.updateCompany(this.movieCompany).subscribe();
+            this.movieCompanyDto = this.movieFormMapper.company;
+            this.movieCompanyDto.movies.push(createdMovie.id!);
+            this._companiesService.updateCompany(this.movieCompanyDto).subscribe();
 
             this.showSnackBar(this._translate.instant(Constants.CREATED_MOVIE_MESSAGE));
-            this._navigationService.getListMoviesPage();
-          })
+          });
+
+        this._navigationService.getBackLocation();
       }
     }
   }

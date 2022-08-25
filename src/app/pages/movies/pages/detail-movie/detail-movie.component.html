@@ -1,8 +1,8 @@
-<div *ngIf="movie; else noResponseYet">
-    <app-info-movie [movieDetail]="movie"></app-info-movie>
+<div *ngIf="movieDetail; else noResponseYet">
+    <app-info-movie [movieDetail]="movieDetail"></app-info-movie>
     <div class="edit-button">
         <button mat-fab color="accent" 
-                [routerLink]="['/movies/edit', movie.id]">
+                [routerLink]="['/movies/edit', movieDetail.id]">
             <mat-icon>edit</mat-icon>
         </button>
         <button mat-fab color="warn" 

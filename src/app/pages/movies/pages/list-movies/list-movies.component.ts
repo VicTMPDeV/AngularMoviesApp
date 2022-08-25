@@ -15,6 +15,7 @@ import { ToolbarServiceService } from '@services/toolbar-service/toolbar-service
 export class ListMoviesComponent implements OnInit {
 
   public moviesList: MovieDto[] = [];
+  public emptyData: boolean = false;
 
   constructor(private _moviesService: MoviesService,
     private _navigationService: NavigationService,
@@ -27,6 +28,9 @@ export class ListMoviesComponent implements OnInit {
     this._moviesService.getMovies()
       .subscribe({
         next: (response: MovieDto[]) => {
+          if(response.length === 0){
+            this.emptyData = true;
+          }
           this.moviesList = response;
         },
         error: (errorResponse: HttpErrorResponse) => {
