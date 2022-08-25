@@ -1,5 +1,40 @@
 {
-  "movies": [],
+  "movies": [
+    {
+      "title": "TITANIC",
+      "poster": "https://i.pinimg.com/originals/17/20/82/17208232208a02a02a0989c19179dbf9.jpg",
+      "genre": [
+        "Action",
+        "Adventure",
+        "Animation",
+        "Comedy",
+        "Crime",
+        "Drama",
+        "Horror",
+        "Musical",
+        "Romance",
+        "Sci-Fi",
+        "Thriller",
+        "War"
+      ],
+      "year": 1996,
+      "duration": 250,
+      "imdbRating": 10,
+      "actors": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "id": 1
+    }
+  ],
   "actors": [
     {
       "id": 1,
@@ -191,7 +226,9 @@
       "createYear": 1999,
       "employees": 921,
       "rating": 1.77,
-      "movies": []
+      "movies": [
+        1
+      ]
     }
   ]
 }
