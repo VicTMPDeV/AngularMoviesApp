@@ -186,7 +186,8 @@ export class AddMovieComponent implements OnInit {
             this.showSnackBar(this._translate.instant(Constants.CREATED_MOVIE_MESSAGE));
           });
 
-        this._navigationService.getBackLocation();
+        this._navigationService.getListMoviesPage();
+        
       }
     }
   }
