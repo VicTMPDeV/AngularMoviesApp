@@ -4,7 +4,8 @@
         <div *ngFor="let movie of moviesList" 
              fxFlex.lt-md="100" fxFlex="33.3" fxFlex.gt-lg="20">
             <app-card-movie [movieData]="movie" 
-                            [routerLink]="['/movies', movie.id]">
+                            [routerLink]="['/movies', movie.id]"
+                            nombre = "juan">
             </app-card-movie>
         </div>
     </div>

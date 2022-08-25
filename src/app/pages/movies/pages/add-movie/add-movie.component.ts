@@ -178,8 +178,10 @@ export class AddMovieComponent implements OnInit {
         this._moviesService.addMovie(this.movieDto)
           .subscribe( (createdMovie: MovieDto) => {
             this.movieCompanyDto = this.movieFormMapper.company;
-            this.movieCompanyDto.movies.push(createdMovie.id!);
-            this._companiesService.updateCompany(this.movieCompanyDto).subscribe();
+            if(this.movieCompanyDto){
+              this.movieCompanyDto.movies?.push(createdMovie.id!);
+              this._companiesService.updateCompany(this.movieCompanyDto).subscribe();
+            }
 
             this.showSnackBar(this._translate.instant(Constants.CREATED_MOVIE_MESSAGE));
           });

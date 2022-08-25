@@ -90,7 +90,7 @@
                    name="movieYear" 
                    [(ngModel)]="movieFormMapper.year"
                    required
-                   min="1895" [max]="getCurrentYear()"> 
+                   min="1885" [max]="getCurrentYear()"> 
             <mat-error *ngIf="movieForm?.controls?.['movieYear']?.errors?.['required']">
                 {{CONST.MOVIE_REQUIRED_FIELD | translate}}
             </mat-error>
