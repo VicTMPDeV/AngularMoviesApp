@@ -92,7 +92,7 @@ export class AddMovieComponent implements OnInit {
               return company.movies?.includes(this.movieDto.id!);
             })!;
 
-            this.movie = this._dataService.movieBuilder(this.movieDto, this.movieActors, this.movieCompany, []); 
+            this.movie = this._dataService.movieBuilder(this.movieDto, this.movieActors, this.movieCompany); 
 
           },
           error: (errorResponse: HttpErrorResponse) => {
@@ -138,7 +138,7 @@ export class AddMovieComponent implements OnInit {
   }
 
   public saveMovie(): void {
-    
+    debugger;
     if(this.form.invalid){ // FORM WITH ERRORS
 
       this.form.control.markAllAsTouched();
@@ -154,8 +154,9 @@ export class AddMovieComponent implements OnInit {
         this.movieDto = this._dataService.movieDtoBuilder(this.movie);
         this._moviesService.updateMovie(this.movieDto)
           .subscribe( updatedMovie => {
-            console.log('UPDATED MOVIE -> PUT: ', updatedMovie); //TODO -> Actualizar Estudio
+            console.log('UPDATED MOVIE -> PUT: ', updatedMovie); 
             console.log('COMPANY: ', this.movieCompany); 
+            // this.movieCompany.movies.
               //TODO -> PRIMERO HABRA QUE BUSCAR LA COMANY ANTERIOR Y ELIMINAR LA PELICULA
                 // const companyToUpdate = this.companies.find((company: CompanyDto) => {
                 //   return company.movies?.includes(this.movie.id!);
@@ -165,8 +166,8 @@ export class AddMovieComponent implements OnInit {
             // this.movieCompany?.movies.push(this.movie.id!);
             // this._companiesService.updateCompnay(this.movieCompany);
             this.showSnackBar(this._translate.instant(Constants.UPDATED_MOVIE_MESSAGE));
-            this._navigationService.getBackLocation();
-          })
+          });
+        this._navigationService.getBackLocation();
 
       } else { //CREATE
         
@@ -178,8 +179,8 @@ export class AddMovieComponent implements OnInit {
             this._companiesService.updateCompany(this.movieCompany).subscribe();
 
             this.showSnackBar(this._translate.instant(Constants.CREATED_MOVIE_MESSAGE));
-            this._navigationService.getListMoviesPage();
-          })
+          });
+        this._navigationService.getListMoviesPage();
       }
     }
   }

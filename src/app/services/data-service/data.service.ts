@@ -13,8 +13,7 @@ export class DataService {
   private movieDto: MovieDto = {} as MovieDto;
 
 
-  public movieBuilder(movieDto: MovieDto, movieActors: ActorDto[], 
-    movieCompany: CompanyDto = {} as CompanyDto, companyList: CompanyDto[] = []): Movie {
+  public movieBuilder(movieDto: MovieDto, movieActors: ActorDto[], movieCompany: CompanyDto): Movie {
     
     this.movie.id = movieDto.id;
     this.movie.title = movieDto.title;
@@ -30,14 +29,6 @@ export class DataService {
       this.movie.genres.push((<any>Genre)[genre]);
     });
     
-    companyList?.forEach((company: CompanyDto) => {
-      company.movies.filter(movieValue => {
-        if(this.movie.id === movieValue){
-          this.movie.company = company;
-        }
-      })
-    });
-
     return this.movie;
   }
 

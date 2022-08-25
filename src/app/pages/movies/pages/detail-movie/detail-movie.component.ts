@@ -35,11 +35,12 @@ import { ToolbarServiceService } from '@services/toolbar-service/toolbar-service
 })
 export class DetailMovieComponent implements OnInit {
 
-  public movie!: Movie;
+  public movieDetail!: Movie;
   
   public movieDto: MovieDto = {} as MovieDto;
-  public movieActors: ActorDto[] = [];
-  public companies: CompanyDto[] = [];
+  public movieActorDtoList: ActorDto[] = [];
+  public movieCompanyDto: CompanyDto = {} as CompanyDto;
+  public companyDtoList: CompanyDto[] = [];
 
   constructor(private _activatedRoute: ActivatedRoute,
               private _moviesService: MoviesService,
@@ -64,15 +65,19 @@ export class DetailMovieComponent implements OnInit {
 
           this.movieDto.actors.forEach( (actorId: number) => {
             this._actorsService.getActorById(actorId)
-              .subscribe((actorResp: ActorDto) => {
-                this.movieActors.push(actorResp);
+              .subscribe((actorDtoResponse: ActorDto) => {
+                this.movieActorDtoList.push(actorDtoResponse);
               });
           });
 
           this._companiesService.getCompanies()
             .subscribe((companiesResp: CompanyDto[]) => {
-              this.companies = companiesResp;
-              this.movie = this._dataService.movieBuilder(this.movieDto, this.movieActors, {} as CompanyDto, this.companies); 
+              this.companyDtoList = companiesResp;
+              const company = companiesResp.find((company: CompanyDto) => {
+                return company.movies?.includes(this.movieDto.id!);
+              });
+              this.movieCompanyDto = company!;
+              this.movieDetail = this._dataService.movieBuilder(this.movieDto, this.movieActorDtoList, this.movieCompanyDto); 
             });
         },
         error: (errorResponse: HttpErrorResponse) => {
@@ -86,19 +91,16 @@ export class DetailMovieComponent implements OnInit {
 
     const dialog = this._dialog.open(ConfirmDialogComponent, {
       width: Constants.DIALOG_WIDTH,
-      data: {...this.movie}
+      data: {...this.movieDetail}
     });
 
     dialog.afterClosed()
       .subscribe( (result) => {
         if(result){
-          this._moviesService.deleteMovie(this.movie.id!)
+          this._moviesService.deleteMovie(this.movieDetail.id!)
             .subscribe(() => {
-              const companyToUpdate = this.companies.find((company: CompanyDto) => {
-                return company.movies?.includes(this.movie.id!);
-              })
-              companyToUpdate?.movies.splice(companyToUpdate?.movies.indexOf(this.movie.id!), Constants.ONE);
-              this._companiesService.updateCompany(companyToUpdate!).subscribe();
+              this.movieCompanyDto.movies.splice(this.movieCompanyDto?.movies.indexOf(this.movieDetail.id!), Constants.ONE);
+              this._companiesService.updateCompany(this.movieCompanyDto!).subscribe();
               this.showSnackBar(this._translate.instant(Constants.DELETED_MOVIE_MESSAGE));
               this._navigationService.getListMoviesPage();
             })
