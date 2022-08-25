@@ -12,7 +12,7 @@ export class MoviesService {
 
   constructor( private http: HttpClient ) { }
 
-  //TODO -> PROBAR QUE NO SE HAIGA ROTO NADA
+
   public getMovies(): Observable<MovieDto[]> {
     return this.http.get<MovieDto[]>(`${environment.baseUrl}/${Constants.MOVIES_ENDPOINT}`);
   }

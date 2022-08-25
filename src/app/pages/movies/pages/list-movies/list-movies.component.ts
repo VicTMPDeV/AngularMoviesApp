@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Constants } from '@constants/constants';
 import { MovieDto } from '@models/movies/dto/movieDto.interface';
 import { MoviesService } from '@services/movies-service/movies.service';
@@ -12,7 +12,7 @@ import { ToolbarServiceService } from '@services/toolbar-service/toolbar-service
   templateUrl: './list-movies.component.html',
   styleUrls: ['./list-movies.component.scss']
 })
-export class ListMoviesComponent implements OnInit {
+export class ListMoviesComponent implements OnInit, OnChanges {
 
   public moviesList: MovieDto[] = [];
   public emptyData: boolean = false;
@@ -21,24 +21,31 @@ export class ListMoviesComponent implements OnInit {
     private _navigationService: NavigationService,
     private _toolbarService: ToolbarServiceService) { }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('ME EJECUTO');
+    
+  }
   ngOnInit(): void {
+    this.initData();
+  }
 
-    this._toolbarService.setToolbarText(Constants.MOVIE_LIST); 
+  public initData(): void {
+
+    this._toolbarService.setToolbarText(Constants.MOVIE_LIST);
 
     this._moviesService.getMovies()
       .subscribe({
         next: (response: MovieDto[]) => {
-          if(response.length === 0){
+          if (response.length === 0) {
             this.emptyData = true;
           }
           this.moviesList = response;
         },
         error: (errorResponse: HttpErrorResponse) => {
-          console.error(Constants.ERROR, errorResponse.error); 
+          console.error(Constants.ERROR, errorResponse.error);
           this._navigationService.getErrorPage();
         }
       });
-
   }
 
 }
