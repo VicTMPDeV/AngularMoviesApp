@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Constants } from '@constants/constants';
 import { MovieDto } from '@models/movies/dto/movieDto.interface';
 import { MoviesService } from '@services/movies-service/movies.service';
@@ -12,7 +12,7 @@ import { ToolbarServiceService } from '@services/toolbar-service/toolbar-service
   templateUrl: './list-movies.component.html',
   styleUrls: ['./list-movies.component.scss']
 })
-export class ListMoviesComponent implements OnInit, OnChanges {
+export class ListMoviesComponent implements OnInit {
 
   public moviesList: MovieDto[] = [];
   public emptyData: boolean = false;
@@ -21,10 +21,6 @@ export class ListMoviesComponent implements OnInit, OnChanges {
     private _navigationService: NavigationService,
     private _toolbarService: ToolbarServiceService) { }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('ME EJECUTO');
-    
-  }
   ngOnInit(): void {
     this.initData();
   }
