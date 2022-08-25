@@ -56,7 +56,7 @@ export class DetailMovieComponent implements OnInit {
   ngOnInit(): void {
 
     this._moviesService.getMovieById(this._activatedRoute.snapshot.paramMap.get(Constants.ROUTE_PARAM_ID)!) 
-      .subscribe( {
+      .subscribe({
         next: (movieResponse: MovieDto) => {
 
           this.movieDto = movieResponse;
@@ -99,10 +99,11 @@ export class DetailMovieComponent implements OnInit {
         if(result){
           this._moviesService.deleteMovie(this.movieDetail.id!)
             .subscribe(() => {
-              this.movieCompanyDto.movies.splice(this.movieCompanyDto?.movies.indexOf(this.movieDetail.id!), Constants.ONE);
+              this.movieCompanyDto.movies.splice(this.movieCompanyDto?.movies?.indexOf(this.movieDetail.id!), Constants.ONE);
               this._companiesService.updateCompany(this.movieCompanyDto!).subscribe();
+              
               this.showSnackBar(this._translate.instant(Constants.DELETED_MOVIE_MESSAGE));
-              this._navigationService.getListMoviesPage();
+              this._navigationService.getBackLocation();
             })
         }
       })
