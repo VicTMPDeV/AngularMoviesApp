@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+
 import { Constants } from '@constants/constants';
 import { MovieDto } from '@models/movies/dto/movieDto.interface';
 import { MoviesService } from '@services/movies-service/movies.service';

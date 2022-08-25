@@ -3,35 +3,19 @@
     {
       "id": 1,
       "title": "Dancing Lady",
-      "poster": "http://dummyimage.com/400x600.png/cc0000/ffffff",
+      "poster": "https://images.justwatch.com/poster/121441960/s718/dancing-lady.%7Bformat%7D",
       "genre": [
         "Comedy",
+        "Crime",
+        "Drama",
         "Musical",
         "Romance"
       ],
-      "year": 2006,
-      "duration": 161,
-      "imdbRating": 8.27,
+      "year": 2020,
+      "duration": 500,
+      "imdbRating": 10,
       "actors": [
-        4,
-        5,
-        6
-      ]
-    },
-    {
-      "id": 2,
-      "title": "Mooring, The",
-      "poster": "http://dummyimage.com/400x600.png/dddddd/000000",
-      "genre": [
-        "Horror",
-        "Thriller"
-      ],
-      "year": 1987,
-      "duration": 187,
-      "imdbRating": 1.99,
-      "actors": [
-        5,
-        6
+        10
       ]
     },
     {
@@ -168,6 +152,18 @@
         9,
         11
       ]
+    },
+    {
+      "title": "Titanic",
+      "poster": "https://cdn.shopify.com/s/files/1/1416/8662/products/titanic_1997_fr_original_film_art_1200x.jpg?v=1619289844",
+      "genre": [
+        "Drama"
+      ],
+      "year": 1996,
+      "duration": 161,
+      "imdbRating": 10,
+      "actors": [],
+      "id": 11
     }
   ],
   "actors": [
@@ -326,7 +322,6 @@
       "employees": 81,
       "rating": 4.32,
       "movies": [
-        1,
         10
       ]
     },
@@ -338,7 +333,6 @@
       "employees": 611,
       "rating": 8.19,
       "movies": [
-        2,
         3,
         4
       ]
@@ -375,7 +369,9 @@
       "createYear": 1999,
       "employees": 921,
       "rating": 1.77,
-      "movies": []
+      "movies": [
+        1
+      ]
     }
   ]
 }
